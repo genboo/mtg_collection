@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemBlock"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/cardImage"
+            android:layout_width="96dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_card_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="223:311"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintLeft_toRightOf="@id/cardImage"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/cardName"
+                style="@style/TextView.Main.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Аватара пробуждающегося солнца" />
+
+            <TextView
+                android:id="@+id/cardType"
+                style="@style/TextView.Main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardName"
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="Creature — Vampire Soldier" />
+
+            <TextView
+                android:id="@+id/cardSet"
+                style="@style/TextView.Main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardType"
+                android:layout_toEndOf="@id/cardRarity"
+                android:maxLines="1"
+                tools:text="Ixalan" />
+
+            <ImageView
+                android:id="@+id/cardRarity"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/cardType"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_xln" />
+
+            <TextView
+                android:id="@+id/cardNumber"
+                style="@style/TextView.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardSet"
+                android:maxLines="1"
+                tools:text="XLN 123" />
+
+            <TextView
+                android:id="@+id/cardCount"
+                style="@style/TextView.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardSet"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/cardNumber"
+                android:maxLines="1"
+                tools:text="Кол-во: 10" />
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

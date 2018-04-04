@@ -1,0 +1,47 @@
+buildscript {
+    ext.kotlin_version = '1.2.31'
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+repositories {
+    mavenCentral()
+}
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com" }
+        google()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    //Version and code
+    ver = '1.1.180312'
+    code = 2
+
+    // App dependencies
+    supportLibVersion = '26.1.0'
+    junitVersion = '4.12'
+    archComponentsVersion = "1.1.1"
+    roomVersion = "1.0.0"
+    daggerVersion = "2.11"
+    retrofitVersion = "2.3.0"
+    okHttpVersion = "3.8.1"
+    mockitoVersion = "2.7.19"
+    archVersion = "2.5"
+    mockWebServerVersion = "3.8.1"
+    testVersion = "1.0.1"
+    picassoVersion = "2.5.2"
+    canaryVersion = "1.5.4"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="animation_speed" format="integer" />
+
+    <declare-styleable name="LibraryStateView">
+        <attr name="color" format="color" />
+        <attr name="colorCreatures" format="color" />
+        <attr name="manaGraphMargin" format="dimension" />
+        <attr name="manaColWidth" format="dimension" />
+        <attr name="colorGraphStrokeWidth" format="dimension" />
+        <attr name="colorGraphSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="animation_speed" />
+    </declare-styleable>
+</resources>

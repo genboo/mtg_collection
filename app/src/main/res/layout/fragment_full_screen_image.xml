@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
+    tools:context="ru.devsp.app.mtgcollections.MainActivity">
+
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/pic_card" />
+
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/app_name"
+        android:padding="4dp"
+        android:src="@drawable/ic_close"
+        android:tint="@android:color/white" />
+</FrameLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_game"
+        android:icon="@drawable/ic_gamepad"
+        android:title="@string/menu_game" />
+    <item
+        android:id="@+id/nav_steps"
+        android:icon="@drawable/ic_xaml"
+        android:title="@string/menu_steps" />
+</menu>

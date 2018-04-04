@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/itemBlock"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="2dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/libraryName"
+            style="@style/TextView.Main.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="Колода 1"/>
+
+        <TextView
+            android:id="@+id/libraryCardsCount"
+            style="@style/TextView.Main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/libraryName"
+            tools:text="Карт в колоде: 12"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

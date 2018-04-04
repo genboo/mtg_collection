@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_gallery"
+        android:icon="@drawable/ic_cards"
+        android:title="@string/menu_gallery"
+        app:iconTint="@android:color/white"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter_outline"
+        android:title="@string/menu_filter"
+        app:iconTint="@android:color/white"
+        app:showAsAction="always" />
+
+</menu>

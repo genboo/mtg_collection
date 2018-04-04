@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ff5722</color>
+
+    <color name="colorTextTitle">#000000</color>
+    <color name="colorTextHint">#CECECE</color>
+    <color name="colorTextMain">#999999</color>
+    <color name="colorDisabled">#999999</color>
+    <color name="colorBackgroundMain">#f0f0f0</color>
+    <color name="colorBackgroundDark">#000000</color>
+
+    <color name="colorRed">#e49977</color>
+    <color name="colorWhite">#f8f6d8</color>
+    <color name="colorBlack">#bab1ab</color>
+    <color name="colorGreen">#a3c095</color>
+    <color name="colorBlue">#c1d7e9</color>
+    <color name="colorNoColor">#CECECE</color>
+
+    <color name="colorShadow">#45000000</color>
+    <color name="colorShadowSecond">#24000000</color>
+
+    <color name="rarityCommon">#000000</color>
+    <color name="rarityUncommon">#9CC1CE</color>
+    <color name="rarityRare">#D5B866</color>
+    <color name="rarityMythicRare">#B85113</color>
+
+</resources>

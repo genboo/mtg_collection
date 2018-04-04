@@ -1,0 +1,85 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Main.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Main">
+
+    </style>
+
+    <style name="ExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolBarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:colorBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextView.Main.Title" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="TextView.Main" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="TextView.Hint" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorTextHint</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="TextView.FilterTitle" parent="android:Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextView.FilterItem" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Button.Rounded" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/bg_rounded_button</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextView.Counter" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/bg_rounded_counter</item>
+    </style>
+</resources>

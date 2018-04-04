@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundMain"
+    tools:context="ru.devsp.app.mtgcollections.MainActivity">
+
+    <include
+        layout="@layout/layout_app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/sv_main_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/line_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/line_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <EditText
+                android:id="@+id/searchSet"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_set_default"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:layout_constraintLeft_toRightOf="@id/line_left"
+                tools:text="xln" />
+
+            <EditText
+                android:id="@+id/searchNum"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_number_default"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLength="4"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:layout_constraintBaseline_toBaselineOf="@+id/searchSet"
+                app:layout_constraintLeft_toRightOf="@+id/searchSet"
+                tools:text="123" />
+
+            <LinearLayout
+                android:id="@+id/ll_search_button_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/searchNum"
+                app:layout_constraintLeft_toRightOf="@+id/searchNum"
+                app:layout_constraintRight_toLeftOf="@id/line_right">
+
+                <Button
+                    android:id="@+id/search"
+                    style="@style/Button.Rounded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/action_search" />
+            </LinearLayout>
+
+
+            <ProgressBar
+                android:id="@+id/progressBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@id/line_left"
+                app:layout_constraintRight_toLeftOf="@id/line_right"
+                app:layout_constraintTop_toBottomOf="@+id/ll_search_button_block"
+                tools:visibility="visible" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/contentBlock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_search_button_block"
+                tools:visibility="visible">
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/line_left_inside"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/line_right_inside"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <ImageView
+                    android:id="@+id/cardImage"
+                    android:layout_width="0dp"
+                    android:layout_height="311dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/pic_card_back"
+                    app:layout_constraintDimensionRatio="223:311"
+                    app:layout_constraintLeft_toRightOf="@id/line_left_inside"
+                    app:layout_constraintRight_toLeftOf="@id/line_right_inside"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/pic_card_back" />
+
+                <ImageButton
+                    android:id="@+id/cardSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/app_name"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_plus_outline"
+                    android:tint="@color/colorAccent"
+                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/cardCount"
+                    style="@style/TextView.Counter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
+                    app:layout_constraintTop_toTopOf="@+id/cardSave"
+                    tools:text="99"
+                    tools:visibility="visible" />
+
+                <ImageButton
+                    android:id="@+id/toWishList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/app_name"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_heart_outline"
+                    android:tint="@color/colorAccent"
+                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@+id/cardSave" />
+
+                <ImageButton
+                    android:id="@+id/goToCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/app_name"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_arrow_right"
+                    android:tint="@color/colorAccent"
+                    android:visibility="gone"
+                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@+id/toWishList"
+                    tools:visibility="visible" />
+
+
+                <TextView
+                    android:id="@+id/tv_card_rules_title"
+                    style="@style/TextView.Main.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/rules"
+                    app:layout_constraintLeft_toLeftOf="@id/line_left_inside"
+                    app:layout_constraintRight_toLeftOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@id/cardImage"
+                    tools:text="Правила" />
+
+                <ImageView
+                    android:id="@+id/cardRulesArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    app:layout_constraintLeft_toRightOf="@id/tv_card_rules_title"
+                    app:layout_constraintRight_toLeftOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@id/cardImage" />
+
+                <ru.devsp.app.mtgcollections.view.components.ExpandableTextView
+                    android:id="@+id/cardRulings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:maxLines="0"
+                    app:layout_constraintLeft_toRightOf="@id/line_left_inside"
+                    app:layout_constraintRight_toLeftOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@id/tv_card_rules_title"
+                    tools:text="Правила использования" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/reprints"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardRulings"
+                    tools:listitem="@layout/list_item_reprint" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/sv_main"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/player_block_offset"
+            android:paddingTop="@dimen/player_block_offset">
+
+            <ImageView
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_heart"
+                android:tint="@color/colorAccent"/>
+
+            <ImageButton
+                android:id="@+id/ib_player_health_minus"
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/minus"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_minus"
+                android:tint="@color/colorTextMain"/>
+
+            <TextView
+                android:id="@+id/tv_player_health_count"
+                style="@style/TextView.Main"
+                android:layout_width="58dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="38sp"
+                tools:text="2"/>
+
+            <ImageButton
+                android:id="@+id/ib_player_health_plus"
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/plus"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_plus"
+                android:tint="@color/colorTextMain"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/player_block_offset"
+            android:paddingTop="@dimen/player_block_offset">
+
+            <ImageView
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_energy"/>
+
+            <ImageButton
+                android:id="@+id/ib_player_energy_minus"
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/minus"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_minus"
+                android:tint="@color/colorTextMain"/>
+
+            <TextView
+                android:id="@+id/tv_player_energy_count"
+                style="@style/TextView.Main"
+                android:layout_width="58dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="38sp"
+                tools:text="2"/>
+
+            <ImageButton
+                android:id="@+id/ib_player_energy_plus"
+                android:layout_width="@dimen/player_button_size"
+                android:layout_height="@dimen/player_button_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/plus"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_plus"
+                android:tint="@color/colorTextMain"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_loyalty_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить planeswalker"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>

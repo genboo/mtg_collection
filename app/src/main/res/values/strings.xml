@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">MTG Collections</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_search">Найти</string>
+    <string name="action_added">Добавлено</string>
+    <string name="action_cancel">Отменить</string>
+    <string name="action_add_to_library">Добавить в библиотеку</string>
+    <string name="action_make_backup">Сохранить</string>
+    <string name="action_restore_backup">Восстановить</string>
+
+    <string name="search_set_default">xln</string>
+    <string name="search_number_default">280</string>
+    <string name="add_card_count">Количество</string>
+    <string name="filters">Фильтры</string>
+    <string name="filter_color">Цвет</string>
+    <string name="filter_rarity">Редкость</string>
+    <string name="filter_subtype">Подтип</string>
+    <string name="filter_type">Тип</string>
+    <string name="filter_set">Набор</string>
+    <string name="select">Выбрать</string>
+    <string name="plus">plus</string>
+    <string name="minus">minus</string>
+    <string name="rules">Правила</string>
+
+    <string name="menu_steps">Шаги</string>
+    <string name="menu_game">Игра</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_collection">Коллекция</string>
+    <string name="menu_libraries">Колоды</string>
+    <string name="menu_wish">Хочу!</string>
+    <string name="menu_spoilers">Спойлеры</string>
+    <string name="menu_gallery">Галлерея</string>
+    <string name="menu_filter">Фильтр</string>
+    <string name="menu_settings">Настройки</string>
+
+    <string name="count_one">1</string>
+
+    <string name="steps_zero_opp">Ничего делать нельзя.</string>
+    <string name="steps_one_opp">Можно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг при получении приоритета.</string>
+    <string name="steps_four_opp">Можно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг при получении приоритета.\n\nПоследний шанс не дать атаковать существам противника.</string>
+    <string name="steps_six_opp">Можно объявить блокирующих (развернутые существа). Одно существо противника можно заблокировать несколькими своими.\n\nПосле объявления можно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг при получении приоритета.</string>
+    <string name="steps_seven_opp">Существа наносят друг другу боевые повреждения.\n\nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг при получении приоритета.</string>
+    <string name="steps_ten_opp">Ничего делать нельзя.\n\nБоевые повреждения и эффекты длящиеся до конца хода снимаются.</string>
+
+    <string name="steps_zero_player">Развернуть перманенты, которые можно развернуть на этом шаге.</string>
+    <string name="steps_one_player">Активировать умения, в тексте которых есть фраза "в начале вашего шага поддержки". \nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_two_player">Взять одну карту из библиотеки (игрок, который ходит первым, на первом ходу карту не берет).\n\nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_three_player">Можно разыгрывать любые заклинания. \n\nМожно ативировать умения. \n\nМожно разыграть не более одной земли.</string>
+    <string name="steps_four_player">Можно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_five_player">Можно объявить атакущих (повернуть их) и выбрать для них цели (игроков или planeswalker\'ов).\n\nПосле объявления можно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.\n\nПоследний шанс не дать блокировать каким-либо существам противника.</string>
+    <string name="steps_six_player">Если ваше существо заблокировало несколько существ оппонента, выберите порядок, в каком они будут получать повреждения. Первое блокирующее существо должно получить повреждений столько, сколько нужно для его уничтожения.\n\nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_seven_player">Существа наносят друг другу боевые повреждения.\n\nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_eight_player">Можно разыгрывать любые заклинания. \n\nМожно ативировать умения. \n\nМожно разыграть не более одной земли, если этого не было сделано во время первой главной фазы.</string>
+    <string name="steps_nine_player">Активировать умения, в тексте которых есть фраза "в начале вашего заключительного шага". \nМожно активировать умения, разыграть мгновенные заклинания и заклинания со способностью миг.</string>
+    <string name="steps_ten_player">Активировать умения, которые нужно активировать на шаге очистки. \n\nЕсли в вашей руке больше семи карт, скинуть лишние, пока в руке не останется семь карт.\n\nБоевые повреждения и эффекты длящиеся до конца хода снимаются.</string>
+
+</resources>
