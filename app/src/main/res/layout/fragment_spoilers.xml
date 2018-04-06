@@ -16,8 +16,8 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="ru.devsp.app.mtgcollections.MainActivity">
+        android:background="@color/colorBackgroundMain"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ProgressBar
             android:id="@+id/progressBlock"
@@ -31,7 +31,6 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundMain"
             tools:listitem="@layout/list_item_spoiler" />
 
     </FrameLayout>
