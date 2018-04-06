@@ -5,7 +5,6 @@
     android:id="@+id/cl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain"
     tools:context="ru.devsp.app.mtgcollections.MainActivity">
 
     <include
@@ -17,6 +16,7 @@
         android:id="@+id/sv_main_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackgroundMain"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout

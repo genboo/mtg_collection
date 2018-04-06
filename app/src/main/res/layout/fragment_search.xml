@@ -5,7 +5,6 @@
     android:id="@+id/cl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain"
     tools:context="ru.devsp.app.mtgcollections.MainActivity">
 
     <include
@@ -17,6 +16,7 @@
         android:id="@+id/sv_main_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackgroundMain"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
@@ -150,19 +150,6 @@
                     app:layout_constraintRight_toRightOf="@id/line_right_inside"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/cardCount"
-                    style="@style/TextView.Counter"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
-                    app:layout_constraintTop_toTopOf="@+id/cardSave"
-                    tools:text="99"
-                    tools:visibility="visible" />
 
                 <ImageButton
                     android:id="@+id/toWishList"
@@ -194,6 +181,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/toWishList"
                     tools:visibility="visible" />
 
+                <TextView
+                    android:id="@+id/cardCount"
+                    style="@style/TextView.Counter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
+                    app:layout_constraintTop_toBottomOf="@+id/goToCard"
+                    tools:text="99"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/tv_card_rules_title"
