@@ -18,7 +18,6 @@ class FullScreenImageFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            exitTransition = null
             enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
             sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         }
