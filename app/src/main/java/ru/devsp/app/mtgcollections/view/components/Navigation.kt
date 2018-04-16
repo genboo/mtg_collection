@@ -2,6 +2,7 @@ package ru.devsp.app.mtgcollections.view.components
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.ViewCompat
 import android.view.View
 import android.widget.ImageView
@@ -86,6 +87,8 @@ class Navigation(private val fragmentManager: FragmentManager) {
         val ft = fragmentManager.beginTransaction()
         if (back) {
             ft.addToBackStack(tag)
+        }else{
+            ft.setTransition(FragmentTransaction.TRANSIT_NONE)
         }
         if (shared != null && !shared.isEmpty()) {
             for (view: View in shared) {

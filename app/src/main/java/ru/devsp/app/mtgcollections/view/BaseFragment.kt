@@ -84,7 +84,7 @@ abstract class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.slide_left)
+            exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
             enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.slide_right)
         }
     }
