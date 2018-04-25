@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.DisplayMetrics
+
 
 object OracleReplacer {
     private fun replace(text: String): String =
@@ -74,7 +76,10 @@ object OracleReplacer {
 
     private fun getDrawable(source: String, activity: Activity): Drawable {
         val drawable = activity.resources.getDrawable(activity.resources.getIdentifier(source, "drawable", activity.packageName), activity.theme)
-        drawable.setBounds(0, 0, 52, 52)
+        val metrics = activity.resources.displayMetrics
+        val px = 16 * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
+
+        drawable.setBounds(0, 0, px, px)
         return drawable
     }
 }

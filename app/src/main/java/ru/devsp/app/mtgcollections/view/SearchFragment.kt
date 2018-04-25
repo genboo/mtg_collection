@@ -21,7 +21,7 @@ import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryCard
 import ru.devsp.app.mtgcollections.model.objects.Wish
-import ru.devsp.app.mtgcollections.tools.Logger
+import ru.devsp.app.mtgcollections.tools.OracleReplacer
 import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
@@ -239,9 +239,8 @@ class SearchFragment : BaseFragment() {
                 })
 
         //Текст правил
-        val rulingsTitle = view!!.findViewById<TextView>(R.id.tv_card_rules_title)
-        cardRulings.text = card.rulesText
-        rulingsTitle.setOnClickListener { _ -> cardRulings.toggle() }
+        cardRulings.text = OracleReplacer.getText(card.rulesText, activity)
+        cardRulesTitle.setOnClickListener { _ -> cardRulings.toggle() }
 
         //Список репринтов
         (reprints.adapter as ReprintListAdapter).setItems(card.printings ?: emptyList())
