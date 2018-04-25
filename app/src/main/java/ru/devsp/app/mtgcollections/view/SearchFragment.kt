@@ -239,7 +239,9 @@ class SearchFragment : BaseFragment() {
                 })
 
         //Текст правил
-        cardRulings.text = OracleReplacer.getText(card.rulesText, activity)
+        if(card.rulesText != null) {
+            cardRulings.text = OracleReplacer.getText(card.rulesText, activity)
+        }
         cardRulesTitle.setOnClickListener { _ -> cardRulings.toggle() }
 
         //Список репринтов
