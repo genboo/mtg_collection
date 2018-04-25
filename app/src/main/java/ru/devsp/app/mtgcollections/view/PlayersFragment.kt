@@ -138,11 +138,4 @@ class PlayersFragment : BaseFragment() {
         return "Игроки"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            exitTransition = null
-        }
-    }
-
 }

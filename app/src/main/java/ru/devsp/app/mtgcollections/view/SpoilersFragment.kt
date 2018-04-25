@@ -96,7 +96,7 @@ class SpoilersFragment : BaseFragment() {
 
 
     override fun inject() {
-        component!!.inject(this)
+        component?.inject(this)
     }
 
     override fun getTitle(): String {

@@ -41,7 +41,7 @@
             <LinearLayout
                 android:id="@+id/imagesBlock"
                 android:layout_width="0dp"
-                android:layout_height="230dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintDimensionRatio="446:311"

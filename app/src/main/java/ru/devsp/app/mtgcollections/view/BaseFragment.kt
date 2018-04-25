@@ -58,12 +58,12 @@ abstract class BaseFragment : Fragment() {
 
     protected fun showSnack(text: Int, action: View.OnClickListener?) {
         if (view != null) {
-            val snackbar = Snackbar.make(view!!.findViewById(R.id.cl_main),
+            val snackBar = Snackbar.make(view!!.findViewById(R.id.cl_main),
                     text, Snackbar.LENGTH_SHORT)
             if (action != null) {
-                snackbar.setAction(R.string.action_cancel, action)
+                snackBar.setAction(R.string.action_cancel, action)
             }
-            snackbar.show()
+            snackBar.show()
         }
     }
 

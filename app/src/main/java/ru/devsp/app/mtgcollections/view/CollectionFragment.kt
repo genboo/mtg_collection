@@ -4,12 +4,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Build
 import android.os.Bundle
 import android.support.annotation.WorkerThread
 import android.support.v4.view.GravityCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.transition.TransitionInflater
 import android.view.*
 import android.widget.CheckBox
 import android.widget.ImageView
