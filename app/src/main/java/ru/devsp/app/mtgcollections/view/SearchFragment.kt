@@ -21,6 +21,7 @@ import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryCard
 import ru.devsp.app.mtgcollections.model.objects.Wish
+import ru.devsp.app.mtgcollections.tools.Logger
 import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
@@ -164,7 +165,10 @@ class SearchFragment : BaseFragment() {
                 showProgressBar()
             } else if (resource?.status == Status.SUCCESS && resource.data != null) {
                 showContent()
-                val card = resource.data[0]
+                val card = resource.data.find {
+                    Logger.e(arguments.getString(ARGS_NAME))
+                    it?.name == arguments.getString(ARGS_NAME)
+                }
                 if (card != null) {
                     card.prepare()
                     model.checkCard(card.id)

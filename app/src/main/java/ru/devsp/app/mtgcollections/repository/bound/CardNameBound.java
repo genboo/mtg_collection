@@ -24,7 +24,7 @@ public class CardNameBound extends NetworkBoundResource<List<Card>, List<Card>> 
 
     private static final int MAX_CACHE_SIZE = 100;
 
-    private static Map<String, Card> mCache = new HashMap<>();
+    private static Map<String, List<Card>> mCache = new HashMap<>();
 
     private CardApi mCardApi;
     private String mSet;
@@ -47,7 +47,7 @@ public class CardNameBound extends NetworkBoundResource<List<Card>, List<Card>> 
             if (mCache.size() == MAX_CACHE_SIZE) {
                 mCache.clear();
             }
-            mCache.put(mSet + mName, item.get(0));
+            mCache.put(mSet + mName, item);
         }
     }
 
@@ -61,9 +61,7 @@ public class CardNameBound extends NetworkBoundResource<List<Card>, List<Card>> 
     protected LiveData<List<Card>> loadSaved() {
         MutableLiveData<List<Card>> card = new MutableLiveData<>();
         if (mCache.containsKey(mSet + mName)) {
-            List<Card> cards = new ArrayList<>();
-            cards.add(mCache.get(mSet + mName));
-            card.setValue(cards);
+            card.setValue(mCache.get(mSet + mName));
         } else {
             card.setValue(null);
         }
