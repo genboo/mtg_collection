@@ -166,8 +166,8 @@ class SearchFragment : BaseFragment() {
             } else if (resource?.status == Status.SUCCESS && resource.data != null) {
                 showContent()
                 val card = resource.data.find {
-                    Logger.e(arguments.getString(ARGS_NAME))
                     it?.name == arguments.getString(ARGS_NAME)
+                            || it?.nameOrigin == arguments.getString(ARGS_NAME)
                 }
                 if (card != null) {
                     card.prepare()
