@@ -71,7 +71,9 @@ class LibraryFragment : BaseFragment() {
 
         adapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<CardListItem> {
             override fun click(position: Int, item: CardListItem, view: View?) {
-                navigation.toCard(item.card.id, view as ImageView)
+                if(item.card != null) {
+                    navigation.toCard(item.card.id, view as ImageView)
+                }
             }
         })
 
