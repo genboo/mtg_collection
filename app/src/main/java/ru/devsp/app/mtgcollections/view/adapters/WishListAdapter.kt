@@ -1,6 +1,7 @@
 package ru.devsp.app.mtgcollections.view.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
@@ -20,10 +21,8 @@ class WishListAdapter(items: List<Card>?) : RecyclerViewAdapter<Card, WishHolder
     }
 
     override fun onBindViewHolder(holder: WishHolder, position: Int) {
-        holder.bind(getItem(holder.adapterPosition))
-        holder.itemBlock.setOnClickListener({ _ ->
-            onItemClick(holder.itemBlock, holder.adapterPosition, holder.cardImage)
-        })
+        holder.bind(getItem(holder.adapterPosition),
+                View.OnClickListener { v -> onItemClick(v, holder.adapterPosition, holder.cardImage) })
     }
 
 }

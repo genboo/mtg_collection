@@ -11,15 +11,14 @@ import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
 
 class WishHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val itemBlock: View
     val cardImage: View
 
     init {
-        this.itemBlock = itemView.itemBlock
         cardImage = itemView.cardImage
     }
 
-    fun bind(item: Card) = with(itemView) {
+    fun bind(item: Card, listener: View.OnClickListener) = with(itemView) {
+        ViewCompat.setTransitionName(cardImage, item.id)
         cardRarity.setColorFilter(ContextCompat.getColor(context, item.rarityColor), PorterDuff.Mode.SRC_IN)
         cardRarity.setImageDrawable(context.getDrawable(item.setIcon))
         cardNumber.text = String.format("%s %s", item.set,
@@ -30,7 +29,7 @@ class WishHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .placeholder(R.drawable.pic_card_back)
                 .into(cardImage)
 
-        ViewCompat.setTransitionName(cardImage, item.id)
+        itemBlock.setOnClickListener(listener)
     }
 
 }

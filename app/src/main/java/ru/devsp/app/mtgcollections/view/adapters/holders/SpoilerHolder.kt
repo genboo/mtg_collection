@@ -8,11 +8,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_spoiler.view.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
-import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 
 class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(item: Card, cards: HashMap<String, Int>, listener: RecyclerViewAdapter.OnItemClickListener<Card>?) = with(itemView) {
+    fun bind(item: Card, cards: HashMap<String, Int>, listener: View.OnClickListener) = with(itemView) {
         cardRarity.setColorFilter(ContextCompat.getColor(cardRarity.context, item.rarityColor), PorterDuff.Mode.SRC_IN)
         cardRarity.setImageDrawable(cardRarity.context.getDrawable(item.setIcon))
         cardNumber.text = String.format("%s %s", item.set, item.numberFormatted ?: "")
@@ -29,11 +28,7 @@ class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .placeholder(R.drawable.pic_card_back)
                 .into(cardImage)
 
-        itemBlock.setOnClickListener({ _ ->
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                listener?.click(adapterPosition, item, cardImage)
-            }
-        })
+        itemBlock.setOnClickListener(listener)
     }
 
 }

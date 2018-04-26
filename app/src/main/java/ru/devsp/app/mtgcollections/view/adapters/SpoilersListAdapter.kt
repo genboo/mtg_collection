@@ -1,6 +1,7 @@
 package ru.devsp.app.mtgcollections.view.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
@@ -23,7 +24,8 @@ class SpoilersListAdapter(items: List<Card>?) : RecyclerViewAdapter<Card, Spoile
     }
 
     override fun onBindViewHolder(holder: SpoilerHolder, position: Int) {
-        holder.bind(getItem(holder.adapterPosition), cards, onItemClickListener)
+        holder.bind(getItem(holder.adapterPosition), cards,
+                View.OnClickListener { v -> onItemClick(v, holder.adapterPosition) })
         onReact(holder.adapterPosition)
     }
 

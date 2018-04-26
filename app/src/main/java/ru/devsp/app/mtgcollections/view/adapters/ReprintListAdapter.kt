@@ -1,6 +1,7 @@
 package ru.devsp.app.mtgcollections.view.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.view.adapters.holders.ReprintHolder
@@ -32,7 +33,8 @@ class ReprintListAdapter(items: List<String>?) : RecyclerViewAdapter<String, Rep
 
     override fun onBindViewHolder(holder: ReprintHolder, position: Int) {
         if (getItemViewType(holder.adapterPosition) == TYPE_MAIN) {
-            holder.bind(getItem(position - 1), onItemClickListener)
+            holder.bind(getItem(position - 1),
+                    View.OnClickListener { v -> onItemClick(v, holder.adapterPosition - 1) })
         }
     }
 

@@ -13,15 +13,14 @@ import java.util.*
 
 class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val itemBlock: View
     val cardImage: View
 
     init {
-        itemBlock = itemView.itemBlock
         cardImage = itemView.cardImage
     }
 
-    fun bind(item: Card) = with(itemView) {
+    fun bind(item: Card, listener: View.OnClickListener) = with(itemView) {
+        ViewCompat.setTransitionName(cardImage, item.id)
         cardName.text = item.name
         cardRarity.setColorFilter(ContextCompat.getColor(context, item.rarityColor), PorterDuff.Mode.SRC_IN)
         cardRarity.setImageDrawable(context.getDrawable(item.setIcon))
@@ -35,7 +34,7 @@ class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .placeholder(R.drawable.pic_card_back)
                 .into(cardImage)
 
-        ViewCompat.setTransitionName(cardImage, item.id)
+        itemBlock.setOnClickListener(listener)
 
     }
 

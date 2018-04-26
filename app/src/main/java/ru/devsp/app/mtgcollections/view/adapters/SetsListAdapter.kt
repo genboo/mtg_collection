@@ -1,6 +1,7 @@
 package ru.devsp.app.mtgcollections.view.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Set
@@ -19,7 +20,8 @@ class SetsListAdapter(items: List<Set>?) : RecyclerViewAdapter<Set, SetHolder>(i
     }
 
     override fun onBindViewHolder(holder: SetHolder, position: Int) {
-        holder.bind(getItem(holder.adapterPosition), onItemClickListener)
+        holder.bind(getItem(holder.adapterPosition),
+                View.OnClickListener { v -> onItemClick(v, holder.adapterPosition) })
     }
 
 }

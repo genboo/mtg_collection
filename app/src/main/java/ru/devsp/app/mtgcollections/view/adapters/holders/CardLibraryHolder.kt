@@ -10,18 +10,23 @@ import kotlinx.android.synthetic.main.layout_card_header.view.*
 import kotlinx.android.synthetic.main.list_item_card.view.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.view.adapters.CardListItem
-import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import java.util.*
 
 class CardLibraryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(item: CardListItem, listener: RecyclerViewAdapter.OnItemClickListener<CardListItem>?) = with(itemView) {
+    val cardImage: View?
+
+    init {
+        cardImage = itemView.cardImage
+    }
+
+    fun bind(item: CardListItem, listener: View.OnClickListener) = with(itemView) {
         if (item.card == null) {
             headerName.text = item.title
         } else {
             cardName.text = item.card.name
             cardRarity.setColorFilter(ContextCompat.getColor(cardRarity.context, item.card.rarityColor), PorterDuff.Mode.SRC_IN)
-            cardRarity.setImageDrawable(cardRarity.context.getDrawable(item.card.getSetIcon()))
+            cardRarity.setImageDrawable(cardRarity.context.getDrawable(item.card.setIcon))
             cardSet.text = item.card.setName
             cardType.text = item.card.type
             cardCount.text = String.format(Locale.getDefault(), "Кол-во: %d", item.card.count)
@@ -33,11 +38,7 @@ class CardLibraryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             ViewCompat.setTransitionName(cardImage, item.card.id)
 
-            itemBlock.setOnClickListener({ _ ->
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    listener?.click(adapterPosition, item, cardImage)
-                }
-            })
+            itemBlock.setOnClickListener(listener)
         }
     }
 
