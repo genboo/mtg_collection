@@ -51,6 +51,12 @@ class SpoilersFragment : BaseFragment() {
         list.layoutManager = layoutManager
         list.adapter = adapter
 
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (adapter.getItemViewType(position) == SpoilersListAdapter.TYPE_LOADING) layoutManager.spanCount else 1
+            }
+        }
+
         val set = arguments.getString(ARG_SET)
 
         showProgressBar()
@@ -62,6 +68,12 @@ class SpoilersFragment : BaseFragment() {
                 adapter.setItems(resource.data)
                 notifyDataSetChange(adapter)
                 showContent()
+            }
+
+            if (resource?.status == Status.SUCCESS || resource?.status == Status.ERROR) {
+                adapter.setLoading(false)
+            } else if (resource?.status == Status.LOADING) {
+                adapter.setLoading(true)
             }
         })
 

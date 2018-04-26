@@ -8,7 +8,7 @@ import java.util.ArrayList
 
 abstract class RecyclerViewAdapter<T, H : RecyclerView.ViewHolder> internal constructor(items: List<T>?) : RecyclerView.Adapter<H>() {
 
-    internal var onItemClickListener: OnItemClickListener<T>? = null
+    private var onItemClickListener: OnItemClickListener<T>? = null
     private var onReactListener: OnReactListener? = null
     private var items: List<T>
 
@@ -32,6 +32,10 @@ abstract class RecyclerViewAdapter<T, H : RecyclerView.ViewHolder> internal cons
     }
 
     override fun getItemCount(): Int {
+        return items.size
+    }
+
+    fun getSize() : Int{
         return items.size
     }
 

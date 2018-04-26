@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.list_item_loading.view.*
 import kotlinx.android.synthetic.main.list_item_spoiler.view.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
@@ -31,4 +32,7 @@ class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemBlock.setOnClickListener(listener)
     }
 
+    fun switchLoading(loading : Boolean) = with(itemView) {
+        loadingBlock.visibility = if(loading) View.VISIBLE else View.GONE
+    }
 }
