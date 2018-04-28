@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import retrofit2.http.GET;
+import ru.devsp.app.mtgcollections.model.tools.ApiResponse;
 import ru.devsp.app.mtgcollections.model.objects.Set;
 
 /**

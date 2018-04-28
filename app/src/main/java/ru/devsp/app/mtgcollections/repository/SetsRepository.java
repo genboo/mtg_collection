@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ru.devsp.app.mtgcollections.model.api.SetsApi;
-import ru.devsp.app.mtgcollections.model.api.tools.Resource;
+import ru.devsp.app.mtgcollections.model.tools.Resource;
 import ru.devsp.app.mtgcollections.model.objects.Set;
 import ru.devsp.app.mtgcollections.repository.bound.SetsBound;
 import ru.devsp.app.mtgcollections.tools.AppExecutors;
@@ -30,7 +30,7 @@ public class SetsRepository {
     /**
      * Получение списка сетов
      *
-     * @return
+     * @return sets
      */
     public LiveData<Resource<List<Set>>> getSets() {
         bound.create();

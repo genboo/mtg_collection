@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_coordinator_layout"
+    android:id="@+id/mainBlock"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +16,7 @@
             android:id="@+id/main.collapsing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="?android:attr/colorPrimary"
             app:expandedTitleGravity="center|top"
             app:expandedTitleTextAppearance="@style/ExpandedTextStyle"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
@@ -30,7 +30,7 @@
                 android:paddingBottom="16dp"
                 android:paddingEnd="32dp"
                 android:paddingStart="32dp"
-                android:paddingTop="?attr/actionBarSize"
+                android:paddingTop="?android:attr/actionBarSize"
                 app:color="@android:color/white"
                 app:colorCreatures="@color/rarityUncommon"
                 app:colorGraphSize="36dp"
@@ -43,7 +43,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
                 android:theme="@style/ToolBarStyle"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

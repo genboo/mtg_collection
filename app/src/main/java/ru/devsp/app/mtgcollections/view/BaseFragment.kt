@@ -58,8 +58,7 @@ abstract class BaseFragment : Fragment() {
 
     protected fun showSnack(text: Int, action: View.OnClickListener?) {
         if (view != null) {
-            val snackBar = Snackbar.make(view!!.findViewById(R.id.cl_main),
-                    text, Snackbar.LENGTH_SHORT)
+            val snackBar = Snackbar.make(view!!, text, Snackbar.LENGTH_SHORT)
             if (action != null) {
                 snackBar.setAction(R.string.action_cancel, action)
             }
@@ -79,14 +78,6 @@ abstract class BaseFragment : Fragment() {
 
     fun updateTitle(title: String) {
         toolbar?.title = title
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
-            enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.slide_right)
-        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

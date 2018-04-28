@@ -13,14 +13,10 @@ import java.util.*
 
 class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val cardImage: View
-
-    init {
-        cardImage = itemView.cardImage
-    }
+    val cardImage: View = itemView.cardImage
 
     fun bind(item: Card, listener: View.OnClickListener) = with(itemView) {
-        ViewCompat.setTransitionName(cardImage, item.id)
+
         cardName.text = item.name
         cardRarity.setColorFilter(ContextCompat.getColor(context, item.rarityColor), PorterDuff.Mode.SRC_IN)
         cardRarity.setImageDrawable(context.getDrawable(item.setIcon))
@@ -29,6 +25,7 @@ class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         cardCount.text = String.format(Locale.getDefault(), "Кол-во: %d", item.count)
         cardNumber.text = String.format(Locale.getDefault(), "%s %s", item.set, item.numberFormatted)
 
+        ViewCompat.setTransitionName(cardImage, item.id)
         Picasso.with(context)
                 .load(item.imageUrl)
                 .placeholder(R.drawable.pic_card_back)

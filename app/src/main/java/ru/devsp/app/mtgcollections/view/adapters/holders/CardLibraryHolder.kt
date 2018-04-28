@@ -14,11 +14,7 @@ import java.util.*
 
 class CardLibraryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val cardImage: View?
-
-    init {
-        cardImage = itemView.cardImage
-    }
+    val cardImage: View? = itemView.cardImage
 
     fun bind(item: CardListItem, listener: View.OnClickListener) = with(itemView) {
         if (item.card == null) {
@@ -31,12 +27,12 @@ class CardLibraryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             cardType.text = item.card.type
             cardCount.text = String.format(Locale.getDefault(), "Кол-во: %d", item.card.count)
             cardNumber.text = String.format(Locale.getDefault(), "%s %s", item.card.set, item.card.numberFormatted)
+
+            ViewCompat.setTransitionName(cardImage, item.card.id)
             Picasso.with(context)
                     .load(item.card.imageUrl)
                     .placeholder(R.drawable.pic_card_back)
                     .into(cardImage)
-
-            ViewCompat.setTransitionName(cardImage, item.card.id)
 
             itemBlock.setOnClickListener(listener)
         }

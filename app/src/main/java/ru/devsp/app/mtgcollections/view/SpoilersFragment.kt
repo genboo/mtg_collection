@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_spoilers.*
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.api.tools.Status
+import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.repository.bound.CardsSetBound
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter

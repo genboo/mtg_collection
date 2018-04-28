@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import ru.devsp.app.mtgcollections.model.tools.ApiResponse;
 import ru.devsp.app.mtgcollections.model.objects.Card;
 
 /**

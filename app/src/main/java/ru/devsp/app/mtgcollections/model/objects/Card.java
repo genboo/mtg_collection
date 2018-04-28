@@ -72,8 +72,6 @@ public class Card {
 
     public boolean child;
 
-
-
     @Ignore
     public List<ForeignName> foreignNames;
 

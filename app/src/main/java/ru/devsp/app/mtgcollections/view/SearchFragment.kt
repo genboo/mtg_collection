@@ -16,7 +16,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_search.*
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.api.tools.Status
+import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryCard
@@ -37,14 +37,11 @@ class SearchFragment : BaseFragment() {
 
     private var addDialog: AlertDialog? = null
     private var currentCard: Card? = null
-    private var container: ViewGroup? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         initFragment()
-        this.container = container
-
         return view
     }
 
@@ -187,7 +184,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initAddDialog(model: SearchViewModel, libraries: List<Library>) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, container, false)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         // адаптер
         val adapter = LibrarySelectAdapter(context, libraries)

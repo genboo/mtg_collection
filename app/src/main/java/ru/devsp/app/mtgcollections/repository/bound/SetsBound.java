@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.devsp.app.mtgcollections.model.api.ApiResponse;
 import ru.devsp.app.mtgcollections.model.api.SetsApi;
 import ru.devsp.app.mtgcollections.model.objects.Set;
+import ru.devsp.app.mtgcollections.model.tools.ApiResponse;
 import ru.devsp.app.mtgcollections.tools.AppExecutors;
 
 /**
@@ -18,7 +18,7 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors;
  * Created by gen on 14.09.2017.
  */
 
-public class SetsBound extends NetworkBoundResource<List<Set>, List<Set>> {
+public class SetsBound extends NetworkBound<List<Set>, List<Set>> {
 
     private List<Set> mCache = new ArrayList<>();
 

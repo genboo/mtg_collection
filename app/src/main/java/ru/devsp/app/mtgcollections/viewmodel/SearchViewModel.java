@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.devsp.app.mtgcollections.model.api.tools.Resource;
+import ru.devsp.app.mtgcollections.model.tools.Resource;
 import ru.devsp.app.mtgcollections.model.objects.Card;
 import ru.devsp.app.mtgcollections.model.objects.CardExists;
 import ru.devsp.app.mtgcollections.model.objects.Library;

@@ -10,7 +10,6 @@ import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AlertDialog
@@ -21,11 +20,12 @@ import android.transition.TransitionInflater
 import android.view.*
 import android.widget.*
 import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_card.*
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.api.tools.Resource
-import ru.devsp.app.mtgcollections.model.api.tools.Status
+import ru.devsp.app.mtgcollections.model.tools.Resource
+import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.CardLibraryInfo
 import ru.devsp.app.mtgcollections.model.objects.Library
@@ -49,9 +49,6 @@ class CardFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var container: ViewGroup? = null
-
-    private val handler: Handler = Handler()
     private var localCard: Card? = null
     private var libraries: MutableList<Library>? = null
 
@@ -59,19 +56,9 @@ class CardFragment : BaseFragment() {
     private var addParentDialog: AlertDialog? = null
     private var addDialog: AlertDialog? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        postponeEnterTransition()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
-            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_card, container, false)
-        this.container = container
         initFragment()
         setHasOptionsMenu(true)
         return view
@@ -162,7 +149,7 @@ class CardFragment : BaseFragment() {
     }
 
     private fun initAddToLibraryDialog(model: CardViewModel) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, container, false)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         // адаптер
         val adapter = LibrarySelectAdapter(context, libraries)
@@ -196,8 +183,7 @@ class CardFragment : BaseFragment() {
     private fun updateSideCard(card: Card?) {
         if (card != null) {
             ViewCompat.setTransitionName(cardImageSecond, card.name + card.id)
-            Picasso
-                    .with(context)
+            Picasso.with(context)
                     .load(card.imageUrl)
                     .into(cardImageSecond)
             cardImageSecond.setOnClickListener { _ ->
@@ -229,6 +215,19 @@ class CardFragment : BaseFragment() {
     private fun updateCardInfo(viewModel: CardViewModel, card: Card?) {
         localCard = card
         if (card != null) {
+            Picasso.with(context)
+                    .load(card.imageUrl)
+                    .networkPolicy(NetworkPolicy.OFFLINE)
+                    .into(cardImage, object : Callback {
+                        override fun onSuccess() {
+                            startPostponedEnterTransition()
+                        }
+
+                        override fun onError() {
+                            startPostponedEnterTransition()
+                        }
+                    })
+
             if (!card.child) {
                 viewModel.setIdChild(card.parent)
                 if (linkButton != null) {
@@ -256,18 +255,6 @@ class CardFragment : BaseFragment() {
             cardRarity.setColorFilter(ContextCompat.getColor(context, card.rarityColor), PorterDuff.Mode.SRC_IN)
             cardRarity.setImageDrawable(resources.getDrawable(card.setIcon, context.theme))
 
-            Picasso.with(context)
-                    .load(card.imageUrl)
-                    .into(cardImage, object : Callback {
-                        override fun onSuccess() {
-                            startPostponedEnterTransition()
-                        }
-
-                        override fun onError() {
-                            startPostponedEnterTransition()
-                        }
-                    })
-
             updateTitle(card.name)
 
             countBlock.removeAllViews()
@@ -283,16 +270,16 @@ class CardFragment : BaseFragment() {
             plus.setOnClickListener { _ ->
                 card.count++
                 count.text = String.format(Locale.getDefault(), "%d", card.count)
-                handler.removeCallbacks(task)
-                handler.postDelayed(task, 400)
+                mainBlock.removeCallbacks(task)
+                mainBlock.postDelayed(task, 400)
             }
             val minus = view.findViewById<ImageButton>(R.id.ib_library_count_minus)
             minus.setOnClickListener { _ ->
                 if (card.count > 0) {
                     card.count--
                     count.text = String.format(Locale.getDefault(), "%d", card.count)
-                    handler.removeCallbacks(task)
-                    handler.postDelayed(task, 400)
+                    mainBlock.removeCallbacks(task)
+                    mainBlock.postDelayed(task, 400)
                 }
             }
 
@@ -318,16 +305,16 @@ class CardFragment : BaseFragment() {
                 plus.setOnClickListener { _ ->
                     libraryCard.count++
                     count.text = String.format(Locale.getDefault(), "%d", libraryCard.count)
-                    handler.removeCallbacks(task)
-                    handler.postDelayed(task, 400)
+                    mainBlock.removeCallbacks(task)
+                    mainBlock.postDelayed(task, 400)
                 }
                 val minus = view.findViewById<ImageButton>(R.id.ib_library_count_minus)
                 minus.setOnClickListener { _ ->
                     if (item.count > 0) {
                         libraryCard.count--
                         count.text = String.format(Locale.getDefault(), "%d", libraryCard.count)
-                        handler.removeCallbacks(task)
-                        handler.postDelayed(task, 400)
+                        mainBlock.removeCallbacks(task)
+                        mainBlock.postDelayed(task, 400)
                     }
                 }
             }
@@ -389,6 +376,14 @@ class CardFragment : BaseFragment() {
 
     override fun getTitle(): String {
         return ""
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        postponeEnterTransition()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
     }
 
     companion object {

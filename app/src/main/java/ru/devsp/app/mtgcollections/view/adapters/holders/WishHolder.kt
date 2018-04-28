@@ -11,11 +11,8 @@ import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
 
 class WishHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val cardImage: View
 
-    init {
-        cardImage = itemView.cardImage
-    }
+    val cardImage : View = itemView.cardImage
 
     fun bind(item: Card, listener: View.OnClickListener) = with(itemView) {
         ViewCompat.setTransitionName(cardImage, item.id)

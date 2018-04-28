@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.devsp.app.mtgcollections.model.api.tools.Resource;
+import ru.devsp.app.mtgcollections.model.tools.Resource;
 import ru.devsp.app.mtgcollections.model.objects.Set;
 import ru.devsp.app.mtgcollections.repository.SetsRepository;
 

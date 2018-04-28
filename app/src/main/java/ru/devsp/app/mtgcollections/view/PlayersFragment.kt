@@ -3,16 +3,15 @@ package ru.devsp.app.mtgcollections.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_players.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Player
 import ru.devsp.app.mtgcollections.viewmodel.GameViewModel
@@ -30,15 +29,12 @@ class PlayersFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var container: ViewGroup? = null
-
     private lateinit var handler: Handler
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_players, container, false)
         initFragment()
-        this.container = container
         handler = Handler()
         return view
     }
@@ -69,7 +65,7 @@ class PlayersFragment : BaseFragment() {
     }
 
     private fun initPlayerLayer(viewModel: GameViewModel, player: Player, parent: Int) {
-        val view = layoutInflater.inflate(R.layout.layout_player, container, false)
+        val view = layoutInflater.inflate(R.layout.layout_player, mainBlock, false)
         if (view != null && getView() != null) {
 
             val task = Runnable { viewModel.save(player) }
@@ -119,8 +115,8 @@ class PlayersFragment : BaseFragment() {
     }
 
     private fun savePlayer(task: Runnable) {
-        handler.removeCallbacks(task)
-        handler.postDelayed(task, 1000)
+        mainBlock.removeCallbacks(task)
+        mainBlock.postDelayed(task, 1000)
     }
 
     private fun getDefaultPlayerObject(id: Int): Player {

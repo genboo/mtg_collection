@@ -10,10 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_libraries.*
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryInfo
 import ru.devsp.app.mtgcollections.view.adapters.LibrariesListAdapter
@@ -32,12 +30,9 @@ class LibrariesFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var container: ViewGroup? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_libraries, container, false)
-        this.container = container
         initFragment()
         return view
     }
@@ -65,7 +60,7 @@ class LibrariesFragment : BaseFragment() {
         })
 
         libraryAdd.setOnClickListener { _ ->
-            val view = layoutInflater.inflate(R.layout.dialog_add_library, container, false)
+            val view = layoutInflater.inflate(R.layout.dialog_add_library, mainBlock, false)
             val addDialog = AlertDialog.Builder(context)
                     .setView(view)
                     .setTitle("Добавить колоду")

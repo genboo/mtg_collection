@@ -14,7 +14,6 @@ import ru.devsp.app.mtgcollections.R;
 import ru.devsp.app.mtgcollections.model.objects.Library;
 
 /**
- *
  * Created by gen on 05.10.2017.
  */
 
@@ -23,11 +22,10 @@ public class LibrarySelectAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<Library> mItems;
 
-    public LibrarySelectAdapter(@NonNull Context context,  List<Library> objects) {
+    public LibrarySelectAdapter(@NonNull Context context, List<Library> objects) {
         mInflater = LayoutInflater.from(context);
         mItems = objects;
     }
-
 
     @Override
     public int getCount() {
@@ -46,8 +44,8 @@ public class LibrarySelectAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(view == null) {
-            view = mInflater.inflate(R.layout.list_item_simple_text, null);
+        if (view == null) {
+            view = mInflater.inflate(R.layout.list_item_simple_text, viewGroup, false);
         }
         TextView name = view.findViewById(R.id.tv_text);
         name.setText(mItems.get(i).name);

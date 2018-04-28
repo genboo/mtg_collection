@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ru.devsp.app.mtgcollections.model.api.CardApi;
-import ru.devsp.app.mtgcollections.model.api.tools.Resource;
+import ru.devsp.app.mtgcollections.model.tools.Resource;
 import ru.devsp.app.mtgcollections.model.objects.Card;
 import ru.devsp.app.mtgcollections.repository.bound.CardBound;
 import ru.devsp.app.mtgcollections.repository.bound.CardLocalBound;

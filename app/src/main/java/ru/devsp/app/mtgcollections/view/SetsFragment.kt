@@ -8,9 +8,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sets.*
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.api.tools.Status
+import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Set
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.SetsListAdapter
@@ -60,6 +61,9 @@ class SetsFragment : BaseFragment() {
                     list.post { adapter.notifyDataSetChanged() }
                     showContent()
                 }
+            }else if(resource?.status == Status.ERROR){
+                showToast(resource.message ?: "", Toast.LENGTH_SHORT)
+                showContent()
             }
         })
 

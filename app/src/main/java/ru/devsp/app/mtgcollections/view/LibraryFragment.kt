@@ -12,7 +12,6 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_library.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Library
-import ru.devsp.app.mtgcollections.model.objects.LibraryInfo
 import ru.devsp.app.mtgcollections.view.adapters.CardListItem
 import ru.devsp.app.mtgcollections.view.adapters.CardsLibraryListAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
@@ -30,17 +29,13 @@ class LibraryFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var container: ViewGroup? = null
-
     private var mEditDialog: AlertDialog.Builder? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_library, container, false)
-        this.container = container
         initFragment()
         setHasOptionsMenu(true)
-
         return view
     }
 
@@ -77,7 +72,7 @@ class LibraryFragment : BaseFragment() {
             }
         })
 
-        val view = layoutInflater.inflate(R.layout.dialog_add_library, container, false)
+        val view = layoutInflater.inflate(R.layout.dialog_add_library, mainBlock, false)
         val libraryName = view.findViewById<EditText>(R.id.et_library_name)
         libraryName.setText(title)
         mEditDialog = AlertDialog.Builder(context)

@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ru.devsp.app.mtgcollections.model.api.ApiResponse;
 import ru.devsp.app.mtgcollections.model.api.CardApi;
 import ru.devsp.app.mtgcollections.model.objects.Card;
+import ru.devsp.app.mtgcollections.model.tools.ApiResponse;
 import ru.devsp.app.mtgcollections.tools.AppExecutors;
 
 /**
@@ -19,7 +19,7 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors;
  * Created by gen on 22.12.2017.
  */
 
-public class CardsSetBound extends NetworkBoundResource<List<Card>, List<Card>> {
+public class CardsSetBound extends NetworkBound<List<Card>, List<Card>> {
 
     public static final int PAGES_SIZE = 40;
     private static final int MAX_CACHE_SIZE = 5;
