@@ -1,9 +1,11 @@
 package ru.devsp.app.mtgcollections.view.components
 
-import android.app.FragmentTransaction
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewCompat
+import android.transition.Fade
+import android.transition.Slide
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import ru.devsp.app.mtgcollections.R
@@ -85,8 +87,16 @@ class Navigation(private val fragmentManager: FragmentManager) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
+        val fragmentPrevious = fragmentManager.findFragmentById(R.id.content)
+        val fade = Fade()
+        fragmentPrevious?.exitTransition = fade
+
+        val slide = Slide()
+        slide.slideEdge = Gravity.END
+        fragment.enterTransition = slide
+
         val ft = fragmentManager.beginTransaction()
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+
         if (back) {
             ft.addToBackStack(tag)
         }
