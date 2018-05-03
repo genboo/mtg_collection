@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_sets.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Set
+import ru.devsp.app.mtgcollections.model.tools.Resource
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.SetsListAdapter
 import ru.devsp.app.mtgcollections.viewmodel.SetsViewModel
@@ -56,12 +57,11 @@ class SetsFragment : BaseFragment() {
         viewModel.sets.observe(this, Observer { resource ->
             if (resource?.status == Status.SUCCESS) {
                 if (resource.data != null) {
-                    resource.data.sortByDescending { it.releaseDate }
-                    adapter.setItems(resource.data)
+                    adapter.setItems(resource.data.sortedByDescending { it.releaseDate })
                     list.post { adapter.notifyDataSetChanged() }
-                    showContent()
                 }
-            }else if(resource?.status == Status.ERROR){
+                showContent()
+            } else if (resource?.status == Status.ERROR) {
                 showToast(resource.message ?: "", Toast.LENGTH_SHORT)
                 showContent()
             }

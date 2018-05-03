@@ -48,14 +48,16 @@ class GalleryFragment : BaseFragment() {
         })
 
         viewModel.filter.observe(this, Observer { filter ->
-            viewModel.setFilter(filter)
-            val selected = Filter()
-            selected.colors = arguments.getStringArray(ARG_COLORS)
-            selected.sets = arguments.getStringArray(ARG_SETS)
-            selected.rarities = arguments.getStringArray(ARG_RARITIES)
-            selected.types = arguments.getStringArray(ARG_TYPES)
-            selected.subtypes = arguments.getStringArray(ARG_SUBTYPES)
-            viewModel.setFilter(selected)
+            if(filter != null) {
+                viewModel.setFilter(filter)
+                val selected = Filter()
+                selected.colors = arguments.getStringArray(ARG_COLORS)
+                selected.sets = arguments.getStringArray(ARG_SETS)
+                selected.rarities = arguments.getStringArray(ARG_RARITIES)
+                selected.types = arguments.getStringArray(ARG_TYPES)
+                selected.subtypes = arguments.getStringArray(ARG_SUBTYPES)
+                viewModel.setFilter(selected)
+            }
         })
         cardsGallery.adapter = adapter
     }

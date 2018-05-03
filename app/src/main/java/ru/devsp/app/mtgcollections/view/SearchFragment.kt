@@ -77,8 +77,7 @@ class SearchFragment : BaseFragment() {
 
         model.libraries.observe(this, Observer { libraries ->
             if (libraries != null && (libraries.isEmpty() || libraries[0].id != 0L)) {
-                libraries.add(0, Library(""))
-                initAddDialog(model, libraries)
+                initAddDialog(model, arrayListOf(Library("")).plus(libraries))
             }
         })
 
@@ -161,10 +160,10 @@ class SearchFragment : BaseFragment() {
             if (resource?.status == Status.LOADING) {
                 showProgressBar()
             } else if (resource?.status == Status.SUCCESS && resource.data != null) {
-                showContent()
                 val card = resource.data.find {
-                    it?.name == arguments.getString(ARGS_NAME)
-                            || it?.nameOrigin == arguments.getString(ARGS_NAME)
+                    resource.data.size == 1
+                            || it.name == arguments.getString(ARGS_NAME)
+                            || it.nameOrigin == arguments.getString(ARGS_NAME)
                 }
                 if (card != null) {
                     card.prepare()
@@ -172,6 +171,7 @@ class SearchFragment : BaseFragment() {
                     updateSearchResult(card)
                 }
                 currentCard = card
+                showContent()
             } else if (resource?.status == Status.ERROR || resource!!.data == null) {
                 showToast("Ничего не найдено")
                 showContent()
@@ -236,7 +236,7 @@ class SearchFragment : BaseFragment() {
                 })
 
         //Текст правил
-        if(card.rulesText != null) {
+        if (card.rulesText != null) {
             cardRulings.text = OracleReplacer.getText(card.rulesText, activity)
         }
         cardRulesTitle.setOnClickListener { _ -> cardRulings.toggle() }

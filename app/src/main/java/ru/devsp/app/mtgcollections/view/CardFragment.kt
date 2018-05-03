@@ -50,7 +50,7 @@ class CardFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var localCard: Card? = null
-    private var libraries: MutableList<Library>? = null
+    private var libraries: List<Library>? = null
 
     private var linkButton: MenuItem? = null
     private var addParentDialog: AlertDialog? = null
@@ -89,7 +89,7 @@ class CardFragment : BaseFragment() {
                 Observer { libraries ->
                     this.libraries = libraries
                     if (libraries != null && (libraries.isEmpty() || libraries[0].id != 0L)) {
-                        libraries.add(0, Library(""))
+                        this.libraries = arrayListOf(Library("")).plus(libraries)
                     }
                     initAddToLibraryDialog(viewModel)
                 })
@@ -228,7 +228,7 @@ class CardFragment : BaseFragment() {
                         }
                     })
 
-            if (!card.child) {
+            if (!card.child && card.parent != null) {
                 viewModel.setIdChild(card.parent)
                 if (linkButton != null) {
                     //Кнопки может еще не быть

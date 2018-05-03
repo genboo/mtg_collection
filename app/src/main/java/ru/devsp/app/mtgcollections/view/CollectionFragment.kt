@@ -83,8 +83,8 @@ class CollectionFragment : BaseFragment() {
                 //Показываем все карты
                 if (filter != null) {
                     filter.full = true
+                    viewModel.setFilter(filter)
                 }
-                viewModel.setFilter(filter)
             } else {
                 //Есть выбранные фильтры
                 viewModel.setFilter(selected)
