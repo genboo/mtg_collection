@@ -4,11 +4,10 @@ import android.graphics.PorterDuff
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_loading.view.*
 import kotlinx.android.synthetic.main.list_item_spoiler.view.*
-import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,11 +23,8 @@ class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             cardExists.text = ""
             cardExists.visibility = View.INVISIBLE
         }
-        Picasso.with(context)
-                .load(item.imageUrl)
-                .placeholder(R.drawable.pic_card_back)
-                .into(cardImage)
 
+        ImageLoader.loadImageFromCache(context, cardImage, item.imageUrl)
         itemBlock.setOnClickListener(listener)
     }
 

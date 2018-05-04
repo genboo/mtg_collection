@@ -15,9 +15,9 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors
  * Created by gen on 14.09.2017.
  */
 
-class CardNameBound(appExecutors: AppExecutors, private val mCardApi: CardApi) : NetworkBound<List<Card>, List<Card>>(appExecutors) {
-    private var set: String? = null
-    private var name: String? = null
+class CardNameBound(appExecutors: AppExecutors, private val cardApi: CardApi) : NetworkBound<List<Card>, List<Card>>(appExecutors) {
+    private var set: String = ""
+    private var name: String = ""
 
     fun setParams(set: String, name: String): CardNameBound {
         this.set = set
@@ -35,13 +35,13 @@ class CardNameBound(appExecutors: AppExecutors, private val mCardApi: CardApi) :
     }
 
     override fun shouldFetch(data: List<Card>?): Boolean {
-        return !cache.containsKey(set!! + name!!)
+        return !cache.containsKey(set + name)
     }
 
     override fun loadSaved(): LiveData<List<Card>> {
         val card = MutableLiveData<List<Card>>()
-        if (cache.containsKey(set!! + name!!)) {
-            card.setValue(cache[set!! + name!!])
+        if (cache.containsKey(set + name)) {
+            card.setValue(cache[set + name])
         } else {
             card.setValue(null)
         }
@@ -49,7 +49,7 @@ class CardNameBound(appExecutors: AppExecutors, private val mCardApi: CardApi) :
     }
 
     override fun createCall(): LiveData<ApiResponse<List<Card>>> {
-        return mCardApi.getCardByName(set, name)
+        return cardApi.getCardByName(set, name)
     }
 
     companion object {

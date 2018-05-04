@@ -5,10 +5,9 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_card.view.*
-import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Card
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 import java.util.*
 
 class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,10 +25,8 @@ class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         cardNumber.text = String.format(Locale.getDefault(), "%s %s", item.set, item.numberFormatted)
 
         ViewCompat.setTransitionName(cardImage, item.id)
-        Picasso.with(context)
-                .load(item.imageUrl)
-                .placeholder(R.drawable.pic_card_back)
-                .into(cardImage)
+
+        ImageLoader.loadImageFromCache(context, cardImage, item.imageUrl)
 
         itemBlock.setOnClickListener(listener)
 
