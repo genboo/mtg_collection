@@ -19,9 +19,6 @@ import android.text.style.StyleSpan
 import android.transition.TransitionInflater
 import android.view.*
 import android.widget.*
-import com.squareup.picasso.Callback
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_card.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.tools.Resource
@@ -30,6 +27,7 @@ import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.CardLibraryInfo
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryCard
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 import ru.devsp.app.mtgcollections.tools.OracleReplacer
 import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
@@ -183,9 +181,7 @@ class CardFragment : BaseFragment() {
     private fun updateSideCard(card: Card?) {
         if (card != null) {
             ViewCompat.setTransitionName(cardImageSecond, card.name + card.id)
-            Picasso.with(context)
-                    .load(card.imageUrl)
-                    .into(cardImageSecond)
+            ImageLoader.loadImageFromCache(context, cardImageSecond, card.imageUrl)
             cardImageSecond.setOnClickListener { _ ->
                 navigation.toFullScreenImage(card.imageUrl, card.name, card.name + card.id, cardImageSecond)
             }
@@ -215,19 +211,7 @@ class CardFragment : BaseFragment() {
     private fun updateCardInfo(viewModel: CardViewModel, card: Card?) {
         localCard = card
         if (card != null) {
-            Picasso.with(context)
-                    .load(card.imageUrl)
-                    .networkPolicy(NetworkPolicy.OFFLINE)
-                    .into(cardImage, object : Callback {
-                        override fun onSuccess() {
-                            startPostponedEnterTransition()
-                        }
-
-                        override fun onError() {
-                            startPostponedEnterTransition()
-                        }
-                    })
-
+            ImageLoader.loadImageFromCache(context, this, cardImage, card.imageUrl)
             if (!card.child && card.parent != null) {
                 viewModel.setIdChild(card.parent)
                 if (linkButton != null) {

@@ -21,6 +21,7 @@ import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.model.objects.Library
 import ru.devsp.app.mtgcollections.model.objects.LibraryCard
 import ru.devsp.app.mtgcollections.model.objects.Wish
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 import ru.devsp.app.mtgcollections.tools.OracleReplacer
 import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
@@ -223,17 +224,7 @@ class SearchFragment : BaseFragment() {
 
     private fun updateSearchResult(card: Card) {
         ViewCompat.setTransitionName(cardImage, card.id)
-        Picasso.with(context)
-                .load(card.imageUrl)
-                .into(cardImage, object : Callback {
-                    override fun onSuccess() {
-                        startPostponedEnterTransition()
-                    }
-
-                    override fun onError() {
-                        startPostponedEnterTransition()
-                    }
-                })
+        ImageLoader.loadImageFromCache(context, this, cardImage, card.imageUrl)
 
         //Текст правил
         if (card.rulesText != null) {

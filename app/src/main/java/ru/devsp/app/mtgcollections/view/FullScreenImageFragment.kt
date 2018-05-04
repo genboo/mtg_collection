@@ -7,10 +7,9 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_full_screen_image.*
 import ru.devsp.app.mtgcollections.R
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 class FullScreenImageFragment : BaseFragment() {
 
@@ -24,17 +23,7 @@ class FullScreenImageFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         ViewCompat.setTransitionName(cardImage, arguments.getString(ARG_ID))
-        Picasso.with(context)
-                .load(arguments.getString(ARG_URL))
-                .into(cardImage, object : Callback {
-                    override fun onSuccess() {
-                        startPostponedEnterTransition()
-                    }
-
-                    override fun onError() {
-                        startPostponedEnterTransition()
-                    }
-                })
+        ImageLoader.loadImageFromCache(context, this, cardImage, arguments.getString(ARG_URL))
         close.setOnClickListener({ _ -> fragmentManager.popBackStack() })
         cardImage.setOnClickListener({ _ -> fragmentManager.popBackStack() })
     }

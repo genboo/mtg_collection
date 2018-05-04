@@ -6,10 +6,10 @@ import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_gallery_item.*
 import ru.devsp.app.mtgcollections.MainActivity
 import ru.devsp.app.mtgcollections.R
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 
 /**
@@ -28,9 +28,7 @@ class CardItemFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         ViewCompat.setTransitionName(cardImage, arguments.getString(ARG_URL))
-        Picasso.with(context)
-                .load(arguments.getString(ARG_URL))
-                .into(cardImage)
+        ImageLoader.loadImageFromCache(context, cardImage, arguments.getString(ARG_URL))
         cardImage.setOnClickListener { _ ->
             (activity as MainActivity).navigation.toFullScreenImage(arguments.getString(ARG_URL), "", arguments.getString(ARG_URL), cardImage)
         }

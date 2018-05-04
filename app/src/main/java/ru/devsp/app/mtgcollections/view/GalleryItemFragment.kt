@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.squareup.picasso.Picasso
 import ru.devsp.app.mtgcollections.MainActivity
 import ru.devsp.app.mtgcollections.R
+import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 
 /**
@@ -23,10 +23,7 @@ class GalleryItemFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_gallery_item, container, false)
 
         val image = view.findViewById<ImageView>(R.id.cardImage)
-        Picasso.with(context)
-                .load(arguments.getString(ARG_URL))
-                .into(image)
-
+        ImageLoader.loadImageFromCache(context, image, arguments.getString(ARG_URL))
         image.setOnClickListener { _ -> (activity as MainActivity).navigation.toCard(arguments.getString(ARG_ID)) }
         return view
     }
