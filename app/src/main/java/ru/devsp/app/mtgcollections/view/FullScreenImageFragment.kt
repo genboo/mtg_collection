@@ -22,10 +22,10 @@ class FullScreenImageFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ViewCompat.setTransitionName(cardImage, arguments.getString(ARG_ID))
-        ImageLoader.loadImageFromCache(context, this, cardImage, arguments.getString(ARG_URL))
-        close.setOnClickListener({ _ -> fragmentManager.popBackStack() })
-        cardImage.setOnClickListener({ _ -> fragmentManager.popBackStack() })
+        ViewCompat.setTransitionName(cardImage, args.getString(ARG_ID))
+        ImageLoader.loadImageFromCache(this, cardImage, args.getString(ARG_URL))
+        close.setOnClickListener({ _ -> fragmentManager?.popBackStack() })
+        cardImage.setOnClickListener({ _ -> fragmentManager?.popBackStack() })
     }
 
     override fun inject() {

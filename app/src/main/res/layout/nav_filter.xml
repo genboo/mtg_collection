@@ -8,15 +8,15 @@
     <TextView
         style="@style/TextView.FilterTitle"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:gravity="center_vertical"
         android:text="@string/filters" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        android:layout_marginTop="?android:attr/actionBarSize">
 
         <LinearLayout
             android:id="@+id/filterList"
@@ -102,12 +102,12 @@
     <TextView
         android:id="@+id/filterSelectOptions"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"

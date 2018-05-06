@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.devsp.app.mtgcollections.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:context="ru.devsp.app.mtgcollections.MainActivity"
+    tools:openDrawer="end">
 
-    <include
-        layout="@layout/layout_app_bar_main"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
+        <include
+            layout="@layout/layout_app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundMain"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/list_item_spoiler"/>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/filter"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/colorBackgroundMain"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/list_item_card" />
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true">
 
+        <include layout="@layout/nav_wish_filter"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

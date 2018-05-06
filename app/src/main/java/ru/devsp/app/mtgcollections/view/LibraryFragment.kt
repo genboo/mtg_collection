@@ -43,8 +43,8 @@ class LibraryFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         updateToolbar()
         list.isNestedScrollingEnabled = true
-        val title = arguments.getString(ARG_TITLE)
-        val id = arguments.getLong(ARG_ID, 0)
+        val title = args.getString(ARG_TITLE)
+        val id = args.getLong(ARG_ID, 0)
         updateTitle(title!!)
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CollectionViewModel::class.java)
@@ -75,7 +75,7 @@ class LibraryFragment : BaseFragment() {
         val view = layoutInflater.inflate(R.layout.dialog_add_library, mainBlock, false)
         val libraryName = view.findViewById<EditText>(R.id.et_library_name)
         libraryName.setText(title)
-        mEditDialog = AlertDialog.Builder(context)
+        mEditDialog = AlertDialog.Builder(requireContext())
                 .setView(view)
                 .setTitle("Редактировать колоду")
                 .setPositiveButton("Ok") { _, _ ->
@@ -91,16 +91,16 @@ class LibraryFragment : BaseFragment() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.nav_edit) {
-            mEditDialog!!.show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.nav_edit) {
+            mEditDialog?.show()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.fragment_library, menu)
+        inflater.inflate(R.menu.fragment_library, menu)
     }
 
 

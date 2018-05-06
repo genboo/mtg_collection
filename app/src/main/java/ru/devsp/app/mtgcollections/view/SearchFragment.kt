@@ -12,8 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_search.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.tools.Status
@@ -29,6 +27,7 @@ import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
 import ru.devsp.app.mtgcollections.view.components.ExpandListener
 import ru.devsp.app.mtgcollections.view.components.SetTextWatcher
 import ru.devsp.app.mtgcollections.viewmodel.SearchViewModel
+import java.util.*
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -105,7 +104,7 @@ class SearchFragment : BaseFragment() {
         reprints.layoutManager = manager
 
         if (arguments != null) {
-            model.search(arguments.getString(ARGS_SET), null, arguments.getString(ARGS_NAME))
+            model.search(args.getString(ARGS_SET), null, args.getString(ARGS_NAME))
         }
 
     }
@@ -113,7 +112,7 @@ class SearchFragment : BaseFragment() {
     private fun observeExists(model: SearchViewModel) {
         model.cardExist.observe(this, Observer { card ->
             if (card == null || !card.wish && card.count == 0) {
-                toWishList.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_heart_outline))
+                toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
                 goToCard.visibility = View.GONE
                 cardCount.text = ""
                 cardCount.visibility = View.GONE
@@ -123,7 +122,7 @@ class SearchFragment : BaseFragment() {
                 cardCount.text = String.format("%s", card.count)
                 cardCount.visibility = View.VISIBLE
                 if (card.wish) {
-                    toWishList.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_heart))
+                    toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart))
                 }
             }
         })
@@ -149,10 +148,10 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putString(STATE_SET, searchSet?.text.toString())
-        outState?.putString(STATE_NUMBER, searchNum?.text.toString())
-        outState?.putBoolean(STATE_SEARCH, currentCard != null)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(STATE_SET, searchSet?.text.toString())
+        outState.putString(STATE_NUMBER, searchNum?.text.toString())
+        outState.putBoolean(STATE_SEARCH, currentCard != null)
         super.onSaveInstanceState(outState)
     }
 
@@ -163,8 +162,8 @@ class SearchFragment : BaseFragment() {
             } else if (resource?.status == Status.SUCCESS && resource.data != null) {
                 val card = resource.data.find {
                     resource.data.size == 1
-                            || it.name == arguments.getString(ARGS_NAME)
-                            || it.nameOrigin == arguments.getString(ARGS_NAME)
+                            || it.name == args.getString(ARGS_NAME)
+                            || it.nameOrigin == args.getString(ARGS_NAME)
                 }
                 if (card != null) {
                     card.prepare()
@@ -187,22 +186,29 @@ class SearchFragment : BaseFragment() {
     private fun initAddDialog(model: SearchViewModel, libraries: List<Library>) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
+        val countText = dialogView.findViewById<TextView>(R.id.tv_cards_count)
+        val plus = dialogView.findViewById<ImageButton>(R.id.ib_count_plus)
+        plus.setOnClickListener( { _ ->
+            var count = countText.text.toString().toInt()
+            countText.text = String.format(Locale.getDefault(), "%d", ++count)
+        })
+        val minus = dialogView.findViewById<ImageButton>(R.id.ib_count_minus)
+        minus.setOnClickListener( { _ ->
+            var count = countText.text.toString().toInt()
+            if(count > 0) {
+                countText.text = String.format(Locale.getDefault(), "%d", --count)
+            }
+        })
         // адаптер
-        val adapter = LibrarySelectAdapter(context, libraries)
+        val adapter = LibrarySelectAdapter(requireContext(), libraries)
         selector.adapter = adapter
-        addDialog = AlertDialog.Builder(context)
+        addDialog = AlertDialog.Builder(requireContext())
                 .setView(dialogView)
                 .setTitle("Добавить карту")
                 .setNegativeButton("Отмена") { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton("Ok") { _, _ ->
                     if (currentCard != null) {
-
-                        val countText = dialogView.findViewById<EditText>(R.id.et_card_count)
-                        var count = 1
-                        if ("" != countText.text.toString()) {
-                            count = Integer.valueOf(countText.text.toString())!!
-                        }
-                        currentCard!!.count = count
+                        currentCard!!.count = countText.text.toString().toInt()
 
                         //Сохраняем локальную копию
                         model.save(currentCard)
@@ -213,7 +219,7 @@ class SearchFragment : BaseFragment() {
                             val item = LibraryCard()
                             item.cardId = currentCard!!.id
                             item.libraryId = selectedLibrary.id
-                            item.count = count
+                            item.count = countText.text.toString().toInt()
                             model.addToLibrary(item)
                         }
                         showSnack(R.string.action_added, null)
@@ -224,11 +230,11 @@ class SearchFragment : BaseFragment() {
 
     private fun updateSearchResult(card: Card) {
         ViewCompat.setTransitionName(cardImage, card.id)
-        ImageLoader.loadImageFromCache(context, this, cardImage, card.imageUrl)
+        ImageLoader.loadImageFromCache(this, cardImage, card.imageUrl)
 
         //Текст правил
         if (card.rulesText != null) {
-            cardRulings.text = OracleReplacer.getText(card.rulesText, activity)
+            cardRulings.text = OracleReplacer.getText(card.rulesText, requireActivity())
         }
         cardRulesTitle.setOnClickListener { _ -> cardRulings.toggle() }
 

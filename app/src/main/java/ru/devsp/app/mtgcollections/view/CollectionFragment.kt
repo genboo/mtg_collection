@@ -211,8 +211,8 @@ class CollectionFragment : BaseFragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.nav_gallery) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.nav_gallery) {
             navigation.toGallery(filterOptions)
         } else if (item.itemId == R.id.filter) {
             if (drawerLayout.isDrawerOpen(GravityCompat.END)) {

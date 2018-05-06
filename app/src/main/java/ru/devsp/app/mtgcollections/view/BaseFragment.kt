@@ -3,11 +3,9 @@ package ru.devsp.app.mtgcollections.view
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleRegistry
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.transition.TransitionInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -26,6 +24,8 @@ abstract class BaseFragment : Fragment() {
 
     var component: AppComponent? = null
     internal val navigation: Navigation by lazy { (activity as MainActivity).navigation }
+    val args: Bundle by lazy { arguments ?: Bundle() }
+
 
     protected fun updateToolbar() {
         if (toolbar != null) {
@@ -37,7 +37,7 @@ abstract class BaseFragment : Fragment() {
 
     protected fun initFragment() {
         if (component == null) {
-            component = (activity.application as App).appComponent
+            component = (activity?.application as App).appComponent
             inject()
         }
     }
@@ -48,7 +48,7 @@ abstract class BaseFragment : Fragment() {
 
 
     protected fun hideSoftKeyboard() {
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 
@@ -80,7 +80,7 @@ abstract class BaseFragment : Fragment() {
         toolbar?.title = title
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (lifecycle as? LifecycleRegistry)?.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
     }

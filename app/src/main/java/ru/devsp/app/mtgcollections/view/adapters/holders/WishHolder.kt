@@ -20,7 +20,15 @@ class WishHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         cardNumber.text = String.format("%s %s", item.set,
                 if (item.numberFormatted == null) "" else item.numberFormatted)
 
-        ImageLoader.loadImageFromCache(context, cardImage, item.imageUrl)
+        if (item.count == 0) {
+            cardExists.text = ""
+            cardExists.visibility = View.INVISIBLE
+        } else {
+            cardExists.text = String.format("%s", item.count)
+            cardExists.visibility = View.VISIBLE
+        }
+
+        ImageLoader.loadImageFromCache(cardImage, item.imageUrl)
 
         itemBlock.setOnClickListener(listener)
     }

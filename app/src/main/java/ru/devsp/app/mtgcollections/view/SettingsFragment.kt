@@ -33,7 +33,7 @@ class SettingsFragment : BaseFragment() {
         saveBackup.setOnClickListener { _ -> saveBackup(viewModel) }
         restoreBackup.setOnClickListener { _ -> restoreBackup(viewModel) }
 
-        if (!PermissionsHelper.havePermissionStorage(context)) {
+        if (!PermissionsHelper.havePermissionStorage(requireContext())) {
             PermissionsHelper.requestLocationPermissions(this)
             saveBackup.isEnabled = false
             restoreBackup.isEnabled = false
@@ -42,13 +42,13 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun saveBackup(viewModel: SettingsViewModel) {
-        if (viewModel.backup(context)) {
+        if (viewModel.backup(requireContext())) {
             showToast("Забекаплено")
         }
     }
 
     private fun restoreBackup(viewModel: SettingsViewModel) {
-        if (viewModel.restore(context)) {
+        if (viewModel.restore(requireContext())) {
             showToast("Восстановлено")
         }
     }

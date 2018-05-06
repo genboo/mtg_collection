@@ -1,18 +1,18 @@
 package ru.devsp.app.mtgcollections.tools
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import ru.devsp.app.mtgcollections.R
+import java.lang.Exception
 
 object ImageLoader {
-    fun loadImageFromCache(context: Context, imageView: ImageView, image: String) {
-        val picasso = Picasso.with(context)
+    fun loadImageFromCache(imageView: ImageView, image: String?) {
         //Принудительная загрузка из кэша
-        picasso.load(image)
+        Picasso.get()
+                .load(image)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.pic_card_back)
                 .into(imageView, object : Callback {
@@ -20,25 +20,23 @@ object ImageLoader {
                         //not used
                     }
 
-                    override fun onError() {
+                    override fun onError(ex: Exception) {
                         //Если в кэше все-таки нет, загружаем из сети
-                        loadImage(context, imageView, image)
+                        loadImage(imageView, image)
                     }
                 })
     }
 
-
-    fun loadImage(context: Context, imageView: ImageView, image: String) {
-        val picasso = Picasso.with(context)
-        picasso.load(image)
+    fun loadImage(imageView: ImageView, image: String?) {
+        Picasso.get()
+                .load(image)
                 .placeholder(R.drawable.pic_card_back)
                 .into(imageView)
     }
 
-    fun loadImageFromCache(context: Context, fragment:Fragment, imageView: ImageView, image: String){
-        val picasso = Picasso.with(context)
-        //Принудительная загрузка из кэша
-        picasso.load(image)
+    fun loadImageFromCache(fragment: Fragment, imageView: ImageView, image: String?) {
+        Picasso.get()
+                .load(image)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.pic_card_back)
                 .into(imageView, object : Callback {
@@ -46,23 +44,23 @@ object ImageLoader {
                         fragment.startPostponedEnterTransition()
                     }
 
-                    override fun onError() {
+                    override fun onError(ex: Exception) {
                         //Если в кэше все-таки нет, загружаем из сети
-                        loadImage(context, fragment, imageView, image)
+                        loadImage(fragment, imageView, image)
                     }
                 })
     }
 
-    fun loadImage(context: Context, fragment:Fragment, imageView: ImageView, image: String) {
-        val picasso = Picasso.with(context)
-        picasso.load(image)
+    fun loadImage(fragment: Fragment, imageView: ImageView, image: String?) {
+        Picasso.get()
+                .load(image)
                 .placeholder(R.drawable.pic_card_back)
                 .into(imageView, object : Callback {
                     override fun onSuccess() {
                         fragment.startPostponedEnterTransition()
                     }
 
-                    override fun onError() {
+                    override fun onError(ex: Exception) {
                         fragment.startPostponedEnterTransition()
                     }
                 })

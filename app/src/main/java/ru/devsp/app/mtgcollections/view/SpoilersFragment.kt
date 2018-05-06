@@ -57,7 +57,7 @@ class SpoilersFragment : BaseFragment() {
             }
         }
 
-        val set = arguments.getString(ARG_SET)
+        val set = args.getString(ARG_SET)
 
         showProgressBar()
         viewModel.cards.observe(this, Observer { resource ->
@@ -112,7 +112,7 @@ class SpoilersFragment : BaseFragment() {
     }
 
     override fun getTitle(): String {
-        return arguments.getString(ARG_NAME)
+        return args.getString(ARG_NAME)
     }
 
     companion object {

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.40'
+    ext.kotlin_version = '1.2.41'
     repositories {
         mavenCentral()
         jcenter()
@@ -27,21 +27,21 @@ task clean(type: Delete) {
 
 ext {
     //Version and code
-    ver = '1.1.180312'
-    code = 2
+    ver = '1.1.180505'
+    code = 3
 
     // App dependencies
-    supportLibVersion = '26.1.0'
+    supportLibVersion = '27.1.0'
+    constraintVersion = '1.1.0'
     junitVersion = '4.12'
     archComponentsVersion = "1.1.1"
     roomVersion = "1.0.0"
     daggerVersion = "2.11"
-    retrofitVersion = "2.3.0"
-    okHttpVersion = "3.8.1"
+    retrofitVersion = "2.4.0"
     mockitoVersion = "2.7.19"
-    archVersion = "2.5"
     mockWebServerVersion = "3.8.1"
     testVersion = "1.0.1"
-    picassoVersion = "2.5.2"
+    picassoVersion = "2.71828"
+    okHttpVersion = "3.10.0"
     canaryVersion = "1.5.4"
 }

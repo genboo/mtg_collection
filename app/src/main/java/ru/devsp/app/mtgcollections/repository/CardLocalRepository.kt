@@ -8,13 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 import ru.devsp.app.mtgcollections.model.db.CardDao
-import ru.devsp.app.mtgcollections.model.objects.Card
-import ru.devsp.app.mtgcollections.model.objects.CardColorState
-import ru.devsp.app.mtgcollections.model.objects.CardExists
-import ru.devsp.app.mtgcollections.model.objects.CardForLibrary
-import ru.devsp.app.mtgcollections.model.objects.CardLibraryInfo
-import ru.devsp.app.mtgcollections.model.objects.CardManaState
-import ru.devsp.app.mtgcollections.model.objects.Filter
+import ru.devsp.app.mtgcollections.model.objects.*
 import ru.devsp.app.mtgcollections.tools.AppExecutors
 
 /**
@@ -39,6 +33,13 @@ internal constructor(private val appExecutors: AppExecutors, private val dao: Ca
      */
     val wishList: LiveData<List<Card>>
         get() = dao.wishList
+
+    /**
+     * Список желаемого
+     * @return ld
+     */
+    val wishSetNamesList: LiveData<List<SetName>>
+        get() = dao.wishSetNames
 
     private val rarities: Array<String>
         get() {
@@ -110,6 +111,10 @@ internal constructor(private val appExecutors: AppExecutors, private val dao: Ca
     fun getFilteredCard(filter: Filter): LiveData<List<Card>> {
         return dao.getFilteredCards(filter.types, filter.subtypes, filter.colors,
                 filter.rarities, filter.sets)
+    }
+
+    fun getFilteredWishList(sets: Array<String>): LiveData<List<Card>> {
+        return dao.getFilteredWishList(sets)
     }
 
     /**

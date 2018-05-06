@@ -28,7 +28,7 @@ class CardLibraryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             cardNumber.text = String.format(Locale.getDefault(), "%s %s", item.card.set, item.card.numberFormatted)
 
             ViewCompat.setTransitionName(cardImage, item.card.id)
-            ImageLoader.loadImageFromCache(context, cardImage, item.card.imageUrl)
+            ImageLoader.loadImageFromCache(cardImage, item.card.imageUrl)
             itemBlock.setOnClickListener(listener)
         }
     }

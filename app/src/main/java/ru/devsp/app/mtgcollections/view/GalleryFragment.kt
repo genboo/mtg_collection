@@ -51,11 +51,11 @@ class GalleryFragment : BaseFragment() {
             if(filter != null) {
                 viewModel.setFilter(filter)
                 val selected = Filter()
-                selected.colors = arguments.getStringArray(ARG_COLORS)
-                selected.sets = arguments.getStringArray(ARG_SETS)
-                selected.rarities = arguments.getStringArray(ARG_RARITIES)
-                selected.types = arguments.getStringArray(ARG_TYPES)
-                selected.subtypes = arguments.getStringArray(ARG_SUBTYPES)
+                selected.colors = args.getStringArray(ARG_COLORS)
+                selected.sets = args.getStringArray(ARG_SETS)
+                selected.rarities = args.getStringArray(ARG_RARITIES)
+                selected.types = args.getStringArray(ARG_TYPES)
+                selected.subtypes = args.getStringArray(ARG_SUBTYPES)
                 viewModel.setFilter(selected)
             }
         })

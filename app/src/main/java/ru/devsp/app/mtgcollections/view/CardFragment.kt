@@ -65,7 +65,7 @@ class CardFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         updateToolbar()
-        ViewCompat.setTransitionName(cardImage, arguments.getString(ARG_ID))
+        ViewCompat.setTransitionName(cardImage, args.getString(ARG_ID))
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CardViewModel::class.java)
 
@@ -81,7 +81,7 @@ class CardFragment : BaseFragment() {
         viewModel.cardSide.observe(this,
                 Observer { updateSideCard(it) })
 
-        viewModel.setId(arguments.getString(ARG_ID, ""))
+        viewModel.setId(args.getString(ARG_ID, ""))
 
         viewModel.libraries.observe(this,
                 Observer { libraries ->
@@ -93,7 +93,7 @@ class CardFragment : BaseFragment() {
                 })
 
         cardMultiId.setOnClickListener { _ ->
-            val clipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipboard = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("multivers id", cardMultiId.text)
             clipboard.primaryClip = clip
             showToast("Скопировано в буфер обмена", Toast.LENGTH_SHORT)
@@ -149,27 +149,35 @@ class CardFragment : BaseFragment() {
     private fun initAddToLibraryDialog(model: CardViewModel) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
+        val countText = dialogView.findViewById<TextView>(R.id.tv_cards_count)
+        val plus = dialogView.findViewById<ImageButton>(R.id.ib_count_plus)
+        plus.setOnClickListener( { _ ->
+            var count = countText.text.toString().toInt()
+            countText.text = String.format(Locale.getDefault(), "%d", ++count)
+        })
+        val minus = dialogView.findViewById<ImageButton>(R.id.ib_count_minus)
+        minus.setOnClickListener( { _ ->
+            var count = countText.text.toString().toInt()
+            if(count > 0) {
+                countText.text = String.format(Locale.getDefault(), "%d", --count)
+            }
+        })
         // адаптер
-        val adapter = LibrarySelectAdapter(context, libraries)
+        val adapter = LibrarySelectAdapter(requireContext(), libraries)
         selector.adapter = adapter
-        addDialog = AlertDialog.Builder(context)
+        addDialog = AlertDialog.Builder(requireContext())
                 .setView(dialogView)
                 .setTitle("Добавить карту")
                 .setNegativeButton("Отмена") { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton("Ok") { _, _ ->
                     if (localCard != null) {
-                        val countText = dialogView.findViewById<EditText>(R.id.et_card_count)
-                        var count = 1
-                        if ("" != countText.text.toString()) {
-                            count = Integer.valueOf(countText.text.toString())!!
-                        }
                         val selectedLibrary = selector.selectedItem as Library
                         if (selectedLibrary.id != 0L) {
                             //Сохраняем в колоду
                             val item = LibraryCard()
                             item.cardId = localCard!!.id
                             item.libraryId = selectedLibrary.id
-                            item.count = count
+                            item.count = countText.text.toString().toInt()
                             model.addToLibrary(item)
                         }
                         showSnack(R.string.action_added, null)
@@ -181,7 +189,7 @@ class CardFragment : BaseFragment() {
     private fun updateSideCard(card: Card?) {
         if (card != null) {
             ViewCompat.setTransitionName(cardImageSecond, card.name + card.id)
-            ImageLoader.loadImageFromCache(context, cardImageSecond, card.imageUrl)
+            ImageLoader.loadImageFromCache(cardImageSecond, card.imageUrl)
             cardImageSecond.setOnClickListener { _ ->
                 navigation.toFullScreenImage(card.imageUrl, card.name, card.name + card.id, cardImageSecond)
             }
@@ -196,7 +204,7 @@ class CardFragment : BaseFragment() {
                     .append(card.name).append("\n")
         }
         if (card.text != null) {
-            stringBuilder.append(OracleReplacer.getText(card.text, activity))
+            stringBuilder.append(OracleReplacer.getText(card.text, requireActivity()))
         }
         val flavorStart = stringBuilder.length
         if (card.flavor != null) {
@@ -211,7 +219,7 @@ class CardFragment : BaseFragment() {
     private fun updateCardInfo(viewModel: CardViewModel, card: Card?) {
         localCard = card
         if (card != null) {
-            ImageLoader.loadImageFromCache(context, this, cardImage, card.imageUrl)
+            ImageLoader.loadImageFromCache(this, cardImage, card.imageUrl)
             if (!card.child && card.parent != null) {
                 viewModel.setIdChild(card.parent)
                 if (linkButton != null) {
@@ -225,19 +233,19 @@ class CardFragment : BaseFragment() {
             cardName.setOnClickListener { _ -> cardOracle.toggle() }
             cardName.text = card.name
 
-            cardManaCost.text = OracleReplacer.getText(card.manaCost ?: "", activity)
+            cardManaCost.text = OracleReplacer.getText(card.manaCost ?: "", requireActivity())
 
             if (view != null) {
                 cardOracle.setExpandListener(ExpandListener(cardOracleArrow))
                 cardRules.setExpandListener(ExpandListener(cardRulesArrow))
             }
             cardRulesTitle.setOnClickListener { _ -> cardRules.toggle() }
-            cardRules.text = OracleReplacer.getText(card.rulesText ?: "", activity)
+            cardRules.text = OracleReplacer.getText(card.rulesText ?: "", requireActivity())
 
             cardMultiId.text = card.id
 
-            cardRarity.setColorFilter(ContextCompat.getColor(context, card.rarityColor), PorterDuff.Mode.SRC_IN)
-            cardRarity.setImageDrawable(resources.getDrawable(card.setIcon, context.theme))
+            cardRarity.setColorFilter(ContextCompat.getColor(requireContext(), card.rarityColor), PorterDuff.Mode.SRC_IN)
+            cardRarity.setImageDrawable(resources.getDrawable(card.setIcon, requireContext().theme))
 
             updateTitle(card.name)
 
@@ -321,7 +329,7 @@ class CardFragment : BaseFragment() {
     }
 
     private fun initAddDialog(model: CardViewModel) {
-        addParentDialog = AlertDialog.Builder(context)
+        addParentDialog = AlertDialog.Builder(requireContext())
                 .setView(R.layout.dialog_add_parent)
                 .setTitle("Указать вторую сторону")
                 .setNegativeButton("Отмена") { d, _ -> d.dismiss() }

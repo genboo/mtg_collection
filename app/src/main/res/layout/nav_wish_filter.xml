@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextView.FilterTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:text="@string/filters" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        android:layout_marginTop="?android:attr/actionBarSize">
+
+        <LinearLayout
+            android:id="@+id/filterList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="4dp">
+
+            <TextView
+                android:id="@+id/filterSets"
+                style="@style/TextView.FilterItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_set" />
+
+            <LinearLayout
+                android:id="@+id/filterSetsBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/filterSelectOptions"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/select"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+</FrameLayout>

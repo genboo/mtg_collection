@@ -18,13 +18,15 @@ import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 class GalleryItemFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    private val args: Bundle by lazy { arguments ?: Bundle() }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(R.layout.fragment_gallery_item, container, false)
+        val view = inflater.inflate(R.layout.fragment_gallery_item, container, false)
 
         val image = view.findViewById<ImageView>(R.id.cardImage)
-        ImageLoader.loadImageFromCache(context, image, arguments.getString(ARG_URL))
-        image.setOnClickListener { _ -> (activity as MainActivity).navigation.toCard(arguments.getString(ARG_ID)) }
+        ImageLoader.loadImageFromCache(image, args.getString(ARG_URL))
+        image.setOnClickListener { _ -> (activity as MainActivity).navigation.toCard(args.getString(ARG_ID)) }
         return view
     }
 

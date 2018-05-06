@@ -26,7 +26,7 @@ class CardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         ViewCompat.setTransitionName(cardImage, item.id)
 
-        ImageLoader.loadImageFromCache(context, cardImage, item.imageUrl)
+        ImageLoader.loadImageFromCache(cardImage, item.imageUrl)
 
         itemBlock.setOnClickListener(listener)
 

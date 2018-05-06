@@ -1,6 +1,5 @@
 package ru.devsp.app.mtgcollections.model.db
 
-
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
@@ -19,7 +18,6 @@ import ru.devsp.app.mtgcollections.model.objects.Color
 import ru.devsp.app.mtgcollections.model.objects.SetName
 import ru.devsp.app.mtgcollections.model.objects.Subtype
 import ru.devsp.app.mtgcollections.model.objects.Type
-
 
 /**
  * Получение данных по сохраненным картам
@@ -41,10 +39,20 @@ interface CardDao {
             " CASE WHEN c.numberFormatted is null THEN  c.number " +
             " ELSE c.numberFormatted END numberFormatted " +
             " FROM Card c, Wish w " +
-            " WHERE w.card_id = c.id AND c.count = 0 " +
+            " WHERE w.card_id = c.id " +
             " GROUP BY c.id " +
             " ORDER BY c.setName, numberFormatted")
     val wishList: LiveData<List<Card>>
+
+    @Query("SELECT c.id, c.name, c.imageUrl, c.setName, c.`set`, c.type, c.card_id, c.child, " +
+            " c.rarity, c.text, c.flavor, c.manaCost, c.cmc, c.rulesText, c.count, c.number, " +
+            " CASE WHEN c.numberFormatted is null THEN  c.number " +
+            " ELSE c.numberFormatted END numberFormatted " +
+            " FROM Card c, Wish w " +
+            " WHERE w.card_id = c.id AND c.setName IN (:sets) " +
+            " GROUP BY c.id " +
+            " ORDER BY c.setName, numberFormatted")
+    fun getFilteredWishList(sets: Array<String>): LiveData<List<Card>>
 
     @get:Query("SELECT col.* FROM Color col GROUP BY col.color ORDER BY col.color")
     val colors: List<Color>
@@ -57,6 +65,9 @@ interface CardDao {
 
     @get:Query("SELECT c.`setName` FROM Card c GROUP BY c.`set` ORDER BY c.setName")
     val setNames: List<SetName>
+
+    @get:Query("SELECT c.`setName` FROM Card c, Wish w WHERE c.id = w.card_id GROUP BY c.`set` ORDER BY c.setName")
+    val wishSetNames: LiveData<List<SetName>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(item: Card)

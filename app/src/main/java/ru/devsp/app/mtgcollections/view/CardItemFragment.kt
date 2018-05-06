@@ -19,6 +19,7 @@ import ru.devsp.app.mtgcollections.tools.ImageLoader
 
 class CardItemFragment : Fragment() {
 
+    private val args: Bundle by lazy { arguments ?: Bundle() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -27,10 +28,10 @@ class CardItemFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ViewCompat.setTransitionName(cardImage, arguments.getString(ARG_URL))
-        ImageLoader.loadImageFromCache(context, cardImage, arguments.getString(ARG_URL))
+        ViewCompat.setTransitionName(cardImage, args.getString(ARG_URL))
+        ImageLoader.loadImageFromCache(cardImage, args.getString(ARG_URL))
         cardImage.setOnClickListener { _ ->
-            (activity as MainActivity).navigation.toFullScreenImage(arguments.getString(ARG_URL), "", arguments.getString(ARG_URL), cardImage)
+            (activity as MainActivity).navigation.toFullScreenImage(args.getString(ARG_URL), "", args.getString(ARG_URL), cardImage)
         }
     }
 

@@ -117,19 +117,19 @@ internal constructor(private val cardLocalRepository: CardLocalRepository,
             filter.full = true
         } else if (this.filter.value != null) {
             if (filter.types.isEmpty()) {
-                filter.types = this.filter.value!!.types
+                filter.types = this.filter.value?.types
             }
             if (filter.subtypes.isEmpty()) {
-                filter.subtypes = this.filter.value!!.subtypes
+                filter.subtypes = this.filter.value?.subtypes
             }
             if (filter.colors.isEmpty()) {
-                filter.colors = this.filter.value!!.colors
+                filter.colors = this.filter.value?.colors
             }
             if (filter.sets.isEmpty()) {
-                filter.sets = this.filter.value!!.sets
+                filter.sets = this.filter.value?.sets
             }
             if (filter.rarities.isEmpty()) {
-                filter.rarities = this.filter.value!!.rarities
+                filter.rarities = this.filter.value?.rarities
             }
         }
         filterSwitcher.postValue(filter)

@@ -24,7 +24,7 @@ class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             cardExists.visibility = View.INVISIBLE
         }
 
-        ImageLoader.loadImageFromCache(context, cardImage, item.imageUrl)
+        ImageLoader.loadImageFromCache(cardImage, item.imageUrl)
         itemBlock.setOnClickListener(listener)
     }
 
