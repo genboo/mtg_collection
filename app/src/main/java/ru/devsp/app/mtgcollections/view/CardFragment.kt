@@ -219,7 +219,7 @@ class CardFragment : BaseFragment() {
     private fun updateCardInfo(viewModel: CardViewModel, card: Card?) {
         localCard = card
         if (card != null) {
-            ImageLoader.loadImageFromCache(this, cardImage, card.imageUrl)
+            ImageLoader.loadImageFromCache(cardImage, card.imageUrl)
             if (!card.child && card.parent != null) {
                 viewModel.setIdChild(card.parent)
                 if (linkButton != null) {
@@ -368,14 +368,6 @@ class CardFragment : BaseFragment() {
 
     override fun getTitle(): String {
         return ""
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        postponeEnterTransition()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        }
     }
 
     companion object {

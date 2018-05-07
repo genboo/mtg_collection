@@ -23,7 +23,7 @@ class FullScreenImageFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         ViewCompat.setTransitionName(cardImage, args.getString(ARG_ID))
-        ImageLoader.loadImageFromCache(this, cardImage, args.getString(ARG_URL))
+        ImageLoader.loadImageFromCache(cardImage, args.getString(ARG_URL))
         close.setOnClickListener({ _ -> fragmentManager?.popBackStack() })
         cardImage.setOnClickListener({ _ -> fragmentManager?.popBackStack() })
     }
@@ -34,14 +34,6 @@ class FullScreenImageFragment : BaseFragment() {
 
     override fun getTitle(): String {
         return ""
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        postponeEnterTransition()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        }
     }
 
     companion object {

@@ -3,9 +3,11 @@ package ru.devsp.app.mtgcollections.view
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleRegistry
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.transition.TransitionInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -78,6 +80,13 @@ abstract class BaseFragment : Fragment() {
 
     fun updateTitle(title: String) {
         toolbar?.title = title
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

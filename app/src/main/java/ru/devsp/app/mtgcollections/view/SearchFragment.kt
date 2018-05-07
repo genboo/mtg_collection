@@ -230,7 +230,7 @@ class SearchFragment : BaseFragment() {
 
     private fun updateSearchResult(card: Card) {
         ViewCompat.setTransitionName(cardImage, card.id)
-        ImageLoader.loadImageFromCache(this, cardImage, card.imageUrl)
+        ImageLoader.loadImageFromCache(cardImage, card.imageUrl)
 
         //Текст правил
         if (card.rulesText != null) {

@@ -116,10 +116,10 @@ public class Card {
     }
 
     public static int getSetIcon(String set) {
-        if (Icons.SET_ICONS.containsKey(set)) {
-            return Icons.SET_ICONS.get(set);
+        if (Icons.INSTANCE.getList().containsKey(set)) {
+            return Icons.INSTANCE.getList().get(set);
         }
-        return Icons.SET_ICONS.get("DEFAULT");
+        return Icons.INSTANCE.getList().get("DEFAULT");
     }
 
     public void prepare() {
