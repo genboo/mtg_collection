@@ -10,13 +10,7 @@ import javax.inject.Singleton
 
 import dagger.Module
 import dagger.Provides
-import ru.devsp.app.mtgcollections.model.db.AdditionalInfoCardDao
-import ru.devsp.app.mtgcollections.model.db.LibraryCardDao
-import ru.devsp.app.mtgcollections.model.db.CardDao
-import ru.devsp.app.mtgcollections.model.db.LibraryDao
-import ru.devsp.app.mtgcollections.model.db.MtgDatabase
-import ru.devsp.app.mtgcollections.model.db.PlayerDao
-import ru.devsp.app.mtgcollections.model.db.WishCardDao
+import ru.devsp.app.mtgcollections.model.db.*
 
 /**
  * Инициализация базы данных
@@ -40,7 +34,8 @@ class DbModule {
                         MIGRATION_1_2,
                         MIGRATION_2_3,
                         MIGRATION_3_4,
-                        MIGRATION_4_5
+                        MIGRATION_4_5,
+                        MIGRATION_5_6
                 )
                 .build()
     }
@@ -75,7 +70,7 @@ class DbModule {
      * Связь колод и карт
      *
      * @param db База данных
-     * @return Dao колод
+     * @return Dao списка карт в колодах
      */
     @Provides
     @Singleton
@@ -87,7 +82,7 @@ class DbModule {
      * Цвет, тип, подтипы, суперсипы карты
      *
      * @param db База данных
-     * @return Dao колод
+     * @return Dao доп. информации
      */
     @Provides
     @Singleton
@@ -100,7 +95,7 @@ class DbModule {
      * Игроки
      *
      * @param db База данных
-     * @return Dao колод
+     * @return Dao игроков
      */
     @Provides
     @Singleton
@@ -112,12 +107,24 @@ class DbModule {
      * Списож желаний
      *
      * @param db База данных
-     * @return Dao колод
+     * @return Dao списка желаний
      */
     @Provides
     @Singleton
     internal fun provideWishDao(db: MtgDatabase): WishCardDao {
         return db.wishCardDao()
+    }
+
+    /**
+     * Списож сетов
+     *
+     * @param db База данных
+     * @return Dao сетов
+     */
+    @Provides
+    @Singleton
+    internal fun provideSetsDao(db: MtgDatabase): SetsDao {
+        return db.setsDao()
     }
 
     companion object {
@@ -197,9 +204,25 @@ class DbModule {
                         "    card_id TEXT UNIQUE " +
                         ")")
 
-                database.execSQL("CREATE UNIQUE INDEX index_Wish_card_id ON Wish ( " +
-                        "    card_id " +
+                database.execSQL("CREATE UNIQUE INDEX index_Wish_card_id ON Wish (card_id)")
+            }
+        }
+
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                //Таблица сетов
+                database.execSQL("CREATE TABLE [Set] (" +
+                        "    name        TEXT NOT NULL," +
+                        "    border      TEXT," +
+                        "    releaseDate TEXT NOT NULL," +
+                        "    block       TEXT," +
+                        "    code        TEXT NOT NULL," +
+                        "    PRIMARY KEY (" +
+                        "        code" +
+                        "    )" +
                         ")")
+
+                database.execSQL("CREATE INDEX index_Set_releaseDate ON [Set] (releaseDate)")
             }
         }
     }

@@ -57,7 +57,7 @@ class SetsFragment : BaseFragment() {
         viewModel.sets.observe(this, Observer { resource ->
             if (resource?.status == Status.SUCCESS) {
                 if (resource.data != null) {
-                    adapter.setItems(resource.data.sortedByDescending { it.releaseDate })
+                    adapter.setItems(resource.data)
                     list.post { adapter.notifyDataSetChanged() }
                 }
                 showContent()
