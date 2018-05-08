@@ -8,7 +8,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
@@ -16,7 +15,6 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import android.transition.TransitionInflater
 import android.view.*
 import android.widget.*
 import kotlinx.android.synthetic.main.fragment_card.*
@@ -93,7 +91,7 @@ class CardFragment : BaseFragment() {
                 })
 
         cardMultiId.setOnClickListener { _ ->
-            val clipboard = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("multivers id", cardMultiId.text)
             clipboard.primaryClip = clip
             showToast("Скопировано в буфер обмена", Toast.LENGTH_SHORT)
