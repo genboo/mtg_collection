@@ -15,6 +15,9 @@ object Icons {
     val list: MutableMap<String, Int> = HashMap()
 
     init {
+        //Battlebond 2018
+        list["BBD"] = R.drawable.ic_bbd
+
         //Dominaria Block 2018
         list["DOM"] = R.drawable.ic_dom
 
@@ -87,10 +90,14 @@ object Icons {
         list["LRW"] = R.drawable.ic_lrw
 
         //Time Spiral Block 2006-2007
+        list["FUT"] = R.drawable.ic_fut
         list["PLC"] = R.drawable.ic_plc
+        list["TSP"] = R.drawable.ic_tsp
+        list["TSB"] = R.drawable.ic_tsp
 
         //Ice Age Block 2006
         list["CSP"] = R.drawable.ic_csp
+        list["CST"] = R.drawable.ic_csp
 
         //Ravnica 2005-2006
         list["DIS"] = R.drawable.ic_dis
@@ -104,10 +111,13 @@ object Icons {
 
         //Mirrodin Block 2003-2004
         list["5DN"] = R.drawable.ic_5dn
+        list["DST"] = R.drawable.ic_dst
         list["MRD"] = R.drawable.ic_mrd
 
         //Onslaught Block 2002-2003
         list["SCG"] = R.drawable.ic_scg
+        list["LGN"] = R.drawable.ic_lgn
+        list["ONS"] = R.drawable.ic_ons
 
         //Odyssey Block 2001-2002
         list["JUD"] = R.drawable.ic_jud
@@ -135,6 +145,7 @@ object Icons {
         list["LEA"] = R.drawable.ic_lea
 
         //Core sets
+        list["M19"] = R.drawable.ic_m19
         list["M15"] = R.drawable.ic_m15
         list["M14"] = R.drawable.ic_m14
         list["M13"] = R.drawable.ic_m13
@@ -218,6 +229,7 @@ object Icons {
         list["ME4"] = R.drawable.ic_me4
         list["ME3"] = R.drawable.ic_me3
         list["ME2"] = R.drawable.ic_me2
+        list["MED"] = R.drawable.ic_med
 
         //From the vault
         list["V17"] = R.drawable.ic_v17
@@ -251,6 +263,8 @@ object Icons {
         list["pMEI"] = R.drawable.ic_promo
         list["pFNM"] = R.drawable.ic_promo
         list["pJGP"] = R.drawable.ic_promo
+        list["p15A"] = R.drawable.ic_dpa
+        list["pREL"] = R.drawable.ic_dpa
 
         //Ready-to-Play Decks
         list["PD3"] = R.drawable.ic_pd3
