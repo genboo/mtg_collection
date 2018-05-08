@@ -32,13 +32,19 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/backup_text" />
+
                 <Button
                     android:id="@+id/saveBackup"
-                    style="@style/Button.Rounded"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/action_make_backup" />
+                    android:text="@string/action_make_backup"
+                    android:textColor="@color/colorAccent" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -54,14 +60,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/restore_text" />
 
                 <Button
                     android:id="@+id/restoreBackup"
-                    style="@style/Button.Rounded"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/action_restore_backup" />
+                    android:text="@string/action_restore_backup"
+                    android:textColor="@color/colorAccent" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -78,13 +90,19 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/expire_text" />
+
                 <Button
                     android:id="@+id/clearExpire"
-                    style="@style/Button.Rounded"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/action_clear_expire" />
+                    android:text="@string/action_clear_expire"
+                    android:textColor="@color/colorAccent" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
