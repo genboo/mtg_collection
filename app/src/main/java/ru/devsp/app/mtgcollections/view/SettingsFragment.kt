@@ -39,6 +39,11 @@ class SettingsFragment : BaseFragment() {
             restoreBackup.isEnabled = false
         }
 
+        clearExpire.setOnClickListener { _ ->
+            viewModel.clearExpire()
+            showToast("Кэш сброшен")
+        }
+
     }
 
     private fun saveBackup(viewModel: SettingsViewModel) {
@@ -52,7 +57,6 @@ class SettingsFragment : BaseFragment() {
             showToast("Восстановлено")
         }
     }
-
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

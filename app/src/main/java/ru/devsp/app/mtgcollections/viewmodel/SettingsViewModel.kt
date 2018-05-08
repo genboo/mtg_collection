@@ -3,6 +3,7 @@ package ru.devsp.app.mtgcollections.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Environment
 
 import java.io.File
@@ -13,6 +14,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 import ru.devsp.app.mtgcollections.di.modules.DbModule
+import ru.devsp.app.mtgcollections.di.modules.Prefs
 import ru.devsp.app.mtgcollections.tools.Logger
 
 
@@ -22,7 +24,7 @@ import ru.devsp.app.mtgcollections.tools.Logger
  */
 
 class SettingsViewModel @Inject
-internal constructor() : ViewModel() {
+internal constructor(private val prefs: SharedPreferences) : ViewModel() {
 
     private val path = Environment.getExternalStorageDirectory().path + "/data/"
 
@@ -83,6 +85,12 @@ internal constructor() : ViewModel() {
 
         }
         return false
+    }
+
+    fun clearExpire() {
+        val editor = prefs.edit()
+        editor.remove(Prefs.SETS_TIME)
+        editor.apply()
     }
 
 }

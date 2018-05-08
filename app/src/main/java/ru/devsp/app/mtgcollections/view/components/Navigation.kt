@@ -87,14 +87,11 @@ class Navigation(private val fragmentManager: FragmentManager) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
-        val fragmentPrevious = fragmentManager.findFragmentById(R.id.content)
         val fade = Fade()
-        fragmentPrevious?.exitTransition = fade
-
         val slide = Slide()
         slide.slideEdge = Gravity.END
-        fragment.enterTransition = slide
 
+        val fragmentPrevious = fragmentManager.findFragmentById(R.id.content)
         val ft = fragmentManager.beginTransaction()
 
         if (back) {
@@ -106,6 +103,10 @@ class Navigation(private val fragmentManager: FragmentManager) {
                 ft.addSharedElement(view, ViewCompat.getTransitionName(view))
             }
         }
+
+        fragmentPrevious?.exitTransition = fade
+        fragment.enterTransition = slide
+
         ft.replace(R.id.content, fragment)
         ft.commit()
     }

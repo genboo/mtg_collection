@@ -10,6 +10,7 @@ import dagger.Component
 import ru.devsp.app.mtgcollections.MainActivity
 import ru.devsp.app.mtgcollections.di.ViewModelModule
 import ru.devsp.app.mtgcollections.di.modules.DbModule
+import ru.devsp.app.mtgcollections.di.modules.Prefs
 import ru.devsp.app.mtgcollections.di.modules.RetrofitModule
 import ru.devsp.app.mtgcollections.view.CardFragment
 import ru.devsp.app.mtgcollections.view.CollectionFragment
@@ -28,7 +29,7 @@ import ru.devsp.app.mtgcollections.view.WishFragment
  * Компонент di
  * Created by gen on 27.09.2017.
  */
-@Component(modules = [ViewModelModule::class, RetrofitModule::class, DbModule::class])
+@Component(modules = [ViewModelModule::class, RetrofitModule::class, DbModule::class, Prefs::class])
 @Singleton
 interface AppComponent {
 

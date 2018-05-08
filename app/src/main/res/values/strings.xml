@@ -10,6 +10,7 @@
     <string name="action_add_to_library">Добавить в библиотеку</string>
     <string name="action_make_backup">Сохранить</string>
     <string name="action_restore_backup">Восстановить</string>
+    <string name="action_clear_expire">Сбросить кэш</string>
 
     <string name="search_set_default">xln</string>
     <string name="search_number_default">280</string>

@@ -2,6 +2,7 @@ package ru.devsp.app.mtgcollections.repository
 
 
 import android.arch.lifecycle.LiveData
+import android.content.SharedPreferences
 
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,9 +20,9 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors
  */
 @Singleton
 class SetsRepository @Inject
-internal constructor(appExecutors: AppExecutors, setsDao: SetsDao, setsApi: SetsApi) {
+internal constructor(appExecutors: AppExecutors, setsDao: SetsDao, setsApi: SetsApi, prefs: SharedPreferences) {
 
-    private val bound: SetsBound = SetsBound(appExecutors, setsDao, setsApi)
+    private val bound: SetsBound = SetsBound(appExecutors, setsDao, setsApi, prefs)
 
     /**
      * Получение списка сетов
