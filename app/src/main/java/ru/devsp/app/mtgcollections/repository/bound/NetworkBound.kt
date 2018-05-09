@@ -45,8 +45,9 @@ internal constructor(private val appExecutors: AppExecutors) {
                     }
                 }
             } else {
-                onFetchFailed(response?.errorMessage)
-                result.setValue(Resource.error(response?.errorMessage ?: "Ошибка получения данных", data))
+                val error = response?.errorMessage ?: "Ошибка получения данных"
+                onFetchFailed(error)
+                result.setValue(Resource.error(error, data))
             }
         }
     }
@@ -55,7 +56,7 @@ internal constructor(private val appExecutors: AppExecutors) {
         return result
     }
 
-    private fun onFetchFailed(message: String?) {
+    private fun onFetchFailed(message: String) {
         Logger.e(message)
     }
 

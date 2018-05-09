@@ -245,8 +245,8 @@ class SearchFragment : BaseFragment() {
                 navigation.toSearch(card.printings[position], card.nameOrigin)
             }
         })
-        reprints.adapter.notifyDataSetChanged()
-        reprints.post { reprints.adapter.notifyDataSetChanged() }
+        reprints?.adapter?.notifyDataSetChanged()
+        reprints?.post { reprints.adapter.notifyDataSetChanged() }
     }
 
     override fun inject() {

@@ -18,7 +18,7 @@ class App : Application() {
         super.onCreate()
         val debug = false
         val picasso = Picasso.Builder(this)
-                .downloader(OkHttp3Downloader(this, 250000000))
+                .downloader(OkHttp3Downloader(this, 750000000))
                 .indicatorsEnabled(debug)
                 .loggingEnabled(debug)
                 .build()
