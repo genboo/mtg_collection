@@ -2,6 +2,7 @@ package ru.devsp.app.mtgcollections.repository
 
 
 import android.arch.lifecycle.LiveData
+import android.content.SharedPreferences
 
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,7 +22,7 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors
  */
 @Singleton
 class CardRepository @Inject
-internal constructor(private val appExecutors: AppExecutors, private val cardApi: CardApi) {
+internal constructor(private val appExecutors: AppExecutors, private val cardApi: CardApi, private val prefs: SharedPreferences) {
 
     /**
      * Получение карты
@@ -58,7 +59,7 @@ internal constructor(private val appExecutors: AppExecutors, private val cardApi
      * @return
      */
     fun getCardsBySet(set: String, page: Int): LiveData<Resource<List<Card>>> {
-        val bound = CardsSetBound(appExecutors, cardApi)
+        val bound = CardsSetBound(appExecutors, prefs, cardApi)
                 .setParams(set, page)
         bound.create()
         return bound.asLiveData()

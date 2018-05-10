@@ -3,8 +3,8 @@ package ru.devsp.app.mtgcollections.repository.bound
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-
-import java.util.HashMap
+import android.content.SharedPreferences
+import com.google.gson.Gson
 
 import ru.devsp.app.mtgcollections.model.api.CardApi
 import ru.devsp.app.mtgcollections.model.objects.Card
@@ -16,7 +16,7 @@ import ru.devsp.app.mtgcollections.tools.AppExecutors
  * Created by gen on 22.12.2017.
  */
 
-class CardsSetBound(appExecutors: AppExecutors, private val cardApi: CardApi) : NetworkBound<List<Card>, List<Card>>(appExecutors) {
+class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPreferences, private val cardApi: CardApi) : NetworkBound<List<Card>, List<Card>>(appExecutors) {
 
     private var set: String = ""
     private var page: Int = 0
@@ -29,29 +29,30 @@ class CardsSetBound(appExecutors: AppExecutors, private val cardApi: CardApi) : 
 
     override fun saveCallResult(data: List<Card>?) {
         if (data != null && data.isNotEmpty()) {
-            if (cache.size == MAX_CACHE_SIZE && page == 1) {
-                cache.clear()
-                downloadPages.clear()
+            val json = prefs.getString(set, null)
+            val list: List<Card> = when(json == null){
+                true -> data
+                else -> Gson().fromJson<Array<Card>>(json, Array<Card>::class.java).asList().plus(data)
             }
-            if (cache.containsKey(set)) {
-                cache[set] = cache[set]?.plus(data)
-            } else {
-                cache[set] = data
-            }
-            downloadPages[set + page] = true
+            val editor = prefs.edit()
+            editor.putString(set, Gson().toJson(list))
+            editor.putInt(set + "_page", page)
+            editor.apply()
         }
     }
 
     override fun shouldFetch(data: List<Card>?): Boolean {
-        return !downloadPages.containsKey(set + page)
+        val savedPage = prefs.getInt(set + "_page", 0)
+        return page > savedPage
     }
 
     override fun loadSaved(): LiveData<List<Card>> {
         val card = MutableLiveData<List<Card>>()
-        if (cache.containsKey(set)) {
-            card.setValue(cache[set])
+        val json = prefs.getString(set, null)
+        if (json == null) {
+            card.value = null
         } else {
-            card.setValue(null)
+            card.value = Gson().fromJson<Array<Card>>(json, Array<Card>::class.java).asList()
         }
         return card
     }
@@ -62,9 +63,6 @@ class CardsSetBound(appExecutors: AppExecutors, private val cardApi: CardApi) : 
 
     companion object {
         const val PAGES_SIZE = 40
-        private const val MAX_CACHE_SIZE = 5
-        private val cache = mutableMapOf<String, List<Card>?>()
-        private val downloadPages = HashMap<String, Boolean>()
     }
 
 }
