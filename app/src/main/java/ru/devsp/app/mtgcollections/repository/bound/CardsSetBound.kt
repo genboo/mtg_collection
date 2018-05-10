@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import ru.devsp.app.mtgcollections.di.modules.Prefs
 
 import ru.devsp.app.mtgcollections.model.api.CardApi
 import ru.devsp.app.mtgcollections.model.objects.Card
@@ -30,20 +31,20 @@ class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPrefere
     override fun saveCallResult(data: List<Card>?) {
         if (data != null && data.isNotEmpty()) {
             val json = prefs.getString(set, null)
-            val savedPage = prefs.getInt(set + "_page", 0)
+            val savedPage = prefs.getInt(set + Prefs.POSTFIX_PAGE, 0)
             val list: List<Card> = when(json == null || savedPage == 0){
                 true -> data
                 else -> Gson().fromJson<Array<Card>>(json, Array<Card>::class.java).asList().plus(data)
             }
             val editor = prefs.edit()
-            editor.putString(set, Gson().toJson(list))
-            editor.putInt(set + "_page", page)
+            editor.putString(set + Prefs.POSTFIX_SET, Gson().toJson(list))
+            editor.putInt(set + Prefs.POSTFIX_PAGE, page)
             editor.apply()
         }
     }
 
     override fun shouldFetch(data: List<Card>?): Boolean {
-        val savedPage = prefs.getInt(set + "_page", 0)
+        val savedPage = prefs.getInt(set + Prefs.POSTFIX_PAGE, 0)
         return page > savedPage
     }
 

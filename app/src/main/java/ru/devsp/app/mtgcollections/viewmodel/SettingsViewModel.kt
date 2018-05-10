@@ -89,7 +89,12 @@ internal constructor(private val prefs: SharedPreferences) : ViewModel() {
 
     fun clearExpire() {
         val editor = prefs.edit()
-        editor.clear()
+        for (key: String in prefs.all.keys) {
+            if (key.contains(Prefs.POSTFIX_PAGE) || key.contains(Prefs.POSTFIX_SET)) {
+                editor.remove(key)
+            }
+        }
+        editor.remove(Prefs.SETS_TIME)
         editor.apply()
     }
 

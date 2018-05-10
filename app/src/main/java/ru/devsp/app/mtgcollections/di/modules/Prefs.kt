@@ -17,6 +17,8 @@ class Prefs {
 
     companion object {
         const val SETS_TIME = "sets_time"
+        const val POSTFIX_SET = "_set"
+        const val POSTFIX_PAGE = "_page"
     }
 
 }
