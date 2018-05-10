@@ -14,6 +14,7 @@ import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Card
 import ru.devsp.app.mtgcollections.repository.bound.CardsSetBound
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
+import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewScrollListener
 import ru.devsp.app.mtgcollections.view.adapters.SpoilersListAdapter
 import ru.devsp.app.mtgcollections.viewmodel.SpoilersViewModel
 import javax.inject.Inject
@@ -41,6 +42,8 @@ class SpoilersFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         updateToolbar()
 
+        val set = args.getString(ARG_SET)
+
         progressBar = progressBlock
         content = list
 
@@ -50,14 +53,18 @@ class SpoilersFragment : BaseFragment() {
         val layoutManager = GridLayoutManager(context, 2)
         list.layoutManager = layoutManager
         list.adapter = adapter
+        list.clearOnScrollListeners()
+        list.addOnScrollListener(RecyclerViewScrollListener(object : RecyclerViewScrollListener.OnReactListener {
+            override fun load(nextPage: Int) {
+                viewModel.setParams(set, nextPage + 1)
+            }
+        }, CardsSetBound.PAGES_SIZE))
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (adapter.getItemViewType(position) == SpoilersListAdapter.TYPE_LOADING) layoutManager.spanCount else 1
             }
         }
-
-        val set = args.getString(ARG_SET)
 
         showProgressBar()
         viewModel.cards.observe(this, Observer { resource ->
@@ -90,12 +97,6 @@ class SpoilersFragment : BaseFragment() {
             }
         })
 
-        adapter.setPositionToReact(CardsSetBound.PAGES_SIZE)
-        adapter.setOnReactListener(object : RecyclerViewAdapter.OnReactListener {
-            override fun load(nextPage: Int) {
-                viewModel.setParams(set, nextPage + 1)
-            }
-        })
     }
 
     private fun notifyDataSetChange(adapter: SpoilersListAdapter) {

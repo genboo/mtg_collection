@@ -29,7 +29,6 @@ class SpoilersListAdapter(items: List<Card>?) : RecyclerViewAdapter<Card, Spoile
         if (getItemViewType(position) == TYPE_MAIN) {
             holder.bind(getItem(holder.adapterPosition), cards,
                     View.OnClickListener { v -> onItemClick(v, holder.adapterPosition) })
-            onReact(holder.adapterPosition)
         }else{
             holder.switchLoading(loading)
         }
