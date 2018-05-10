@@ -30,7 +30,8 @@ class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPrefere
     override fun saveCallResult(data: List<Card>?) {
         if (data != null && data.isNotEmpty()) {
             val json = prefs.getString(set, null)
-            val list: List<Card> = when(json == null){
+            val savedPage = prefs.getInt(set + "_page", 0)
+            val list: List<Card> = when(json == null || savedPage == 0){
                 true -> data
                 else -> Gson().fromJson<Array<Card>>(json, Array<Card>::class.java).asList().plus(data)
             }

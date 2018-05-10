@@ -89,7 +89,7 @@ internal constructor(private val prefs: SharedPreferences) : ViewModel() {
 
     fun clearExpire() {
         val editor = prefs.edit()
-        editor.remove(Prefs.SETS_TIME)
+        editor.clear()
         editor.apply()
     }
 
