@@ -129,17 +129,19 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun addToFavorite(model: SearchViewModel) {
-        model.save(currentCard)
-        val wish = Wish()
-        wish.cardId = currentCard!!.id
-        model.addToWish(wish).observe(this, Observer { id ->
-            if (id != null) {
-                showSnack(R.string.action_added, View.OnClickListener { _ ->
-                    wish.id = id
-                    model.deleteWish(wish)
-                })
-            }
-        })
+        if(currentCard != null) {
+            model.save(currentCard)
+            val wish = Wish()
+            wish.cardId = currentCard?.id
+            model.addToWish(wish).observe(this, Observer { id ->
+                if (id != null) {
+                    showSnack(R.string.action_added, View.OnClickListener { _ ->
+                        wish.id = id
+                        model.deleteWish(wish)
+                    })
+                }
+            })
+        }
     }
 
     private fun search(model: SearchViewModel) {
