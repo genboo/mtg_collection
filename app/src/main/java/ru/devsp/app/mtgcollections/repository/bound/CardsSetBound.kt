@@ -30,7 +30,7 @@ class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPrefere
 
     override fun saveCallResult(data: List<Card>?) {
         if (data != null && data.isNotEmpty()) {
-            val json = prefs.getString(set, null)
+            val json = prefs.getString(set + Prefs.POSTFIX_SET, null)
             val savedPage = prefs.getInt(set + Prefs.POSTFIX_PAGE, 0)
             val list: List<Card> = when(json == null || savedPage == 0){
                 true -> data
@@ -50,7 +50,7 @@ class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPrefere
 
     override fun loadSaved(): LiveData<List<Card>> {
         val card = MutableLiveData<List<Card>>()
-        val json = prefs.getString(set, null)
+        val json = prefs.getString(set + Prefs.POSTFIX_SET, null)
         if (json == null) {
             card.value = null
         } else {

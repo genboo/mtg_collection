@@ -30,7 +30,7 @@ class RecyclerViewScrollListener(val listener: OnReactListener, private val page
     }
 
     companion object {
-        const val DEFAULT_REACT = 12
+        const val DEFAULT_REACT = 20
     }
 }
 
