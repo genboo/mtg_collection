@@ -15,6 +15,8 @@ object Icons {
     val list: MutableMap<String, Int> = HashMap()
 
     init {
+
+
         //Battlebond 2018
         list["BBD"] = R.drawable.ic_bbd
 
@@ -174,6 +176,7 @@ object Icons {
         list["C13"] = R.drawable.ic_c13
         list["CMD"] = R.drawable.ic_cmd
         list["CM1"] = R.drawable.ic_cm1
+        list["CM2"] = R.drawable.ic_cm2
 
         //Duel deck
         list["DDU"] = R.drawable.ic_ddu
