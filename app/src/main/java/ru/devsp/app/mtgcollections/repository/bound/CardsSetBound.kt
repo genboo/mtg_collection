@@ -29,7 +29,7 @@ class CardsSetBound(appExecutors: AppExecutors, private val prefs: SharedPrefere
     }
 
     override fun saveCallResult(data: List<Card>?) {
-        if (data != null && data.isNotEmpty()) {
+        if (data != null) {
             val json = prefs.getString(set + Prefs.POSTFIX_SET, null)
             val savedPage = prefs.getInt(set + Prefs.POSTFIX_PAGE, 0)
             val list: List<Card> = when(json == null || savedPage == 0){
