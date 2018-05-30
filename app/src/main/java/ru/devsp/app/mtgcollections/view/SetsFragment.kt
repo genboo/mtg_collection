@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,8 @@ import kotlinx.android.synthetic.main.fragment_sets.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.tools.Status
 import ru.devsp.app.mtgcollections.model.objects.Set
-import ru.devsp.app.mtgcollections.model.tools.Resource
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
+import ru.devsp.app.mtgcollections.view.adapters.diffs.SetsDiffCallback
 import ru.devsp.app.mtgcollections.view.adapters.SetsListAdapter
 import ru.devsp.app.mtgcollections.viewmodel.SetsViewModel
 import javax.inject.Inject
@@ -54,19 +55,26 @@ class SetsFragment : BaseFragment() {
         })
 
         showProgressBar()
-        viewModel.sets.observe(this, Observer { resource ->
+        viewModel.getSets().observe(this, Observer { resource ->
             if (resource?.status == Status.SUCCESS) {
                 if (resource.data != null) {
+                    val diff = DiffUtil.calculateDiff(SetsDiffCallback(adapter.getItems(), resource.data), false)
                     adapter.setItems(resource.data)
-                    list.post { adapter.notifyDataSetChanged() }
+                    diff.dispatchUpdatesTo(adapter)
                 }
+                swipeRefresh.isRefreshing = false
                 showContent()
             } else if (resource?.status == Status.ERROR) {
                 showToast(resource.message ?: "", Toast.LENGTH_SHORT)
                 showContent()
             }
         })
+        viewModel.loadSets()
 
+        swipeRefresh.setOnRefreshListener({
+            viewModel.clearExpire()
+            viewModel.loadSets()
+        })
     }
 
     override fun inject() {

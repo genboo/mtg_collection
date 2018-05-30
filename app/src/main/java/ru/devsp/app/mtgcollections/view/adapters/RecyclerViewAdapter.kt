@@ -28,7 +28,7 @@ abstract class RecyclerViewAdapter<T, H : RecyclerView.ViewHolder> internal cons
         return items.size
     }
 
-    fun getSize() : Int{
+    fun getSize(): Int {
         return items.size
     }
 
@@ -38,6 +38,10 @@ abstract class RecyclerViewAdapter<T, H : RecyclerView.ViewHolder> internal cons
 
     fun getItem(position: Int): T {
         return items[position]
+    }
+
+    fun getItems(): List<T> {
+        return items
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener<T>) {

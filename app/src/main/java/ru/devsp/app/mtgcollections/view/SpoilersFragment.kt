@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import ru.devsp.app.mtgcollections.repository.bound.CardsSetBound
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewScrollListener
 import ru.devsp.app.mtgcollections.view.adapters.SpoilersListAdapter
+import ru.devsp.app.mtgcollections.view.adapters.diffs.SpoilersDiffCallback
 import ru.devsp.app.mtgcollections.viewmodel.SpoilersViewModel
 import javax.inject.Inject
 
@@ -50,7 +52,7 @@ class SpoilersFragment : BaseFragment() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(SpoilersViewModel::class.java)
 
         val adapter = SpoilersListAdapter(null)
-        val layoutManager = GridLayoutManager(context, 2)
+        val layoutManager = GridLayoutManager(context, 3)
         list.layoutManager = layoutManager
         list.adapter = adapter
         list.clearOnScrollListeners()
@@ -68,25 +70,27 @@ class SpoilersFragment : BaseFragment() {
 
         showProgressBar()
         viewModel.cards.observe(this, Observer { resource ->
-            if (resource?.status == Status.SUCCESS && resource.data != null) {
-                for (card in resource.data) {
-                    card.prepare()
-                }
-                adapter.setItems(resource.data)
-                notifyDataSetChange(adapter)
-                showContent()
-            }
-
             if (resource?.status == Status.SUCCESS || resource?.status == Status.ERROR) {
                 adapter.setLoading(false)
             } else if (resource?.status == Status.LOADING) {
                 adapter.setLoading(true)
             }
+
+            if (resource?.status == Status.SUCCESS && resource.data != null) {
+                for (card in resource.data) {
+                    card.prepare()
+                }
+                updateAdapterItems(adapter, resource.data)
+                adapter.notifyItemChanged(adapter.getSize())
+                showContent()
+            }
         })
 
+        //Количество карт в коллекции
         viewModel.cardsBySet.observe(this, Observer { items ->
+            viewModel.cardsBySet.removeObservers(this)
             adapter.setCards(items)
-            notifyDataSetChange(adapter)
+            list.post { adapter.notifyDataSetChanged() }
         })
 
         viewModel.setParams(set, 1)
@@ -96,17 +100,13 @@ class SpoilersFragment : BaseFragment() {
                 navigation.toSearch(item.set, item.nameOrigin)
             }
         })
-
     }
 
-    private fun notifyDataSetChange(adapter: SpoilersListAdapter) {
-        if (list.isComputingLayout) {
-            list.post { adapter.notifyDataSetChanged() }
-        } else {
-            adapter.notifyDataSetChanged()
-        }
+    private fun updateAdapterItems(adapter: SpoilersListAdapter, items: List<Card>) {
+        val diffs = DiffUtil.calculateDiff(SpoilersDiffCallback(adapter.getItems(), items), !adapter.getItems().isEmpty())
+        adapter.setItems(items)
+        diffs.dispatchUpdatesTo(adapter)
     }
-
 
     override fun inject() {
         component?.inject(this)

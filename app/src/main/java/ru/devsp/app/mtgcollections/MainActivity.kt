@@ -1,6 +1,7 @@
 package ru.devsp.app.mtgcollections
 
 import android.arch.lifecycle.ViewModelProvider
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    //Хак, инициализируем настройки тут, чтобы потом первое обращение не вызывало фризов
+    @Inject
+    lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
