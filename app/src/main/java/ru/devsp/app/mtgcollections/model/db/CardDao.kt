@@ -63,7 +63,7 @@ interface CardDao {
     @get:Query("SELECT sub.* FROM Subtype sub GROUP BY sub.subtype ORDER BY sub.subtype")
     val subtypes: List<Subtype>
 
-    @get:Query("SELECT c.`setName` FROM Card c GROUP BY c.`set` ORDER BY c.setName")
+    @get:Query("SELECT c.`setName` FROM Card c WHERE c.count > 0 GROUP BY c.`set` ORDER BY c.setName")
     val setNames: List<SetName>
 
     @get:Query("SELECT c.`setName` FROM Card c, Wish w WHERE c.id = w.card_id GROUP BY c.`set` ORDER BY c.setName")

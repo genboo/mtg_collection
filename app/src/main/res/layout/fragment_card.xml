@@ -12,226 +12,232 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/sv_main_scroll"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackgroundMain"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_main_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp">
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundMain">
 
-            <android.support.constraint.Guideline
-                android:id="@+id/line_left"
-                android:layout_width="wrap_content"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp" />
+                android:paddingBottom="15dp">
 
-            <android.support.constraint.Guideline
-                android:id="@+id/line_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="16dp" />
-
-            <LinearLayout
-                android:id="@+id/imagesBlock"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintDimensionRatio="446:311"
-                app:layout_constraintLeft_toLeftOf="@+id/line_left"
-                app:layout_constraintRight_toRightOf="@+id/line_right"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/cardImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight=".5"
-                    android:contentDescription="@string/app_name"
-                    tools:src="@drawable/pic_card" />
-
-                <ImageView
-                    android:id="@+id/cardImageSecond"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight=".5"
-                    android:contentDescription="@string/app_name"
-                    tools:src="@drawable/pic_card_back" />
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/cardManaCost"
-                android:layout_width="0dp"
-                android:layout_height="22dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                app:layout_constraintLeft_toLeftOf="@+id/line_left"
-                app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
-                tools:text="10GG" />
-
-            <TextView
-                android:id="@+id/cardMultiId"
-                style="@style/TextView.Hint"
-                android:layout_width="0dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                app:layout_constraintLeft_toRightOf="@+id/cardManaCost"
-                app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
-                tools:text="414790" />
-
-            <ImageView
-                android:id="@+id/cardRarity"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginTop="17dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_xln"
-                android:tint="@color/rarityMythicRare"
-                app:layout_constraintLeft_toRightOf="@+id/line_left"
-                app:layout_constraintTop_toBottomOf="@+id/cardManaCost" />
-
-            <TextView
-                android:id="@+id/cardName"
-                style="@style/TextView.Main.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintLeft_toRightOf="@id/cardRarity"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardManaCost"
-                tools:text="Название карты" />
-
-            <ImageView
-                android:id="@+id/cardOracleArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_keyboard_arrow_down"
-                app:layout_constraintLeft_toRightOf="@id/cardName"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardManaCost" />
-
-
-            <ru.devsp.app.mtgcollections.view.components.ExpandableTextView
-                android:id="@+id/cardOracle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="1dp"
-                android:maxLines="0"
-                app:layout_constraintLeft_toRightOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardName"
-                tools:maxLines="10"
-                tools:text="Оракл текст\nВторая строка" />
-
-            <TextView
-                android:id="@+id/cardRulesTitle"
-                style="@style/TextView.Main.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/rules"
-                app:layout_constraintLeft_toLeftOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardOracle"
-                tools:text="Правила" />
-
-            <ImageView
-                android:id="@+id/cardRulesArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_keyboard_arrow_down"
-                app:layout_constraintLeft_toRightOf="@id/cardRulesTitle"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardOracle" />
-
-            <ru.devsp.app.mtgcollections.view.components.ExpandableTextView
-                android:id="@+id/cardRules"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="1dp"
-                android:maxLines="0"
-                app:layout_constraintLeft_toRightOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/cardRulesTitle"
-                tools:maxLines="10"
-                tools:text="Правила" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/reprints"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardRules"
-                tools:listitem="@layout/list_item_reprint" />
-
-            <LinearLayout
-                android:id="@+id/countBlock"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:minHeight="45dp"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                app:layout_constraintLeft_toLeftOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/reprints">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/librariesBlock"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                app:layout_constraintLeft_toLeftOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/countBlock">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                app:layout_constraintLeft_toLeftOf="@id/line_left"
-                app:layout_constraintRight_toLeftOf="@id/line_right"
-                app:layout_constraintTop_toBottomOf="@id/librariesBlock">
-
-                <Button
-                    android:id="@+id/addToLibrary"
-                    style="@style/Button.Rounded"
+                <android.support.constraint.Guideline
+                    android:id="@+id/line_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/action_add_to_library" />
-            </LinearLayout>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/line_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/imagesBlock"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintDimensionRatio="446:311"
+                    app:layout_constraintLeft_toLeftOf="@+id/line_left"
+                    app:layout_constraintRight_toRightOf="@+id/line_right"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/cardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight=".5"
+                        android:contentDescription="@string/app_name"
+                        tools:src="@drawable/pic_card" />
+
+                    <ImageView
+                        android:id="@+id/cardImageSecond"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight=".5"
+                        android:contentDescription="@string/app_name"
+                        tools:src="@drawable/pic_card_back" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/cardManaCost"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintLeft_toLeftOf="@+id/line_left"
+                    app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
+                    tools:text="10GG" />
+
+                <TextView
+                    android:id="@+id/cardMultiId"
+                    style="@style/TextView.Hint"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintLeft_toRightOf="@+id/cardManaCost"
+                    app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
+                    tools:text="414790" />
+
+                <ImageView
+                    android:id="@+id/cardRarity"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="17dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_xln"
+                    android:tint="@color/rarityMythicRare"
+                    app:layout_constraintLeft_toRightOf="@+id/line_left"
+                    app:layout_constraintTop_toBottomOf="@+id/cardManaCost" />
+
+                <TextView
+                    android:id="@+id/cardName"
+                    style="@style/TextView.Main.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintLeft_toRightOf="@id/cardRarity"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardManaCost"
+                    tools:text="Название карты" />
+
+                <ImageView
+                    android:id="@+id/cardOracleArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    app:layout_constraintLeft_toRightOf="@id/cardName"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardManaCost" />
+
+
+                <ru.devsp.app.mtgcollections.view.components.ExpandableTextView
+                    android:id="@+id/cardOracle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="1dp"
+                    android:maxLines="0"
+                    app:layout_constraintLeft_toRightOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardName"
+                    tools:maxLines="10"
+                    tools:text="Оракл текст\nВторая строка" />
+
+                <TextView
+                    android:id="@+id/cardRulesTitle"
+                    style="@style/TextView.Main.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/rules"
+                    app:layout_constraintLeft_toLeftOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardOracle"
+                    tools:text="Правила" />
+
+                <ImageView
+                    android:id="@+id/cardRulesArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    app:layout_constraintLeft_toRightOf="@id/cardRulesTitle"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardOracle" />
+
+                <ru.devsp.app.mtgcollections.view.components.ExpandableTextView
+                    android:id="@+id/cardRules"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="1dp"
+                    android:maxLines="0"
+                    app:layout_constraintLeft_toRightOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/cardRulesTitle"
+                    tools:maxLines="10"
+                    tools:text="Правила" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/reprints"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardRules"
+                    tools:listitem="@layout/list_item_reprint" />
+
+                <LinearLayout
+                    android:id="@+id/countBlock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:minHeight="45dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintLeft_toLeftOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/reprints">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/librariesBlock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintLeft_toLeftOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/countBlock">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintLeft_toLeftOf="@id/line_left"
+                    app:layout_constraintRight_toLeftOf="@id/line_right"
+                    app:layout_constraintTop_toBottomOf="@id/librariesBlock">
+
+                    <Button
+                        android:id="@+id/addToLibrary"
+                        style="@style/Button.Rounded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/action_add_to_library" />
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.design.widget.CoordinatorLayout>

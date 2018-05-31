@@ -57,7 +57,7 @@ class WishFragment : BaseFragment() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(WishViewModel::class.java)
 
         val adapter = WishListAdapter(null)
-        val layoutManager = GridLayoutManager(context, 2)
+        val layoutManager = GridLayoutManager(context, 3)
         list.layoutManager = layoutManager
         list.adapter = adapter
 

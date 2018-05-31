@@ -43,6 +43,10 @@ class SpoilersListAdapter(items: List<Card>?) : RecyclerViewAdapter<Card, Spoile
         }
     }
 
+    fun getCardCount(number:String):Int{
+        return this.cards[number] ?: 0
+    }
+
     fun setLoading(loading : Boolean){
         this.loading = loading
     }

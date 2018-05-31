@@ -53,6 +53,7 @@ internal constructor(private val cardLocalRepository: CardLocalRepository,
     val librariesByCard: LiveData<List<CardLibraryInfo>>
     val libraries: LiveData<List<Library>>
     private val switcher = MutableLiveData<String>()
+    private val switcherNetwork = MutableLiveData<String>()
     private val switcherChild = MutableLiveData<String>()
 
 
@@ -80,7 +81,7 @@ internal constructor(private val cardLocalRepository: CardLocalRepository,
             }
         }
 
-        cardNetwork = Transformations.switchMap(switcher) { id ->
+        cardNetwork = Transformations.switchMap(switcherNetwork) { id ->
             if (id == null) {
                 return@switchMap AbsentLiveData . create < Resource < List < Card > > >()
             }
@@ -93,6 +94,10 @@ internal constructor(private val cardLocalRepository: CardLocalRepository,
 
     fun setId(id: String) {
         switcher.value = id
+    }
+
+    fun setIdNetwork(id: String) {
+        switcherNetwork.value = id
     }
 
     fun setIdChild(id: String) {

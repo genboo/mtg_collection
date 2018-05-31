@@ -105,6 +105,10 @@ class CardFragment : BaseFragment() {
                 LinearLayoutManager.HORIZONTAL, false)
         reprints.adapter = adapter
         reprints.layoutManager = manager
+
+        swipeRefresh.setOnRefreshListener({
+            viewModel.setIdNetwork(args.getString(ARG_ID, ""))
+        })
     }
 
     private fun showAddDialog() {
@@ -142,6 +146,7 @@ class CardFragment : BaseFragment() {
                 updateSideCard(secondCard)
             }
         }
+        swipeRefresh.isRefreshing = false
     }
 
     private fun initAddToLibraryDialog(model: CardViewModel) {

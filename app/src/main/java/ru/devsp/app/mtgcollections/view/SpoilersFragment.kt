@@ -88,7 +88,6 @@ class SpoilersFragment : BaseFragment() {
 
         //Количество карт в коллекции
         viewModel.cardsBySet.observe(this, Observer { items ->
-            viewModel.cardsBySet.removeObservers(this)
             adapter.setCards(items)
             list.post { adapter.notifyDataSetChanged() }
         })
@@ -97,7 +96,11 @@ class SpoilersFragment : BaseFragment() {
 
         adapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<Card> {
             override fun click(position: Int, item: Card, view: View?) {
-                navigation.toSearch(item.set, item.nameOrigin)
+                if (adapter.getCardCount(item.number) == 0) {
+                    navigation.toSearch(item.set, item.nameOrigin)
+                } else {
+                    navigation.toCard(item.id)
+                }
             }
         })
     }
