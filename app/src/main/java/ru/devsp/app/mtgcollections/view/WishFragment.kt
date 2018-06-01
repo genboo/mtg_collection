@@ -67,6 +67,7 @@ class WishFragment : BaseFragment() {
         viewModel.wishSetNames.observe(this,
                 Observer { setNames ->
                     if (setNames != null) {
+                        filterSetsBlock.removeAllViews()
                         val holder = LinearLayout(context)
                         holder.orientation = LinearLayout.VERTICAL
                         val selectedList = Arrays.asList(*viewModel.selectedFilter?.sets)
@@ -114,11 +115,13 @@ class WishFragment : BaseFragment() {
     }
 
     private fun updateListData(adapter: WishListAdapter, items: List<Card>?) {
-        adapter.setItems(items ?: emptyList())
-        if (list.isComputingLayout) {
-            list.post { adapter.notifyDataSetChanged() }
-        } else {
-            adapter.notifyDataSetChanged()
+        if(adapter.itemCount == 0) {
+            adapter.setItems(items ?: emptyList())
+            if (list.isComputingLayout) {
+                list.post { adapter.notifyDataSetChanged() }
+            } else {
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
