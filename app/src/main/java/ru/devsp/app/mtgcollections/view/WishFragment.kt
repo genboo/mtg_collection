@@ -76,7 +76,7 @@ class WishFragment : BaseFragment() {
                             val filterText = filterView.findViewById<CheckBox>(R.id.filter_selector)
                             filterText.text = item.setName
                             filterText.tag = item.setName
-                            if(selectedList.contains(item.setName)){
+                            if (selectedList.contains(item.setName)) {
                                 filterText.isChecked = true
                             }
                             holder.addView(filterView)
@@ -115,7 +115,7 @@ class WishFragment : BaseFragment() {
     }
 
     private fun updateListData(adapter: WishListAdapter, items: List<Card>?) {
-        if(adapter.itemCount == 0) {
+        if (adapter.itemCount == 0 || adapter.itemCount != items?.size) {
             adapter.setItems(items ?: emptyList())
             if (list.isComputingLayout) {
                 list.post { adapter.notifyDataSetChanged() }
