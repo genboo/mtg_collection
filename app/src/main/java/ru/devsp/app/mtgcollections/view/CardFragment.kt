@@ -132,13 +132,17 @@ class CardFragment : BaseFragment() {
                 card.count = localCard!!.count
                 model.updateCard(card)
             }
-            (reprints.adapter as ReprintListAdapter).setItems(card.printings ?: emptyList())
-            (reprints.adapter as ReprintListAdapter).setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<String> {
-                override fun click(position: Int, item: String, view: View?) {
-                    navigation.toSearch(item, card.nameOrigin)
-                }
-            })
-            reprints?.post { reprints.adapter.notifyDataSetChanged() }
+            (reprints?.adapter as ReprintListAdapter).setItems(card.printings ?: emptyList())
+            (reprints?.adapter as ReprintListAdapter)
+                    .setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<String> {
+                        override fun click(position: Int, item: String, view: View?) {
+                            navigation.toSearch(item, card.nameOrigin)
+                        }
+                    })
+            reprints?.post {
+                reprints?.adapter?.notifyDataSetChanged()
+                swipeRefresh.isRefreshing = false
+            }
 
             if (resource.data.size > 1) {
                 val secondCard = resource.data[1]
@@ -146,7 +150,6 @@ class CardFragment : BaseFragment() {
                 updateSideCard(secondCard)
             }
         }
-        swipeRefresh.isRefreshing = false
     }
 
     private fun initAddToLibraryDialog(model: CardViewModel) {
@@ -154,14 +157,14 @@ class CardFragment : BaseFragment() {
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         val countText = dialogView.findViewById<TextView>(R.id.tv_cards_count)
         val plus = dialogView.findViewById<ImageButton>(R.id.ib_count_plus)
-        plus.setOnClickListener( { _ ->
+        plus.setOnClickListener({ _ ->
             var count = countText.text.toString().toInt()
             countText.text = String.format(Locale.getDefault(), "%d", ++count)
         })
         val minus = dialogView.findViewById<ImageButton>(R.id.ib_count_minus)
-        minus.setOnClickListener( { _ ->
+        minus.setOnClickListener({ _ ->
             var count = countText.text.toString().toInt()
-            if(count > 0) {
+            if (count > 0) {
                 countText.text = String.format(Locale.getDefault(), "%d", --count)
             }
         })
