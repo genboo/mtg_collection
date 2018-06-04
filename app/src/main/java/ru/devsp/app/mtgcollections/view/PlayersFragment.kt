@@ -9,11 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_players.*
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.model.objects.Player
+import ru.devsp.app.mtgcollections.view.components.NumberCounterView
 import ru.devsp.app.mtgcollections.viewmodel.GameViewModel
 import java.util.*
 import javax.inject.Inject
@@ -70,48 +69,42 @@ class PlayersFragment : BaseFragment() {
 
             val task = Runnable { viewModel.save(player) }
 
-            val health = view.findViewById<TextView>(R.id.tv_player_health_count)
-            val energy = view.findViewById<TextView>(R.id.tv_player_energy_count)
+            val healthCounter = view.findViewById<NumberCounterView>(R.id.healthCounter)
+            val energyCounter = view.findViewById<NumberCounterView>(R.id.energyCounter)
 
-            updateCounterUi(health, energy, player)
-
-            val healthMinus = view.findViewById<ImageButton>(R.id.ib_player_health_minus)
-            healthMinus.setOnClickListener { _ ->
-                player.health--
-                updateCounterUi(health, energy, player)
-                savePlayer(task)
-            }
-
-            val healthPlus = view.findViewById<ImageButton>(R.id.ib_player_health_plus)
-            healthPlus.setOnClickListener { _ ->
-                player.health++
-                updateCounterUi(health, energy, player)
-                savePlayer(task)
-            }
-
-            val energyMinus = view.findViewById<ImageButton>(R.id.ib_player_energy_minus)
-            energyMinus.setOnClickListener { _ ->
-                if (player.energy > 0) {
-                    player.energy--
-                    updateCounterUi(health, energy, player)
+            healthCounter.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+                override fun click(inc: Boolean) {
+                    if (inc) {
+                        player.health++
+                    }else{
+                        player.health--
+                    }
+                    updateCounterUi(healthCounter, energyCounter, player)
                     savePlayer(task)
                 }
-            }
+            })
 
-            val energyPlus = view.findViewById<ImageButton>(R.id.ib_player_energy_plus)
-            energyPlus.setOnClickListener { _ ->
-                player.energy++
-                updateCounterUi(health, energy, player)
-                savePlayer(task)
-            }
+            energyCounter.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+                override fun click(inc: Boolean) {
+                    if (inc) {
+                        player.energy++
+                    }else if(player.energy > 0){
+                        player.energy--
+                    }
+                    updateCounterUi(healthCounter, energyCounter, player)
+                    savePlayer(task)
+                }
+            })
+            updateCounterUi(healthCounter, energyCounter, player)
+
             val parentBlock = getView()!!.findViewById<FrameLayout>(parent)
             parentBlock.addView(view)
         }
     }
 
-    private fun updateCounterUi(health: TextView, energy: TextView, player: Player) {
-        energy.text = String.format(Locale.getDefault(), "%d", player.energy)
-        health.text = String.format(Locale.getDefault(), "%d", player.health)
+    private fun updateCounterUi(health: NumberCounterView, energy: NumberCounterView, player: Player) {
+        energy.setCount(String.format(Locale.getDefault(), "%d", player.energy))
+        health.setCount(String.format(Locale.getDefault(), "%d", player.health))
     }
 
     private fun savePlayer(task: Runnable) {

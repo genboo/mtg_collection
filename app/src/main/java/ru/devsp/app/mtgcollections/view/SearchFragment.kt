@@ -25,6 +25,7 @@ import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
 import ru.devsp.app.mtgcollections.view.components.ExpandListener
+import ru.devsp.app.mtgcollections.view.components.NumberCounterView
 import ru.devsp.app.mtgcollections.view.components.SetTextWatcher
 import ru.devsp.app.mtgcollections.viewmodel.SearchViewModel
 import java.util.*
@@ -188,19 +189,19 @@ class SearchFragment : BaseFragment() {
     private fun initAddDialog(model: SearchViewModel, libraries: List<Library>) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
-        val countText = dialogView.findViewById<TextView>(R.id.tv_cards_count)
-        val plus = dialogView.findViewById<ImageButton>(R.id.ib_count_plus)
-        plus.setOnClickListener( { _ ->
-            var count = countText.text.toString().toInt()
-            countText.text = String.format(Locale.getDefault(), "%d", ++count)
-        })
-        val minus = dialogView.findViewById<ImageButton>(R.id.ib_count_minus)
-        minus.setOnClickListener( { _ ->
-            var count = countText.text.toString().toInt()
-            if(count > 0) {
-                countText.text = String.format(Locale.getDefault(), "%d", --count)
+        val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
+        countText.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+            override fun click(inc: Boolean) {
+                var count = countText.getCount().toInt()
+                if (inc) {
+                    count++
+                } else if (count > 1) {
+                    count--
+                }
+                countText.setCount(String.format(Locale.getDefault(), "%d", count))
             }
         })
+
         // адаптер
         val adapter = LibrarySelectAdapter(requireContext(), libraries)
         selector.adapter = adapter
@@ -210,7 +211,7 @@ class SearchFragment : BaseFragment() {
                 .setNegativeButton("Отмена") { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton("Ok") { _, _ ->
                     if (currentCard != null) {
-                        currentCard!!.count = countText.text.toString().toInt()
+                        currentCard!!.count = countText.getCount().toInt()
 
                         //Сохраняем локальную копию
                         model.save(currentCard)
@@ -221,7 +222,7 @@ class SearchFragment : BaseFragment() {
                             val item = LibraryCard()
                             item.cardId = currentCard!!.id
                             item.libraryId = selectedLibrary.id
-                            item.count = countText.text.toString().toInt()
+                            item.count = countText.getCount().toInt()
                             model.addToLibrary(item)
                         }
                         showSnack(R.string.action_added, null)

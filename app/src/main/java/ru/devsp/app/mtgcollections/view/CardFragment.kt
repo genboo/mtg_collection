@@ -31,6 +31,7 @@ import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
 import ru.devsp.app.mtgcollections.view.components.ExpandListener
+import ru.devsp.app.mtgcollections.view.components.NumberCounterView
 import ru.devsp.app.mtgcollections.viewmodel.CardViewModel
 import java.util.*
 import javax.inject.Inject
@@ -155,19 +156,19 @@ class CardFragment : BaseFragment() {
     private fun initAddToLibraryDialog(model: CardViewModel) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
-        val countText = dialogView.findViewById<TextView>(R.id.tv_cards_count)
-        val plus = dialogView.findViewById<ImageButton>(R.id.ib_count_plus)
-        plus.setOnClickListener({ _ ->
-            var count = countText.text.toString().toInt()
-            countText.text = String.format(Locale.getDefault(), "%d", ++count)
-        })
-        val minus = dialogView.findViewById<ImageButton>(R.id.ib_count_minus)
-        minus.setOnClickListener({ _ ->
-            var count = countText.text.toString().toInt()
-            if (count > 0) {
-                countText.text = String.format(Locale.getDefault(), "%d", --count)
+        val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
+        countText.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+            override fun click(inc: Boolean) {
+                var count = countText.getCount().toInt()
+                if (inc) {
+                    count++
+                } else if (count > 1) {
+                    count--
+                }
+                countText.setCount(String.format(Locale.getDefault(), "%d", count))
             }
         })
+
         // адаптер
         val adapter = LibrarySelectAdapter(requireContext(), libraries)
         selector.adapter = adapter
@@ -183,7 +184,7 @@ class CardFragment : BaseFragment() {
                             val item = LibraryCard()
                             item.cardId = localCard!!.id
                             item.libraryId = selectedLibrary.id
-                            item.count = countText.text.toString().toInt()
+                            item.count = countText.getCount().toInt()
                             model.addToLibrary(item)
                         }
                         showSnack(R.string.action_added, null)
@@ -259,27 +260,22 @@ class CardFragment : BaseFragment() {
             val view = layoutInflater.inflate(R.layout.layout_card_library, countBlock, false)
             val name = view.findViewById<TextView>(R.id.tv_library_name)
             name.text = "Всего"
-            val count = view.findViewById<TextView>(R.id.tv_library_cards_count)
-            count.text = String.format(Locale.getDefault(), "%d", card.count)
+            val count = view.findViewById<NumberCounterView>(R.id.counterBlock)
+            count.setCount(String.format(Locale.getDefault(), "%d", card.count))
             countBlock.addView(view)
-
             val task = { viewModel.updateCard(card) }
-            val plus = view.findViewById<ImageButton>(R.id.ib_library_count_plus)
-            plus.setOnClickListener { _ ->
-                card.count++
-                count.text = String.format(Locale.getDefault(), "%d", card.count)
-                mainBlock.removeCallbacks(task)
-                mainBlock.postDelayed(task, 400)
-            }
-            val minus = view.findViewById<ImageButton>(R.id.ib_library_count_minus)
-            minus.setOnClickListener { _ ->
-                if (card.count > 0) {
-                    card.count--
-                    count.text = String.format(Locale.getDefault(), "%d", card.count)
+            count.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+                override fun click(inc: Boolean) {
+                    if (inc) {
+                        card.count++
+                    } else if (card.count > 0) {
+                        card.count--
+                    }
+                    count.setCount(String.format(Locale.getDefault(), "%d", card.count))
                     mainBlock.removeCallbacks(task)
                     mainBlock.postDelayed(task, 400)
                 }
-            }
+            })
 
             cardImage.setOnClickListener { _ ->
                 navigation.toFullScreenImage(card.imageUrl, card.name, card.id, cardImage)
@@ -294,27 +290,23 @@ class CardFragment : BaseFragment() {
                 val view = layoutInflater.inflate(R.layout.layout_card_library, librariesBlock, false)
                 val name = view.findViewById<TextView>(R.id.tv_library_name)
                 name.text = item.name
-                val count = view.findViewById<TextView>(R.id.tv_library_cards_count)
-                count.text = String.format(Locale.getDefault(), "%d", item.count)
+                val count = view.findViewById<NumberCounterView>(R.id.counterBlock)
+                count.setCount(String.format(Locale.getDefault(), "%d", item.count))
                 librariesBlock.addView(view)
                 val libraryCard = getLibraryCard(item)
                 val task = { viewModel.saveCount(libraryCard) }
-                val plus = view.findViewById<ImageButton>(R.id.ib_library_count_plus)
-                plus.setOnClickListener { _ ->
-                    libraryCard.count++
-                    count.text = String.format(Locale.getDefault(), "%d", libraryCard.count)
-                    mainBlock.removeCallbacks(task)
-                    mainBlock.postDelayed(task, 400)
-                }
-                val minus = view.findViewById<ImageButton>(R.id.ib_library_count_minus)
-                minus.setOnClickListener { _ ->
-                    if (item.count > 0) {
-                        libraryCard.count--
-                        count.text = String.format(Locale.getDefault(), "%d", libraryCard.count)
+                count.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
+                    override fun click(inc: Boolean) {
+                        if (inc) {
+                            libraryCard.count++
+                        } else if (libraryCard.count > 0) {
+                            libraryCard.count--
+                        }
+                        count.setCount(String.format(Locale.getDefault(), "%d", libraryCard.count))
                         mainBlock.removeCallbacks(task)
                         mainBlock.postDelayed(task, 400)
                     }
-                }
+                })
             }
         }
     }

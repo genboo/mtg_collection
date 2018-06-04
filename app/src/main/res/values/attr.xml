@@ -14,4 +14,13 @@
     <declare-styleable name="ExpandableTextView">
         <attr name="animation_speed" />
     </declare-styleable>
+
+    <declare-styleable name="NumberCounterView">
+        <attr name="text_size" format="dimension"  />
+        <attr name="size" format="dimension"  />
+        <attr name="counter_size" format="dimension"  />
+        <attr name="default_count" format="integer"  />
+        <attr name="icon_plus" format="integer"  />
+        <attr name="icon_minus" format="integer"  />
+    </declare-styleable>
 </resources>

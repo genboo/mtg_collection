@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal"
-              android:padding="4dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/tv_library_name"
@@ -12,32 +13,16 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        tools:text="Библиотека"
-        />
+        tools:text="Библиотека" />
 
-    <ImageButton
-        android:id="@+id/ib_library_count_minus"
+
+    <ru.devsp.app.mtgcollections.view.components.NumberCounterView
+        android:id="@+id/counterBlock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/minus"
-        android:src="@drawable/ic_minus"
-        android:tint="@color/colorTextMain"/>
-
-    <TextView
-        android:id="@+id/tv_library_cards_count"
-        style="@style/TextView.Main.Title"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="2"/>
-
-    <ImageButton
-        android:id="@+id/ib_library_count_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/plus"
-        android:src="@drawable/ic_plus"
-        android:tint="@color/colorTextMain"/>
+        app:counter_size="@dimen/player_text_size"
+        app:default_count="0"
+        app:icon_minus="@drawable/ic_minus"
+        app:icon_plus="@drawable/ic_plus"
+        app:text_size="18sp" />
 </LinearLayout>
