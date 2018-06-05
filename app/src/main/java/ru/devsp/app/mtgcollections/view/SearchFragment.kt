@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -114,12 +115,10 @@ class SearchFragment : BaseFragment() {
             if (card == null || (!card.wish && card.count == 0)) {
                 toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
                 toWishList.tag = null
-                cardCount.slideOutEnd(actionsBlock)
-                goToCard.slideOutEnd(actionsBlock)
+                actionsBlock.toggleSlideChilds(View.GONE, Gravity.END, cardCount, goToCard)
             } else {
                 cardCount.text = String.format("%s", card.count)
-                cardCount.slideInEnd(actionsBlock)
-                goToCard.slideInEnd(actionsBlock)
+                actionsBlock.toggleSlideChilds(View.VISIBLE, Gravity.END, goToCard, cardCount)
                 if (card.wish) {
                     toWishList.tag = card.id
                     toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart))
