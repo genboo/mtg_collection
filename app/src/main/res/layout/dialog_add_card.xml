@@ -23,9 +23,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:counter_size="@dimen/player_text_size"
-            app:default_count="0"
+            app:default_count="1"
             app:icon_minus="@drawable/ic_minus"
             app:icon_plus="@drawable/ic_plus"
-            app:text_size="18sp" />
+            app:size="@dimen/counter_button_size"
+            app:text_size="24sp" />
     </LinearLayout>
 </LinearLayout>

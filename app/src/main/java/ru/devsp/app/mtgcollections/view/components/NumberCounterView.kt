@@ -39,6 +39,7 @@ class NumberCounterView : LinearLayout {
     }
 
     private fun init(attrs: AttributeSet?) {
+        gravity = Gravity.CENTER
 
         val a = context.theme.obtainStyledAttributes(
                 attrs,
