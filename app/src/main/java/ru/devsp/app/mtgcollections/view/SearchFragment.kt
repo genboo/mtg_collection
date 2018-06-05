@@ -24,9 +24,7 @@ import ru.devsp.app.mtgcollections.tools.OracleReplacer
 import ru.devsp.app.mtgcollections.view.adapters.LibrarySelectAdapter
 import ru.devsp.app.mtgcollections.view.adapters.RecyclerViewAdapter
 import ru.devsp.app.mtgcollections.view.adapters.ReprintListAdapter
-import ru.devsp.app.mtgcollections.view.components.ExpandListener
-import ru.devsp.app.mtgcollections.view.components.NumberCounterView
-import ru.devsp.app.mtgcollections.view.components.SetTextWatcher
+import ru.devsp.app.mtgcollections.view.components.*
 import ru.devsp.app.mtgcollections.viewmodel.SearchViewModel
 import java.util.*
 import javax.inject.Inject
@@ -112,18 +110,22 @@ class SearchFragment : BaseFragment() {
 
     private fun observeExists(model: SearchViewModel) {
         model.cardExist.observe(this, Observer { card ->
-            if (card == null || !card.wish && card.count == 0) {
+            currentCard!!.count = card?.count ?: 0
+            if (card == null || (!card.wish && card.count == 0)) {
                 toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
-                goToCard.visibility = View.GONE
-                cardCount.text = ""
-                cardCount.visibility = View.GONE
+                toWishList.tag = null
+                cardCount.slideOutEnd(actionsBlock)
+                goToCard.slideOutEnd(actionsBlock)
             } else {
-                currentCard!!.count = card.count
-                goToCard.visibility = View.VISIBLE
                 cardCount.text = String.format("%s", card.count)
-                cardCount.visibility = View.VISIBLE
+                cardCount.slideInEnd(actionsBlock)
+                goToCard.slideInEnd(actionsBlock)
                 if (card.wish) {
+                    toWishList.tag = card.id
                     toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart))
+                }else{
+                    toWishList.tag = null
+                    toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
                 }
             }
         })
@@ -131,17 +133,16 @@ class SearchFragment : BaseFragment() {
 
     private fun addToFavorite(model: SearchViewModel) {
         if(currentCard != null) {
-            model.save(currentCard)
-            val wish = Wish()
-            wish.cardId = currentCard?.id
-            model.addToWish(wish).observe(this, Observer { id ->
-                if (id != null) {
-                    showSnack(R.string.action_added, View.OnClickListener { _ ->
-                        wish.id = id
-                        model.deleteWish(wish)
-                    })
-                }
-            })
+            if(toWishList.tag == null) {
+                model.save(currentCard)
+                val wish = Wish()
+                wish.cardId = currentCard?.id
+                model.addToWish(wish)
+            }else{
+                val wish = Wish()
+                wish.id = toWishList.tag.toString().toLong()
+                model.deleteWish(wish)
+            }
         }
     }
 

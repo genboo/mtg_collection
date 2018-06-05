@@ -136,64 +136,68 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/pic_card_back" />
 
-                <ImageButton
-                    android:id="@+id/cardSave"
+                <LinearLayout
+                    android:id="@+id/actionsBlock"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginTop="16dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/app_name"
-                    android:padding="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_plus_outline"
-                    android:tint="@color/colorAccent"
-                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardImage">
 
+                    <ImageButton
+                        android:id="@+id/cardSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/app_name"
+                        android:padding="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_plus_outline"
+                        android:tint="@color/colorAccent" />
 
-                <ImageButton
-                    android:id="@+id/toWishList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/app_name"
-                    android:padding="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_heart_outline"
-                    android:tint="@color/colorAccent"
-                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
-                    app:layout_constraintTop_toBottomOf="@+id/cardSave" />
+                    <ImageButton
+                        android:id="@+id/toWishList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/app_name"
+                        android:padding="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_heart_outline"
+                        android:tint="@color/colorAccent" />
 
-                <ImageButton
-                    android:id="@+id/goToCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/app_name"
-                    android:padding="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_arrow_right"
-                    android:tint="@color/colorAccent"
-                    android:visibility="gone"
-                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
-                    app:layout_constraintTop_toBottomOf="@+id/toWishList"
-                    tools:visibility="visible" />
+                    <ImageButton
+                        android:id="@+id/goToCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/app_name"
+                        android:padding="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/colorAccent"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/cardCount"
-                    style="@style/TextView.Counter"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    app:layout_constraintRight_toRightOf="@id/line_right_inside"
-                    app:layout_constraintTop_toBottomOf="@+id/goToCard"
-                    tools:text="99"
-                    tools:visibility="visible" />
+                    <TextView
+                        android:id="@+id/cardCount"
+                        style="@style/TextView.Counter"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        tools:text="99"
+                        tools:visibility="visible" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/cardRulesTitle"

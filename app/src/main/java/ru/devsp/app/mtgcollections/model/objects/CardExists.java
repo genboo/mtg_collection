@@ -6,7 +6,10 @@ package ru.devsp.app.mtgcollections.model.objects;
 
 public class CardExists {
 
+    public long id;
+
     public int count;
 
     public boolean wish;
+
 }

@@ -81,7 +81,7 @@ interface CardDao {
     @Query("SELECT c.* FROM Card c WHERE c.id = :id")
     fun getCard(id: String): LiveData<Card>
 
-    @Query("SELECT c.count, CASE WHEN w.card_id is null THEN  0  " +
+    @Query("SELECT w.id, c.count, CASE WHEN w.card_id is null THEN  0  " +
             "              ELSE 1 END wish  " +
             "FROM Card c  " +
             "LEFT join Wish w on w.card_id = c.id  " +
