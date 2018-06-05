@@ -27,6 +27,6 @@
             app:icon_minus="@drawable/ic_minus"
             app:icon_plus="@drawable/ic_plus"
             app:size="@dimen/counter_button_size"
-            app:text_size="24sp" />
+            app:text_size="20sp" />
     </LinearLayout>
 </LinearLayout>

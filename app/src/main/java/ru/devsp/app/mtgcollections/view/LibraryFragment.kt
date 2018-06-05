@@ -45,7 +45,7 @@ class LibraryFragment : BaseFragment() {
         list.isNestedScrollingEnabled = true
         val title = args.getString(ARG_TITLE)
         val id = args.getLong(ARG_ID, 0)
-        updateTitle(title!!)
+        updateTitle(title)
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CollectionViewModel::class.java)
 

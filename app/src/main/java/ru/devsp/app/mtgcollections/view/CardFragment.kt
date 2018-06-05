@@ -290,6 +290,7 @@ class CardFragment : BaseFragment() {
                 val view = layoutInflater.inflate(R.layout.layout_card_library, librariesBlock, false)
                 val name = view.findViewById<TextView>(R.id.tv_library_name)
                 name.text = item.name
+                name.setOnClickListener({ navigation.toLibrary(item.libraryId, item.name) })
                 val count = view.findViewById<NumberCounterView>(R.id.counterBlock)
                 count.setCount(String.format(Locale.getDefault(), "%d", item.count))
                 librariesBlock.addView(view)

@@ -61,29 +61,29 @@ internal constructor(private val cardLocalRepository: CardLocalRepository,
 
         card = Transformations.switchMap(switcher) { id ->
             if (id == null) {
-                return@switchMap AbsentLiveData . create < Card >()
+                return@switchMap AbsentLiveData.create<Card>()
             } else {
-                return@switchMap cardLocalRepository . getCard (id)
+                return@switchMap cardLocalRepository.getCard(id)
             }
         }
         cardSide = Transformations.switchMap(switcherChild) { id ->
             if (id == null) {
-                return@switchMap AbsentLiveData . create < Card >()
+                return@switchMap AbsentLiveData.create<Card>()
             } else {
-                return@switchMap cardLocalRepository . getCard (id)
+                return@switchMap cardLocalRepository.getCard(id)
             }
         }
         librariesByCard = Transformations.switchMap(switcher) { id ->
             if (id == null) {
-                return@switchMap AbsentLiveData . create < List < CardLibraryInfo > > ()
+                return@switchMap AbsentLiveData.create<List<CardLibraryInfo>>()
             } else {
-                return@switchMap cardLocalRepository . getLibrariesByCard (id)
+                return@switchMap cardLocalRepository.getLibrariesByCard(id)
             }
         }
 
         cardNetwork = Transformations.switchMap(switcherNetwork) { id ->
             if (id == null) {
-                return@switchMap AbsentLiveData . create < Resource < List < Card > > >()
+                return@switchMap AbsentLiveData.create<Resource<List<Card>>>()
             }
             cardRepository.getCard(id)
         }

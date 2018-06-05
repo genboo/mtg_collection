@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="4dp">
-
-    <TextView
-        android:id="@+id/tv_library_name"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        tools:text="Библиотека" />
-
 
     <ru.devsp.app.mtgcollections.view.components.NumberCounterView
         android:id="@+id/counterBlock"
@@ -24,6 +16,21 @@
         app:default_count="0"
         app:icon_minus="@drawable/ic_minus"
         app:icon_plus="@drawable/ic_plus"
+        app:layout_constraintRight_toRightOf="parent"
         app:size="@dimen/counter_button_size"
-        app:text_size="24sp" />
-</LinearLayout>
+        app:text_size="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_library_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/counterBlock"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Библиотека"/>
+</android.support.constraint.ConstraintLayout>
