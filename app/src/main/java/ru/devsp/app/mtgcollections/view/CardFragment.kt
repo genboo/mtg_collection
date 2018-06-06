@@ -110,6 +110,21 @@ class CardFragment : BaseFragment() {
         swipeRefresh.setOnRefreshListener({
             viewModel.setIdNetwork(args.getString(ARG_ID, ""))
         })
+
+        val onScrollChangeListener = ViewTreeObserver.OnScrollChangedListener {
+            if (mainScroll != null) {
+                if (mainScroll.scrollY >= cardImage.bottom) {
+                    cardImage.visibility = View.INVISIBLE
+                } else if (cardImage.visibility == View.INVISIBLE) {
+                    cardImage.visibility = View.VISIBLE
+                }
+            }
+        }
+        //хак на время анимации переключения фрагментов
+        mainScroll.postDelayed({
+            mainScroll.viewTreeObserver.removeOnScrollChangedListener(onScrollChangeListener)
+            mainScroll.viewTreeObserver.addOnScrollChangedListener(onScrollChangeListener)
+        }, 1000)
     }
 
     private fun showAddDialog() {
