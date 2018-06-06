@@ -122,8 +122,8 @@ class CardFragment : BaseFragment() {
         }
         //хак на время анимации переключения фрагментов
         mainScroll.postDelayed({
-            mainScroll.viewTreeObserver.removeOnScrollChangedListener(onScrollChangeListener)
-            mainScroll.viewTreeObserver.addOnScrollChangedListener(onScrollChangeListener)
+            mainScroll?.viewTreeObserver?.removeOnScrollChangedListener(onScrollChangeListener)
+            mainScroll?.viewTreeObserver?.addOnScrollChangedListener(onScrollChangeListener)
         }, 1000)
     }
 
