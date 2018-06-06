@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.transition.TransitionInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.layout_app_bar_main.*
@@ -16,7 +17,7 @@ import ru.devsp.app.mtgcollections.App
 import ru.devsp.app.mtgcollections.MainActivity
 import ru.devsp.app.mtgcollections.R
 import ru.devsp.app.mtgcollections.di.components.AppComponent
-import ru.devsp.app.mtgcollections.view.components.Navigation
+import ru.devsp.app.mtgcollections.view.components.*
 
 
 abstract class BaseFragment : Fragment() {
@@ -74,8 +75,8 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showContent() {
-        progressBar?.visibility = View.GONE
-        content?.visibility = View.VISIBLE
+        progressBar?.fadeOut(progressBar?.parent as ViewGroup)
+        content?.fadeIn(content?.parent as ViewGroup)
     }
 
     fun updateTitle(title: String) {

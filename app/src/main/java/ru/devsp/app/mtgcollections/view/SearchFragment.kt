@@ -175,7 +175,7 @@ class SearchFragment : BaseFragment() {
                 }
                 currentCard = card
                 showContent()
-            } else if (resource?.status == Status.ERROR || resource!!.data == null) {
+            } else if (resource?.status == Status.ERROR || resource?.data == null) {
                 showToast("Ничего не найдено")
                 showContent()
             }
@@ -187,7 +187,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initAddDialog(model: SearchViewModel, libraries: List<Library>) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, contentBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
         countText.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {

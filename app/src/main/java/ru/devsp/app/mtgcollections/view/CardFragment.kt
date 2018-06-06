@@ -113,9 +113,7 @@ class CardFragment : BaseFragment() {
     }
 
     private fun showAddDialog() {
-        if (addDialog != null) {
-            addDialog?.show()
-        }
+        addDialog?.show()
     }
 
     /**
