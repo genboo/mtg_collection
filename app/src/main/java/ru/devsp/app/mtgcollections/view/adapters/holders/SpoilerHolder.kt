@@ -29,6 +29,6 @@ class SpoilerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun switchLoading(loading : Boolean) = with(itemView) {
-        loadingBlock.visibility = if(loading) View.VISIBLE else View.GONE
+        loadingBlock.visibility = if(loading) View.VISIBLE else View.INVISIBLE
     }
 }
