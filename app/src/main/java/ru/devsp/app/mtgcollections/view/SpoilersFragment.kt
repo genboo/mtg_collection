@@ -53,6 +53,8 @@ class SpoilersFragment : BaseFragment() {
 
         val adapter = SpoilersListAdapter(null)
         val layoutManager = GridLayoutManager(context, 3)
+        layoutManager.isItemPrefetchEnabled = false
+
         list.layoutManager = layoutManager
         list.adapter = adapter
         list.clearOnScrollListeners()
@@ -80,9 +82,11 @@ class SpoilersFragment : BaseFragment() {
                 for (card in resource.data) {
                     card.prepare()
                 }
+                if(adapter.getItems().isEmpty()) {
+                    showContent()
+                }
                 updateAdapterItems(adapter, resource.data)
                 adapter.notifyItemChanged(adapter.getSize())
-                showContent()
             }
         })
 
