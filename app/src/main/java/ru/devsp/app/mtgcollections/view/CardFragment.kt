@@ -170,17 +170,15 @@ class CardFragment : BaseFragment() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, mainBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
-        countText.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-            override fun click(inc: Boolean) {
-                var count = countText.getCount().toInt()
-                if (inc) {
-                    count++
-                } else if (count > 1) {
-                    count--
-                }
-                countText.setCount(String.format(Locale.getDefault(), "%d", count))
+        countText.setOnCounterClickListener { inc ->
+            var count = countText.getCount().toInt()
+            if (inc) {
+                count++
+            } else if (count > 1) {
+                count--
             }
-        })
+            countText.setCount(String.format(Locale.getDefault(), "%d", count))
+        }
 
         // адаптер
         val adapter = LibrarySelectAdapter(requireContext(), libraries)
@@ -250,7 +248,7 @@ class CardFragment : BaseFragment() {
             initAddDialog(viewModel)
             cardOracle.text = ""
             updateCardText(card)
-            cardName.setOnClickListener { _ -> cardOracle.toggle() }
+            cardName.setOnClickListener { cardOracle.toggle() }
             cardName.text = card.name
 
             cardManaCost.text = OracleReplacer.getText(card.manaCost ?: "", requireActivity())
@@ -259,7 +257,7 @@ class CardFragment : BaseFragment() {
                 cardOracle.setExpandListener(ExpandListener(cardOracleArrow))
                 cardRules.setExpandListener(ExpandListener(cardRulesArrow))
             }
-            cardRulesTitle.setOnClickListener { _ -> cardRules.toggle() }
+            cardRulesTitle.setOnClickListener { cardRules.toggle() }
             cardRules.text = OracleReplacer.getText(card.rulesText ?: "", requireActivity())
 
             cardMultiId.text = card.id
@@ -277,22 +275,17 @@ class CardFragment : BaseFragment() {
             count.setCount(String.format(Locale.getDefault(), "%d", card.count))
             countBlock.addView(view)
             val task = { viewModel.updateCard(card) }
-            count.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-                override fun click(inc: Boolean) {
-                    if (inc) {
-                        card.count++
-                    } else if (card.count > 0) {
-                        card.count--
-                    }
-                    count.setCount(String.format(Locale.getDefault(), "%d", card.count))
-                    mainBlock.removeCallbacks(task)
-                    mainBlock.postDelayed(task, 400)
+            count.setOnCounterClickListener { inc ->
+                if (inc) {
+                    card.count++
+                } else if (card.count > 0) {
+                    card.count--
                 }
-            })
-
-            cardImage.setOnClickListener { _ ->
-                navigation.toFullScreenImage(card.imageUrl, card.name, card.id, cardImage)
+                count.setCount(String.format(Locale.getDefault(), "%d", card.count))
+                mainBlock.removeCallbacks(task)
+                mainBlock.postDelayed(task, 1000)
             }
+            cardImage.setOnClickListener { navigation.toFullScreenImage(card.imageUrl, card.name, card.id, cardImage) }
         }
     }
 
@@ -309,18 +302,16 @@ class CardFragment : BaseFragment() {
                 librariesBlock.addView(view)
                 val libraryCard = getLibraryCard(item)
                 val task = { viewModel.saveCount(libraryCard) }
-                count.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-                    override fun click(inc: Boolean) {
-                        if (inc) {
-                            libraryCard.count++
-                        } else if (libraryCard.count > 0) {
-                            libraryCard.count--
-                        }
-                        count.setCount(String.format(Locale.getDefault(), "%d", libraryCard.count))
-                        mainBlock.removeCallbacks(task)
-                        mainBlock.postDelayed(task, 400)
+                count.setOnCounterClickListener { inc ->
+                    if (inc) {
+                        libraryCard.count++
+                    } else if (libraryCard.count > 0) {
+                        libraryCard.count--
                     }
-                })
+                    count.setCount(String.format(Locale.getDefault(), "%d", libraryCard.count))
+                    mainBlock.removeCallbacks(task)
+                    mainBlock.postDelayed(task, 1000)
+                }
             }
         }
     }

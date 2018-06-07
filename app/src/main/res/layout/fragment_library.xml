@@ -19,7 +19,7 @@
             app:contentScrim="?android:attr/colorPrimary"
             app:expandedTitleGravity="center|top"
             app:expandedTitleTextAppearance="@style/ExpandedTextStyle"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:scrimAnimationDuration="200">
 
             <ru.devsp.app.mtgcollections.view.components.LibraryStateView
@@ -47,7 +47,6 @@
                 android:theme="@style/ToolBarStyle"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

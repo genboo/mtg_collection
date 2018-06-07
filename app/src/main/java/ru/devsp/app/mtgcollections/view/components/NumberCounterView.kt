@@ -16,7 +16,7 @@ class NumberCounterView : LinearLayout {
     private lateinit var counter: TextView
     private lateinit var plus: ImageButton
     private lateinit var minus: ImageButton
-    private var clickListener: OnCounterClickListener? = null
+    private var click: (Boolean) -> Unit = {}
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -32,10 +32,6 @@ class NumberCounterView : LinearLayout {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
         init(attrs)
-    }
-
-    interface OnCounterClickListener {
-        fun click(inc: Boolean)
     }
 
     private fun init(attrs: AttributeSet?) {
@@ -55,28 +51,24 @@ class NumberCounterView : LinearLayout {
         val defaultCount = a.getString(R.styleable.NumberCounterView_default_count)
         val size = a.getDimensionPixelSize(R.styleable.NumberCounterView_size, 48)
         val counterSize = a.getDimensionPixelSize(R.styleable.NumberCounterView_counter_size, 48)
-        val textSize = a.getDimension(R.styleable.NumberCounterView_text_size, 18f) /
+        val counterTextSize = a.getDimension(R.styleable.NumberCounterView_text_size, 18f) /
                 resources.displayMetrics.scaledDensity
-
-        a.recycle()
-
         val color = ContextCompat.getColor(context, R.color.colorTextMain)
+        a.recycle()
 
         prepareImageButton(plus, plusIcon, color, size)
         prepareImageButton(minus, minusIcon, color, size)
 
-        counter.text = defaultCount
-        counter.layoutParams = LayoutParams(counterSize, LayoutParams.WRAP_CONTENT)
-        counter.gravity = Gravity.CENTER
-        counter.textSize = textSize
+        with(counter) {
+            text = defaultCount
+            layoutParams = LayoutParams(counterSize, LayoutParams.WRAP_CONTENT)
+            gravity = Gravity.CENTER
+            textSize = counterTextSize
+        }
 
-        minus.setOnClickListener({ _ ->
-            clickListener?.click(false)
-        })
+        minus.setOnClickListener { click(false) }
 
-        plus.setOnClickListener({ _ ->
-            clickListener?.click(true)
-        })
+        plus.setOnClickListener { click(true) }
 
         addView(minus)
         addView(counter)
@@ -85,14 +77,15 @@ class NumberCounterView : LinearLayout {
 
 
     private fun prepareImageButton(view: ImageButton, drawableResource: Drawable, tintColor: Int, size: Int) {
-        DrawableCompat.setTint(drawableResource, tintColor)
-        view.setImageDrawable(drawableResource)
-        view.layoutParams = LayoutParams(size, size)
-        view.scaleType = ImageView.ScaleType.CENTER_CROP
-
         val outValue = TypedValue()
         context.theme.resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, outValue, true)
-        view.background = resources.getDrawable(outValue.resourceId, context.theme)
+        DrawableCompat.setTint(drawableResource, tintColor)
+        with(view){
+            setImageDrawable(drawableResource)
+            layoutParams = LayoutParams(size, size)
+            scaleType = ImageView.ScaleType.CENTER_CROP
+            background = resources.getDrawable(outValue.resourceId, context.theme)
+        }
     }
 
     fun getCount(): String {
@@ -103,7 +96,7 @@ class NumberCounterView : LinearLayout {
         counter.text = count
     }
 
-    fun setOnCounterClickListener(listener: OnCounterClickListener) {
-        clickListener = listener
+    fun setOnCounterClickListener(event: (Boolean) -> Unit) {
+        click = event
     }
 }

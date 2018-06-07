@@ -29,7 +29,7 @@ class LibraryFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var mEditDialog: AlertDialog.Builder? = null
+    private var editDialog: AlertDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -66,7 +66,7 @@ class LibraryFragment : BaseFragment() {
 
         adapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<CardListItem> {
             override fun click(position: Int, item: CardListItem, view: View?) {
-                if(item.card != null) {
+                if (item.card != null) {
                     navigation.toCard(item.card.id, view as ImageView)
                 }
             }
@@ -75,25 +75,24 @@ class LibraryFragment : BaseFragment() {
         val view = layoutInflater.inflate(R.layout.dialog_add_library, mainBlock, false)
         val libraryName = view.findViewById<EditText>(R.id.et_library_name)
         libraryName.setText(title)
-        mEditDialog = AlertDialog.Builder(requireContext())
+        editDialog = AlertDialog.Builder(requireContext())
                 .setView(view)
                 .setTitle("Редактировать колоду")
                 .setPositiveButton("Ok") { _, _ ->
-
                     val name = libraryName.text.toString()
-                    if ("" != name) {
+                    if (name != "") {
                         val lib = Library(id)
                         lib.name = name
                         viewModel.updateLibrary(lib)
                         updateTitle(name)
                     }
                 }
-
+                .create()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.nav_edit) {
-            mEditDialog?.show()
+            editDialog?.show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -103,6 +102,9 @@ class LibraryFragment : BaseFragment() {
         inflater.inflate(R.menu.fragment_library, menu)
     }
 
+    override fun updateTitle(title: String) {
+        toolbar.title = title
+    }
 
     override fun inject() {
         component?.inject(this)

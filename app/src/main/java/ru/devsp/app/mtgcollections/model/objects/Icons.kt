@@ -143,6 +143,15 @@ object Icons {
         list["WTH"] = R.drawable.ic_wth
 
         //Early sets
+        list["DRK"] = R.drawable.ic_drk
+        list["LEG"] = R.drawable.ic_leg
+        list["ATQ"] = R.drawable.ic_atq
+        list["ARN"] = R.drawable.ic_arn
+        list["CEI"] = R.drawable.ic_cei
+        list["CED"] = R.drawable.ic_ced
+        list["SUM"] = R.drawable.ic_3ed
+        list["3ED"] = R.drawable.ic_3ed
+        list["2ED"] = R.drawable.ic_2ed
         list["LEB"] = R.drawable.ic_leb
         list["LEA"] = R.drawable.ic_lea
 
@@ -246,6 +255,11 @@ object Icons {
         list["V09"] = R.drawable.ic_v09
         list["DRB"] = R.drawable.ic_drb
 
+        //Ready-to-Play Decks
+        list["PD3"] = R.drawable.ic_pd3
+        list["PD2"] = R.drawable.ic_pd2
+        list["H09"] = R.drawable.ic_h09
+
         //Promo
         list["MD1"] = R.drawable.ic_md1
         list["CP3"] = R.drawable.ic_promo
@@ -266,13 +280,9 @@ object Icons {
         list["pMEI"] = R.drawable.ic_promo
         list["pFNM"] = R.drawable.ic_promo
         list["pJGP"] = R.drawable.ic_promo
+        list["pDRC"] = R.drawable.ic_pdrc
         list["p15A"] = R.drawable.ic_dpa
         list["pREL"] = R.drawable.ic_dpa
-
-        //Ready-to-Play Decks
-        list["PD3"] = R.drawable.ic_pd3
-        list["PD2"] = R.drawable.ic_pd2
-        list["H09"] = R.drawable.ic_h09
 
 
         list["DEFAULT"] = R.drawable.ic_circle

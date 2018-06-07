@@ -72,29 +72,25 @@ class PlayersFragment : BaseFragment() {
             val healthCounter = view.findViewById<NumberCounterView>(R.id.healthCounter)
             val energyCounter = view.findViewById<NumberCounterView>(R.id.energyCounter)
 
-            healthCounter.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-                override fun click(inc: Boolean) {
-                    if (inc) {
-                        player.health++
-                    }else{
-                        player.health--
-                    }
-                    updateCounterUi(healthCounter, energyCounter, player)
-                    savePlayer(task)
+            healthCounter.setOnCounterClickListener { inc ->
+                if (inc) {
+                    player.health++
+                } else {
+                    player.health--
                 }
-            })
+                updateCounterUi(healthCounter, energyCounter, player)
+                savePlayer(task)
+            }
 
-            energyCounter.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-                override fun click(inc: Boolean) {
-                    if (inc) {
-                        player.energy++
-                    }else if(player.energy > 0){
-                        player.energy--
-                    }
-                    updateCounterUi(healthCounter, energyCounter, player)
-                    savePlayer(task)
+            energyCounter.setOnCounterClickListener { inc ->
+                if (inc) {
+                    player.energy++
+                } else if (player.energy > 0) {
+                    player.energy--
                 }
-            })
+                updateCounterUi(healthCounter, energyCounter, player)
+                savePlayer(task)
+            }
             updateCounterUi(healthCounter, energyCounter, player)
 
             val parentBlock = getView()!!.findViewById<FrameLayout>(parent)

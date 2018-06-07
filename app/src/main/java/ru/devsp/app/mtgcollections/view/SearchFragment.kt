@@ -82,7 +82,7 @@ class SearchFragment : BaseFragment() {
         observeExists()
 
         //Переход к карте
-        goToCard.setOnClickListener { navigation.toCard(currentCard!!.id, cardImage)}
+        goToCard.setOnClickListener { navigation.toCard(currentCard!!.id, cardImage) }
 
         //Добавление в виш лист
         toWishList.setOnClickListener { _ -> addToFavorite() }
@@ -182,17 +182,15 @@ class SearchFragment : BaseFragment() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, contentBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
-        countText.setOnCounterClickListener(object : NumberCounterView.OnCounterClickListener {
-            override fun click(inc: Boolean) {
-                var count = countText.getCount().toInt()
-                if (inc) {
-                    count++
-                } else if (count > 1) {
-                    count--
-                }
-                countText.setCount(String.format(Locale.getDefault(), "%d", count))
+        countText.setOnCounterClickListener { inc ->
+            var count = countText.getCount().toInt()
+            if (inc) {
+                count++
+            } else if (count > 1) {
+                count--
             }
-        })
+            countText.setCount(String.format(Locale.getDefault(), "%d", count))
+        }
 
         // адаптер
         val adapter = LibrarySelectAdapter(requireContext(), libraries)

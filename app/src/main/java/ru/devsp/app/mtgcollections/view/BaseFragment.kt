@@ -78,7 +78,7 @@ abstract class BaseFragment : Fragment() {
         content?.fadeIn(content?.parent as ViewGroup)
     }
 
-    fun updateTitle(title: String) {
+    open fun updateTitle(title: String) {
         toolbar?.title = title
     }
 
