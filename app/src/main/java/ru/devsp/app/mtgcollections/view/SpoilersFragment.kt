@@ -53,16 +53,12 @@ class SpoilersFragment : BaseFragment() {
 
         val adapter = SpoilersListAdapter(null)
         val layoutManager = GridLayoutManager(context, 3)
-        layoutManager.isItemPrefetchEnabled = false
 
         list.layoutManager = layoutManager
         list.adapter = adapter
         list.clearOnScrollListeners()
-        list.addOnScrollListener(RecyclerViewScrollListener(object : RecyclerViewScrollListener.OnReactListener {
-            override fun load(nextPage: Int) {
-                viewModel.setParams(set, nextPage + 1)
-            }
-        }, CardsSetBound.PAGES_SIZE))
+        list.addOnScrollListener(RecyclerViewScrollListener({ viewModel.setParams(set, it + 1) },
+                CardsSetBound.PAGES_SIZE))
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -82,7 +78,7 @@ class SpoilersFragment : BaseFragment() {
                 for (card in resource.data) {
                     card.prepare()
                 }
-                if(adapter.getItems().isEmpty()) {
+                if (adapter.getItems().isEmpty()) {
                     showContent()
                 }
                 updateAdapterItems(adapter, resource.data)

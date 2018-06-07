@@ -57,7 +57,7 @@ class SetsFragment : BaseFragment() {
         showProgressBar()
         viewModel.getSets().observe(this, Observer { resource ->
             if (resource?.status == Status.SUCCESS) {
-                if (resource.data != null) {
+                if (resource.data != null && resource.data.isNotEmpty()) {
                     val diff = DiffUtil.calculateDiff(SetsDiffCallback(adapter.getItems(), resource.data), false)
                     adapter.setItems(resource.data)
                     diff.dispatchUpdatesTo(adapter)

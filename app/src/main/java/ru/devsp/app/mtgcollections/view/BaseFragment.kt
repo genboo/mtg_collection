@@ -29,7 +29,6 @@ abstract class BaseFragment : Fragment() {
     internal val navigation: Navigation by lazy { (activity as MainActivity).navigation }
     val args: Bundle by lazy { arguments ?: Bundle() }
 
-
     protected fun updateToolbar() {
         if (toolbar != null) {
             toolbar.title = getTitle()
