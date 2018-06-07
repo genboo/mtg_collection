@@ -82,4 +82,13 @@
         <item name="android:textSize">12sp</item>
         <item name="android:background">@drawable/bg_rounded_counter</item>
     </style>
+
+    <style name="TextView.Search" parent="android:Widget.TextView">
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textColorHint">@color/colorTextHint</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
 </resources>

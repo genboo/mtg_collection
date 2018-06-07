@@ -8,10 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import ru.devsp.app.mtgcollections.R
@@ -38,10 +35,13 @@ class SearchFragment : BaseFragment() {
     private var addDialog: AlertDialog? = null
     private var currentCard: Card? = null
 
+    private lateinit var viewModel: SearchViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         initFragment()
+        setHasOptionsMenu(true)
         return view
     }
 
@@ -57,27 +57,21 @@ class SearchFragment : BaseFragment() {
             searchNum.setText(savedInstanceState.getString(STATE_NUMBER))
         }
 
-        val model = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
 
         searchSet.addTextChangedListener(SetTextWatcher(searchNum))
 
-        observeSearch(model)
+        observeSearch()
 
         cardRulings.setExpandListener(ExpandListener(cardRulesArrow))
 
-        //Поиск карты
-        search.setOnClickListener { _ ->
-            hideSoftKeyboard()
-            search(model)
-        }
-
         if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_SEARCH)) {
-            search(model)
+            search()
         }
 
-        model.libraries.observe(this, Observer { libraries ->
+        viewModel.libraries.observe(this, Observer { libraries ->
             if (libraries != null && (libraries.isEmpty() || libraries[0].id != 0L)) {
-                initAddDialog(model, arrayListOf(Library("")).plus(libraries))
+                initAddDialog(arrayListOf(Library("")).plus(libraries))
             }
         })
 
@@ -85,15 +79,13 @@ class SearchFragment : BaseFragment() {
         cardSave.setOnClickListener { _ -> showAddDialog() }
 
         //Есть карта в базе или нет
-        observeExists(model)
+        observeExists()
 
         //Переход к карте
-        goToCard.setOnClickListener { _ ->
-            navigation.toCard(currentCard!!.id, cardImage)
-        }
+        goToCard.setOnClickListener { navigation.toCard(currentCard!!.id, cardImage)}
 
         //Добавление в виш лист
-        toWishList.setOnClickListener { _ -> addToFavorite(model) }
+        toWishList.setOnClickListener { _ -> addToFavorite() }
 
         //Список репринтов
         val adapter = ReprintListAdapter(null)
@@ -104,13 +96,13 @@ class SearchFragment : BaseFragment() {
         reprints.layoutManager = manager
 
         if (arguments != null) {
-            model.search(args.getString(ARGS_SET), null, args.getString(ARGS_NAME))
+            viewModel.search(args.getString(ARGS_SET), null, args.getString(ARGS_NAME))
         }
 
     }
 
-    private fun observeExists(model: SearchViewModel) {
-        model.cardExist.observe(this, Observer { card ->
+    private fun observeExists() {
+        viewModel.cardExist.observe(this, Observer { card ->
             currentCard!!.count = card?.count ?: 0
             if (card == null || (!card.wish && card.count == 0)) {
                 toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
@@ -122,7 +114,7 @@ class SearchFragment : BaseFragment() {
                 if (card.wish) {
                     toWishList.tag = card.id
                     toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart))
-                }else{
+                } else {
                     toWishList.tag = null
                     toWishList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outline))
                 }
@@ -130,24 +122,24 @@ class SearchFragment : BaseFragment() {
         })
     }
 
-    private fun addToFavorite(model: SearchViewModel) {
-        if(currentCard != null) {
-            if(toWishList.tag == null) {
-                model.save(currentCard)
+    private fun addToFavorite() {
+        if (currentCard != null) {
+            if (toWishList.tag == null) {
+                viewModel.save(currentCard)
                 val wish = Wish()
                 wish.cardId = currentCard?.id
-                model.addToWish(wish)
-            }else{
+                viewModel.addToWish(wish)
+            } else {
                 val wish = Wish()
                 wish.id = toWishList.tag.toString().toLong()
-                model.deleteWish(wish)
+                viewModel.deleteWish(wish)
             }
         }
     }
 
-    private fun search(model: SearchViewModel) {
+    private fun search() {
         if (!searchNum.text.toString().isEmpty()) {
-            model.search(searchSet.text.toString(), searchNum.text.toString(), null)
+            viewModel.search(searchSet.text.toString(), searchNum.text.toString(), null)
         }
     }
 
@@ -158,8 +150,8 @@ class SearchFragment : BaseFragment() {
         super.onSaveInstanceState(outState)
     }
 
-    private fun observeSearch(model: SearchViewModel) {
-        model.card.observe(this, Observer { resource ->
+    private fun observeSearch() {
+        viewModel.card.observe(this, Observer { resource ->
             if (resource?.status == Status.LOADING) {
                 showProgressBar()
             } else if (resource?.status == Status.SUCCESS && resource.data != null) {
@@ -170,7 +162,7 @@ class SearchFragment : BaseFragment() {
                 }
                 if (card != null) {
                     card.prepare()
-                    model.checkCard(card.id)
+                    viewModel.checkCard(card.id)
                     updateSearchResult(card)
                 }
                 currentCard = card
@@ -186,7 +178,7 @@ class SearchFragment : BaseFragment() {
         addDialog?.show()
     }
 
-    private fun initAddDialog(model: SearchViewModel, libraries: List<Library>) {
+    private fun initAddDialog(libraries: List<Library>) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_card, contentBlock, false)
         val selector = dialogView.findViewById<Spinner>(R.id.spn_card_library)
         val countText = dialogView.findViewById<NumberCounterView>(R.id.counterBlock)
@@ -214,7 +206,7 @@ class SearchFragment : BaseFragment() {
                         currentCard!!.count = countText.getCount().toInt()
 
                         //Сохраняем локальную копию
-                        model.save(currentCard)
+                        viewModel.save(currentCard)
 
                         val selectedLibrary = selector.selectedItem as Library
                         if (selectedLibrary.id != 0L) {
@@ -223,7 +215,7 @@ class SearchFragment : BaseFragment() {
                             item.cardId = currentCard!!.id
                             item.libraryId = selectedLibrary.id
                             item.count = countText.getCount().toInt()
-                            model.addToLibrary(item)
+                            viewModel.addToLibrary(item)
                         }
                         showSnack(R.string.action_added, null)
                     }
@@ -252,12 +244,24 @@ class SearchFragment : BaseFragment() {
         reprints?.post { reprints.adapter.notifyDataSetChanged() }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.search) {
+            search()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_search, menu)
+    }
+
     override fun inject() {
         component?.inject(this)
     }
 
     override fun getTitle(): String {
-        return "Поиск"
+        return ""
     }
 
     companion object {
