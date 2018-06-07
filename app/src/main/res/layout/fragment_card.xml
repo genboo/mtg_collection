@@ -195,17 +195,18 @@
                             tools:maxLines="10"
                             tools:text="Правила" />
 
-
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/reprints"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardRules"
+                            tools:listitem="@layout/list_item_reprint" />
                     </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/reprints"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/list_item_reprint" />
 
                 <LinearLayout
                     android:id="@+id/countBlock"

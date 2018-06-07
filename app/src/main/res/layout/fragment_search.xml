@@ -91,9 +91,9 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <android.support.constraint.ConstraintLayout
-                            android:layout_marginBottom="16dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp">
 
                             <android.support.constraint.Guideline
                                 android:id="@+id/line_left_inside"
@@ -184,16 +184,19 @@
                                     tools:visibility="visible" />
                             </LinearLayout>
 
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/reprints"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_marginTop="16dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardImage"
+                                tools:listitem="@layout/list_item_reprint" />
+
                         </android.support.constraint.ConstraintLayout>
                     </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/reprints"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
-                        tools:listitem="@layout/list_item_reprint" />
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
