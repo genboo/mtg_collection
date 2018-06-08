@@ -29,121 +29,116 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    app:cardCornerRadius="1dp"
-                    app:cardElevation="5dp">
+                    android:background="@drawable/card_bg"
+                    android:paddingBottom="16dp">
 
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
+                    <android.support.constraint.Guideline
+                        android:id="@+id/line_left"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="15dp">
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
 
-                        <android.support.constraint.Guideline
-                            android:id="@+id/line_left"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_begin="16dp" />
+                    <android.support.constraint.Guideline
+                        android:id="@+id/line_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
 
-                        <android.support.constraint.Guideline
-                            android:id="@+id/line_right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_end="16dp" />
-
-                        <LinearLayout
-                            android:id="@+id/imagesBlock"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="16dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintDimensionRatio="446:311"
-                            app:layout_constraintLeft_toLeftOf="@+id/line_left"
-                            app:layout_constraintRight_toRightOf="@+id/line_right"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/cardImage"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="5dp"
-                                android:layout_weight=".5"
-                                android:contentDescription="@string/app_name"
-                                tools:src="@drawable/pic_card" />
-
-                            <ImageView
-                                android:id="@+id/cardImageSecond"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:layout_weight=".5"
-                                android:contentDescription="@string/app_name"
-                                tools:src="@drawable/pic_card_back" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/cardManaCost"
-                            android:layout_width="0dp"
-                            android:layout_height="22dp"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical"
-                            app:layout_constraintLeft_toLeftOf="@+id/line_left"
-                            app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
-                            tools:text="10GG" />
-
-                        <TextView
-                            android:id="@+id/cardName"
-                            style="@style/TextView.Main.Title"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical"
-                            app:layout_constraintBaseline_toBaselineOf="@+id/cardManaCost"
-                            app:layout_constraintLeft_toRightOf="@+id/cardManaCost"
-                            app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
-                            tools:text="Карн, Детище Урзы" />
+                    <LinearLayout
+                        android:id="@+id/imagesBlock"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintDimensionRatio="446:311"
+                        app:layout_constraintLeft_toLeftOf="@+id/line_left"
+                        app:layout_constraintRight_toRightOf="@+id/line_right"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/cardRarity"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="18dp"
+                            android:id="@+id/cardImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight=".5"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/ic_xln"
-                            android:tint="@color/rarityMythicRare"
-                            app:layout_constraintLeft_toLeftOf="@+id/line_left"
-                            app:layout_constraintTop_toBottomOf="@+id/cardName" />
+                            tools:src="@drawable/pic_card" />
 
-                        <TextView
-                            android:id="@+id/cardNumber"
-                            style="@style/TextView.Hint"
-                            android:layout_width="0dp"
-                            android:layout_height="22dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical"
-                            app:layout_constraintLeft_toRightOf="@+id/cardRarity"
-                            app:layout_constraintRight_toRightOf="@+id/line_right"
-                            app:layout_constraintTop_toBottomOf="@+id/cardName"
-                            tools:text="DOM 001" />
+                        <ImageView
+                            android:id="@+id/cardImageSecond"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight=".5"
+                            android:contentDescription="@string/app_name"
+                            tools:src="@drawable/pic_card_back" />
+                    </LinearLayout>
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/reprints"
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardRarity"
-                            tools:listitem="@layout/list_item_reprint" />
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/cardManaCost"
+                        android:layout_width="0dp"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintLeft_toLeftOf="@+id/line_left"
+                        app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
+                        tools:text="10GG" />
+
+                    <TextView
+                        android:id="@+id/cardName"
+                        style="@style/TextView.Main.Title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/cardManaCost"
+                        app:layout_constraintLeft_toRightOf="@+id/cardManaCost"
+                        app:layout_constraintTop_toBottomOf="@+id/imagesBlock"
+                        tools:text="Карн, Детище Урзы" />
+
+                    <ImageView
+                        android:id="@+id/cardRarity"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="18dp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_xln"
+                        android:tint="@color/rarityMythicRare"
+                        app:layout_constraintLeft_toLeftOf="@+id/line_left"
+                        app:layout_constraintTop_toBottomOf="@+id/cardName" />
+
+                    <TextView
+                        android:id="@+id/cardNumber"
+                        style="@style/TextView.Hint"
+                        android:layout_width="0dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintLeft_toRightOf="@+id/cardRarity"
+                        app:layout_constraintRight_toRightOf="@+id/line_right"
+                        app:layout_constraintTop_toBottomOf="@+id/cardName"
+                        tools:text="DOM 001" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/reprints"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardRarity"
+                        tools:listitem="@layout/list_item_reprint" />
+                </android.support.constraint.ConstraintLayout>
+
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"

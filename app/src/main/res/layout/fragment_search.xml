@@ -82,123 +82,116 @@
                     android:visibility="gone"
                     tools:visibility="visible">
 
-                    <android.support.v7.widget.CardView
+
+                    <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/card_bg"
                         android:paddingBottom="16dp"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="5dp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <android.support.constraint.ConstraintLayout
-                            android:layout_width="match_parent"
+                        <android.support.constraint.Guideline
+                            android:id="@+id/line_left_inside"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp">
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="16dp" />
 
-                            <android.support.constraint.Guideline
-                                android:id="@+id/line_left_inside"
+                        <android.support.constraint.Guideline
+                            android:id="@+id/line_right_inside"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="16dp" />
+
+                        <ImageView
+                            android:id="@+id/cardImage"
+                            android:layout_width="0dp"
+                            android:layout_height="311dp"
+                            android:layout_marginTop="16dp"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/pic_card_back"
+                            app:layout_constraintDimensionRatio="223:311"
+                            app:layout_constraintLeft_toRightOf="@id/line_left_inside"
+                            app:layout_constraintRight_toLeftOf="@id/line_right_inside"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/pic_card_back" />
+
+                        <LinearLayout
+                            android:id="@+id/actionsBlock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/cardImage"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/cardSave"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintGuide_begin="16dp" />
-
-                            <android.support.constraint.Guideline
-                                android:id="@+id/line_right_inside"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintGuide_end="16dp" />
-
-                            <ImageView
-                                android:id="@+id/cardImage"
-                                android:layout_width="0dp"
-                                android:layout_height="311dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginStart="16dp"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
                                 android:contentDescription="@string/app_name"
-                                android:src="@drawable/pic_card_back"
-                                app:layout_constraintDimensionRatio="223:311"
-                                app:layout_constraintLeft_toRightOf="@id/line_left_inside"
-                                app:layout_constraintRight_toLeftOf="@id/line_right_inside"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:src="@drawable/pic_card_back" />
+                                android:padding="4dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_plus_outline"
+                                android:tint="@color/colorAccent" />
 
-                            <LinearLayout
-                                android:id="@+id/actionsBlock"
+                            <ImageButton
+                                android:id="@+id/toWishList"
                                 android:layout_width="wrap_content"
-                                android:layout_height="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                app:layout_constraintBottom_toBottomOf="@+id/cardImage"
-                                app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="@string/app_name"
+                                android:padding="4dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_heart_outline"
+                                android:tint="@color/colorAccent" />
 
-                                <ImageButton
-                                    android:id="@+id/cardSave"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginStart="16dp"
-                                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                                    android:contentDescription="@string/app_name"
-                                    android:padding="4dp"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_plus_outline"
-                                    android:tint="@color/colorAccent" />
-
-                                <ImageButton
-                                    android:id="@+id/toWishList"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
-                                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                                    android:contentDescription="@string/app_name"
-                                    android:padding="4dp"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_heart_outline"
-                                    android:tint="@color/colorAccent" />
-
-                                <ImageButton
-                                    android:id="@+id/goToCard"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
-                                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                                    android:contentDescription="@string/app_name"
-                                    android:padding="4dp"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_arrow_right"
-                                    android:tint="@color/colorAccent"
-                                    android:visibility="gone"
-                                    tools:visibility="visible" />
-
-                                <TextView
-                                    android:id="@+id/cardCount"
-                                    style="@style/TextView.Counter"
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:layout_marginTop="16dp"
-                                    android:gravity="center"
-                                    android:visibility="gone"
-                                    tools:text="99"
-                                    tools:visibility="visible" />
-                            </LinearLayout>
-
-                            <android.support.v7.widget.RecyclerView
-                                android:id="@+id/reprints"
-                                android:layout_width="0dp"
-                                android:layout_height="45dp"
+                            <ImageButton
+                                android:id="@+id/goToCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                android:orientation="horizontal"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/cardImage"
-                                tools:listitem="@layout/list_item_reprint" />
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="@string/app_name"
+                                android:padding="4dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_arrow_right"
+                                android:tint="@color/colorAccent"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
 
-                        </android.support.constraint.ConstraintLayout>
-                    </android.support.v7.widget.CardView>
+                            <TextView
+                                android:id="@+id/cardCount"
+                                style="@style/TextView.Counter"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center"
+                                android:visibility="gone"
+                                tools:text="99"
+                                tools:visibility="visible" />
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/reprints"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardImage"
+                            tools:listitem="@layout/list_item_reprint" />
+                    </android.support.constraint.ConstraintLayout>
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
