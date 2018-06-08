@@ -25,6 +25,7 @@
     <string name="plus">plus</string>
     <string name="minus">minus</string>
     <string name="rules">Правила</string>
+    <string name="text">Текст</string>
 
     <string name="menu_steps">Шаги</string>
     <string name="menu_game">Игра</string>

@@ -37,6 +37,7 @@
                     android:hint="@string/search_set_default"
                     android:imeOptions="actionNext"
                     android:maxLength="7"
+                    android:theme="@style/TextView.Search.Theme"
                     app:layout_constraintLeft_toRightOf="@id/line_left"
                     tools:text="xln" />
 
@@ -48,6 +49,7 @@
                     android:hint="@string/search_number_default"
                     android:imeOptions="actionDone"
                     android:maxLength="4"
+                    android:theme="@style/TextView.Search.Theme"
                     app:layout_constraintBaseline_toBaselineOf="@+id/searchSet"
                     app:layout_constraintLeft_toRightOf="@+id/searchSet"
                     tools:text="123" />

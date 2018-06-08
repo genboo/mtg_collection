@@ -124,36 +124,39 @@ object Icons {
         //Odyssey Block 2001-2002
         list["JUD"] = R.drawable.ic_jud
         list["TOR"] = R.drawable.ic_tor
+        list["ODY"] = R.drawable.ic_ody
 
         //Invasion Block 2000-2001
+        list["APC"] = R.drawable.ic_apc
         list["PLS"] = R.drawable.ic_pls
         list["INV"] = R.drawable.ic_inv
 
-        //Masques Block
+        //Masques Block 1999-2000
         list["PCY"] = R.drawable.ic_pcy
+        list["NMS"] = R.drawable.ic_nem
+        list["MMQ"] = R.drawable.ic_mmq
+
+        //Urza Block 1998-1999
+        list["UDS"] = R.drawable.ic_uds
+        list["ULG"] = R.drawable.ic_ulg
+        list["USG"] = R.drawable.ic_usg
 
         //Tempest Block 1997-1998
+        list["EXO"] = R.drawable.ic_exo
+        list["STH"] = R.drawable.ic_sth
         list["TMP"] = R.drawable.ic_tmp
 
-        //Portal Block 1997-1998
-        list["PO2"] = R.drawable.ic_p02
-        list["P02"] = R.drawable.ic_p02
-
         //Mirage Block 1996-1997
+        list["VIS"] = R.drawable.ic_vis
         list["WTH"] = R.drawable.ic_wth
+        list["MIR"] = R.drawable.ic_mir
 
-        //Early sets
-        list["DRK"] = R.drawable.ic_drk
-        list["LEG"] = R.drawable.ic_leg
-        list["ATQ"] = R.drawable.ic_atq
-        list["ARN"] = R.drawable.ic_arn
-        list["CEI"] = R.drawable.ic_cei
-        list["CED"] = R.drawable.ic_ced
-        list["SUM"] = R.drawable.ic_3ed
-        list["3ED"] = R.drawable.ic_3ed
-        list["2ED"] = R.drawable.ic_2ed
-        list["LEB"] = R.drawable.ic_leb
-        list["LEA"] = R.drawable.ic_lea
+        //Ice Age Block 1995-1996
+        list["ALL"] = R.drawable.ic_all
+        list["ICE"] = R.drawable.ic_ice
+
+        //Homelands Block 1995
+        list["HML"] = R.drawable.ic_hml
 
         //Core sets
         list["M19"] = R.drawable.ic_m19
@@ -166,6 +169,35 @@ object Icons {
         list["10E"] = R.drawable.ic_10e
         list["9ED"] = R.drawable.ic_9ed
         list["8ED"] = R.drawable.ic_8ed
+        list["7ED"] = R.drawable.ic_7ed
+        list["6ED"] = R.drawable.ic_6ed
+        list["5ED"] = R.drawable.ic_5ed
+
+        //Early sets
+        list["DKM"] = R.drawable.ic_dkm
+        list["BTD"] = R.drawable.ic_btd
+        list["BRB"] = R.drawable.ic_brb
+        list["S00"] = R.drawable.ic_s00
+        list["PTK"] = R.drawable.ic_ptk
+        list["ATH"] = R.drawable.ic_ath
+        list["PO2"] = R.drawable.ic_p02
+        list["POR"] = R.drawable.ic_por
+        list["pPOD"] = R.drawable.ic_por
+        list["VAN"] = R.drawable.ic_dpa
+        list["CHR"] = R.drawable.ic_chr
+        list["4ED"] = R.drawable.ic_4ed
+        list["FEM"] = R.drawable.ic_fem
+        list["DRK"] = R.drawable.ic_drk
+        list["LEG"] = R.drawable.ic_leg
+        list["ATQ"] = R.drawable.ic_atq
+        list["ARN"] = R.drawable.ic_arn
+        list["CEI"] = R.drawable.ic_cei
+        list["CED"] = R.drawable.ic_ced
+        list["SUM"] = R.drawable.ic_3ed
+        list["3ED"] = R.drawable.ic_3ed
+        list["2ED"] = R.drawable.ic_2ed
+        list["LEB"] = R.drawable.ic_leb
+        list["LEA"] = R.drawable.ic_lea
 
         //Conspiracy
         list["CN2"] = R.drawable.ic_cn2
@@ -226,6 +258,7 @@ object Icons {
         //Un-sets
         list["UST"] = R.drawable.ic_ust
         list["UNH"] = R.drawable.ic_unh
+        list["UGL"] = R.drawable.ic_ugl
 
         //Masters
         list["A25"] = R.drawable.ic_a25
@@ -280,9 +313,22 @@ object Icons {
         list["pMEI"] = R.drawable.ic_promo
         list["pFNM"] = R.drawable.ic_promo
         list["pJGP"] = R.drawable.ic_promo
+        list["pLGM"] = R.drawable.ic_promo
+        list["pCEL"] = R.drawable.ic_promo
+        list["pGRU"] = R.drawable.ic_pgru
+        list["pWOR"] = R.drawable.ic_promo
+        list["pWOS"] = R.drawable.ic_promo
+        list["pSUS"] = R.drawable.ic_promo
+        list["pELP"] = R.drawable.ic_promo
+        list["pMPR"] = R.drawable.ic_promo
         list["pDRC"] = R.drawable.ic_pdrc
         list["p15A"] = R.drawable.ic_dpa
+        list["pALP"] = R.drawable.ic_dpa
+        list["RQS"] = R.drawable.ic_dpa
         list["pREL"] = R.drawable.ic_dpa
+        list["pARL"] = R.drawable.ic_dpa
+        list["MGB"] = R.drawable.ic_dpa
+        list["ITP"] = R.drawable.ic_dpa
 
 
         list["DEFAULT"] = R.drawable.ic_circle

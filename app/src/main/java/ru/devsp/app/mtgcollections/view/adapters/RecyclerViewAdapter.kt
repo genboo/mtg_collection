@@ -32,7 +32,7 @@ abstract class RecyclerViewAdapter<T, H : RecyclerView.ViewHolder> internal cons
         return items.size
     }
 
-    fun setItems(items: List<T>) {
+    open fun setItems(items: List<T>) {
         this.items = items
     }
 

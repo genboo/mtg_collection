@@ -38,6 +38,10 @@ class ReprintListAdapter(items: List<String>?) : RecyclerViewAdapter<String, Rep
         }
     }
 
+    override fun setItems(items: List<String>) {
+        super.setItems(items.reversed())
+    }
+
     companion object {
         private const val TYPE_OFFSET = 1
         private const val TYPE_MAIN = 2

@@ -91,9 +91,9 @@ class CardFragment : BaseFragment() {
                     initAddToLibraryDialog(viewModel)
                 })
 
-        cardMultiId.setOnClickListener { _ ->
+        cardName.setOnClickListener { _ ->
             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("multivers id", cardMultiId.text)
+            val clip = ClipData.newPlainText("multivers id", cardName.tag.toString())
             clipboard.primaryClip = clip
             showToast("Скопировано в буфер обмена", Toast.LENGTH_SHORT)
         }
@@ -248,8 +248,11 @@ class CardFragment : BaseFragment() {
             initAddDialog(viewModel)
             cardOracle.text = ""
             updateCardText(card)
-            cardName.setOnClickListener { cardOracle.toggle() }
+
             cardName.text = card.name
+            cardName.tag = card.id
+
+            cardNumber.text = String.format("%s %s", card.set, card.numberFormatted ?: "")
 
             cardManaCost.text = OracleReplacer.getText(card.manaCost ?: "", requireActivity())
 
@@ -257,10 +260,10 @@ class CardFragment : BaseFragment() {
                 cardOracle.setExpandListener(ExpandListener(cardOracleArrow))
                 cardRules.setExpandListener(ExpandListener(cardRulesArrow))
             }
+
+            cardText.setOnClickListener { cardOracle.toggle() }
             cardRulesTitle.setOnClickListener { cardRules.toggle() }
             cardRules.text = OracleReplacer.getText(card.rulesText ?: "", requireActivity())
-
-            cardMultiId.text = card.id
 
             cardRarity.setColorFilter(ContextCompat.getColor(requireContext(), card.rarityColor), PorterDuff.Mode.SRC_IN)
             cardRarity.setImageDrawable(resources.getDrawable(card.setIcon, requireContext().theme))

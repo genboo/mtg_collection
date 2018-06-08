@@ -83,11 +83,16 @@
         <item name="android:background">@drawable/bg_rounded_counter</item>
     </style>
 
-    <style name="TextView.Search" parent="android:Widget.TextView">
+    <style name="TextView.Search.Theme">
+        <item name="android:textColorHint">@color/colorTextHint</item>
+        <item name="colorControlNormal">@color/colorTextTitle</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="TextView.Search" parent="android:Widget.EditText">
+        <item name="android:textColor">@color/colorTextTitle</item>
         <item name="android:maxLines">1</item>
         <item name="android:inputType">text</item>
-        <item name="android:textColor">@color/colorTextTitle</item>
-        <item name="android:textColorHint">@color/colorTextHint</item>
         <item name="android:singleLine">true</item>
         <item name="android:selectAllOnFocus">true</item>
     </style>
