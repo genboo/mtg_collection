@@ -5,18 +5,14 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewCompat
 import android.transition.Fade
 import android.transition.Slide
+import android.transition.TransitionSet
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import ru.devsp.app.mtgcollections.R
-import ru.devsp.app.mtgcollections.model.objects.Filter
 import ru.devsp.app.mtgcollections.view.*
 
 class Navigation(private val fragmentManager: FragmentManager) {
-
-    fun toGallery(filter: Filter) {
-        navigate(GalleryFragment.getInstance(filter), "gallery", true)
-    }
 
     fun toFirst() {
         navigate(CollectionFragment(), "collection", false)
@@ -83,20 +79,19 @@ class Navigation(private val fragmentManager: FragmentManager) {
      * @param back
      */
     private fun navigate(fragment: Fragment, tag: String, back: Boolean, shared: List<View>? = null) {
+
+        val fragmentPrevious = fragmentManager.findFragmentById(R.id.content)
         if (!back) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
-        val fade = Fade()
-        val slide = Slide()
-        slide.slideEdge = Gravity.END
-
-        val fragmentPrevious = fragmentManager.findFragmentById(R.id.content)
         val ft = fragmentManager.beginTransaction()
 
         if (back) {
             ft.addToBackStack(tag)
         }
+
+        val transitionExit = getExitTransition()
 
         if (shared != null && !shared.isEmpty()) {
             for (view: View in shared) {
@@ -104,11 +99,40 @@ class Navigation(private val fragmentManager: FragmentManager) {
             }
         }
 
-        fragmentPrevious?.exitTransition = fade
-        fragment.enterTransition = slide
+        fragmentPrevious?.exitTransition = transitionExit
+        fragment.enterTransition = getEnterTransition()
 
         ft.replace(R.id.content, fragment)
         ft.commit()
+    }
+
+    private fun getEnterTransition(): TransitionSet {
+        val transitionEnter = TransitionSet()
+        transitionEnter.ordering = TransitionSet.ORDERING_TOGETHER
+
+        val slideContent = Slide(Gravity.BOTTOM)
+        slideContent.excludeTarget(R.id.app_bar, true)
+        slideContent.excludeTarget(R.id.close, true)
+
+        val slideAppBar = Slide(Gravity.TOP)
+        slideAppBar.excludeTarget(R.id.main, true)
+        slideAppBar.excludeTarget(R.id.swipeRefresh, true)
+        slideAppBar.excludeTarget(R.id.list, true)
+
+        transitionEnter.addTransition(slideContent)
+        transitionEnter.addTransition(slideAppBar)
+
+        return transitionEnter
+    }
+
+    private fun getExitTransition(): TransitionSet {
+        val transitionExit = TransitionSet()
+        transitionExit.ordering = TransitionSet.ORDERING_TOGETHER
+
+        val fade = Fade()
+        transitionExit.addTransition(fade)
+
+        return transitionExit
     }
 
 }

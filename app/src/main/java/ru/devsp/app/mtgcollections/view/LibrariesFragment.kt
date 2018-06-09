@@ -60,7 +60,7 @@ class LibrariesFragment : BaseFragment() {
         })
 
         libraryAdd.setOnClickListener { _ ->
-            val view = layoutInflater.inflate(R.layout.dialog_add_library, mainBlock, false)
+            val view = layoutInflater.inflate(R.layout.dialog_add_library, main, false)
             val addDialog = AlertDialog.Builder(requireContext())
                     .setView(view)
                     .setTitle("Добавить колоду")

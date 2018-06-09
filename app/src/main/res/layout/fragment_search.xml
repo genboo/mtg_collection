@@ -55,10 +55,10 @@
                     tools:text="123" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackgroundMain"
