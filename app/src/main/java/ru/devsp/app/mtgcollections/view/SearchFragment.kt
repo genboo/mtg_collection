@@ -235,11 +235,10 @@ class SearchFragment : BaseFragment() {
         (reprints.adapter as ReprintListAdapter).setItems(card.printings ?: emptyList())
         (reprints.adapter as ReprintListAdapter).setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener<String> {
             override fun click(position: Int, item: String, view: View?) {
-                navigation.toSearch(card.printings[position], card.nameOrigin)
+                navigation.toSearch(item, card.nameOrigin)
             }
         })
-        reprints?.adapter?.notifyDataSetChanged()
-        reprints?.post { reprints.adapter.notifyDataSetChanged() }
+        reprints?.post { reprints?.adapter?.notifyDataSetChanged() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

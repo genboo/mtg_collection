@@ -107,9 +107,9 @@ class CardFragment : BaseFragment() {
         reprints.adapter = adapter
         reprints.layoutManager = manager
 
-        swipeRefresh.setOnRefreshListener({
+        swipeRefresh.setOnRefreshListener{
             viewModel.setIdNetwork(args.getString(ARG_ID, ""))
-        })
+        }
 
         val onScrollChangeListener = ViewTreeObserver.OnScrollChangedListener {
             if (mainScroll != null) {
