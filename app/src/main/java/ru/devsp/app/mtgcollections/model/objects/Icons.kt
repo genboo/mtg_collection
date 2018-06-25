@@ -16,7 +16,6 @@ object Icons {
 
     init {
 
-
         //Battlebond 2018
         list["BBD"] = R.drawable.ic_bbd
 
@@ -172,6 +171,12 @@ object Icons {
         list["7ED"] = R.drawable.ic_7ed
         list["6ED"] = R.drawable.ic_6ed
         list["5ED"] = R.drawable.ic_5ed
+
+        //Signature Spellbook
+        list["SS1"] = R.drawable.ic_ss1
+
+        //Global Series
+        list["GS1"] = R.drawable.ic_gs1
 
         //Early sets
         list["DKM"] = R.drawable.ic_dkm
