@@ -15,8 +15,7 @@ class SetsDiffCallback(private val oldList: List<Set>,
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].code == newList[newItemPosition].code
-                && oldList[oldItemPosition].name == newList[newItemPosition].name
+        return oldList[oldItemPosition].name == newList[newItemPosition].name
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

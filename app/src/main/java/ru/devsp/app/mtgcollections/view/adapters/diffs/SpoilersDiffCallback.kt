@@ -15,8 +15,7 @@ class SpoilersDiffCallback(private val oldList: List<Card>,
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
-                && oldList[oldItemPosition].name == newList[newItemPosition].name
+        return oldList[oldItemPosition].name == newList[newItemPosition].name
                 && oldList[oldItemPosition].set == newList[newItemPosition].set
     }
 

@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle = ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
-        toggle.setToolbarNavigationClickListener({ _ -> onBackPressed() })
+        toggle.setToolbarNavigationClickListener{ _ -> onBackPressed() }
         toggle.syncState()
     }
 

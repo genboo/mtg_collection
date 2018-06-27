@@ -71,10 +71,10 @@ class SetsFragment : BaseFragment() {
         })
         viewModel.loadSets()
 
-        swipeRefresh.setOnRefreshListener({
+        swipeRefresh.setOnRefreshListener{
             viewModel.clearExpire()
             viewModel.loadSets()
-        })
+        }
     }
 
     override fun inject() {

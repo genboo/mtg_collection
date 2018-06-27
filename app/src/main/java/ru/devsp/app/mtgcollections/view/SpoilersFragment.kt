@@ -81,15 +81,17 @@ class SpoilersFragment : BaseFragment() {
                 if (adapter.getItems().isEmpty()) {
                     showContent()
                 }
-                updateAdapterItems(adapter, resource.data)
-                adapter.notifyItemChanged(adapter.getSize())
-            }
-        })
 
-        //Количество карт в коллекции
-        viewModel.cardsBySet.observe(this, Observer { items ->
-            adapter.setCards(items)
-            list.post { adapter.notifyDataSetChanged() }
+                if(adapter.getSize() == 0){
+                    //Количество карт в коллекции
+                    viewModel.cardsBySet.observe(this, Observer { items ->
+                        adapter.setCards(items)
+                        list.post { adapter.notifyDataSetChanged() }
+                    })
+                }
+
+                updateAdapterItems(adapter, resource.data)
+            }
         })
 
         viewModel.setParams(set, 1)
