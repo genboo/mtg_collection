@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             component?.inject(this)
         }
 
-        supportFragmentManager.addOnBackStackChangedListener({ this.updateToolbarIcon() })
+        supportFragmentManager.addOnBackStackChangedListener{ this.updateToolbarIcon() }
 
         navigation = Navigation(supportFragmentManager)
 
@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             navigation.toFirst()
             navigationView.menu.getItem(2).isChecked = true
         }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

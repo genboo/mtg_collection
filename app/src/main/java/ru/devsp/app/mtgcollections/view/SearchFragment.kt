@@ -239,6 +239,8 @@ class SearchFragment : BaseFragment() {
             }
         })
         reprints?.post { reprints?.adapter?.notifyDataSetChanged() }
+        searchNum.setText(card.number)
+        searchSet.setText(card.set)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
