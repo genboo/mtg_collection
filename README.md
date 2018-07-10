@@ -1,3 +1,4 @@
-# mtg_collection
+# MTG Collection
 
-Проект переписан с нуля https://github.com/genboo/mtgpro
+Проект переехал
+https://github.com/genboo/mtgpro
